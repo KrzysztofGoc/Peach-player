@@ -1,0 +1,106 @@
+<RCC>
+  <qresource prefix="/icons/18x18">
+    <file>icons/18x18/album_white_18dp.svg</file>
+    <file>icons/18x18/favorite_black_18dp.svg</file>
+    <file>icons/18x18/skip_next_black_18dp.svg</file>
+  </qresource>
+  <qresource prefix="/icons/48x48"/>
+  <qresource prefix="minatures">
+    <file>icons/likedSongsMinature.png</file>
+  </qresource>
+  <qresource prefix="/fonts">
+    <file>fonts/Heebo/static/HeeboBlack.ttf</file>
+    <file>fonts/Heebo/static/HeeboBold.ttf</file>
+    <file>fonts/Heebo/static/HeeboExtraBold.ttf</file>
+    <file>fonts/Heebo/static/HeeboExtraLight.ttf</file>
+    <file>fonts/Heebo/static/HeeboLight.ttf</file>
+    <file>fonts/Heebo/static/HeeboMedium.ttf</file>
+    <file>fonts/Heebo/static/HeeboRegular.ttf</file>
+    <file>fonts/Heebo/static/HeeboSemiBold.ttf</file>
+    <file>fonts/Heebo/static/HeeboThin.ttf</file>
+  </qresource>
+  <qresource prefix="/icons/temporary">
+    <file>icons/playlistCoverExample1.png</file>
+    <file>icons/authorCoverExample.png</file>
+    <file>icons/peachBackground16bit.png</file>
+    <file>icons/peach16bit.png</file>
+  </qresource>
+  <qresource prefix="/icons/logos">
+    <file>icons/logos/peachPlayerLogo.png</file>
+    <file>icons/logos/peachPlayerLogoWhite.png</file>
+  </qresource>
+  <qresource prefix="/icons/24x24">
+    <file>icons/24x24/library_music_white_24dp.svg</file>
+    <file>icons/24x24/pause_circle_black_24dp.svg</file>
+    <file>icons/24x24/queue_music_black_24dp.svg</file>
+    <file>icons/24x24/skip_next_black_24dp.svg</file>
+    <file>icons/24x24/skip_previous_black_24dp.svg</file>
+    <file>icons/24x24/volume_up_black_24dp.svg</file>
+  </qresource>
+  <qresource prefix="/icons/36x36">
+    <file>icons/36x36/library_music_white_36dp.svg</file>
+    <file>icons/36x36/album_white_36dp.svg</file>
+    <file>icons/36x36/format_list_bulleted_white_36dp.svg</file>
+    <file>icons/36x36/fullscreen_exit_white_36dp.svg</file>
+    <file>icons/36x36/play_circle_black_36dp.svg</file>
+    <file>icons/36x36/music_note_white_36dp.svg</file>
+  </qresource>
+  <qresource prefix="/icons/48x48/filled">
+    <file>icons/48x48/filled/filled_add_white_48dp.png</file>
+    <file>icons/48x48/filled/filled_add_gray_48dp.png</file>
+    <file>icons/48x48/filled/filled_favorite_border_white_48dp.png</file>
+    <file>icons/48x48/filled/filled_pause_white_48dp.png</file>
+    <file>icons/48x48/filled/filled_play_arrow_white_48dp.png</file>
+    <file>icons/48x48/filled/filled_favorite_peach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_loop_lightpeach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_shuffle_lightpeach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_queue_music_lightpeach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_volume_max_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_volume_max_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_volume_off_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_volume_off_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_volume_low_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_volume_low_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_queue_music_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_queue_music_peach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_queue_music_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_pause_circle_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_play_circle_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_loop_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_loop_peach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_loop_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_skip_next_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_skip_previous_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_skip_previous_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_skip_next_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_shuffle_gray_48dp.png</file>
+    <file>icons/48x48/filled/baseline_shuffle_peach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_shuffle_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_list_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_album_white_48dp.png</file>
+    <file>icons/48x48/filled/baseline_picture_in_picture_white_48dp.png</file>
+  </qresource>
+  <qresource prefix="/icons/48x48/outlined">
+    <file>icons/48x48/outlined/outline_logout_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_person_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_maximize_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_minimize_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_restore_down_48dp.png</file>
+    <file>icons/48x48/outlined/outline_close_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_expand_more_peach_48dp.png</file>
+    <file>icons/48x48/outlined/outline_account_circle_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_visibility_off_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_visibility_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_visibility_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_visibility_off_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_email_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_favorite_border_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_favorite_border_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_list_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_list_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_album_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_album_white_48dp.png</file>
+    <file>icons/48x48/outlined/outline_picture_in_picture_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_picture_in_picture_white_48dp.png</file>
+  </qresource>
+</RCC>
