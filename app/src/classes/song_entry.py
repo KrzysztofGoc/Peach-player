@@ -9,14 +9,16 @@ class SongEntry(QtWidgets.QFrame):
 
     """
 
-    def __init__(self, *, song_title="Nam tristique", artist_name=None, category_name="In ac",
-                 date_added="24 Dec 2020", song_length="5 : 30", parent=None):
+    def __init__(self, *, song_title="Nam tristique", artist_name=None, category_name="",
+                 date_added="24 Dec 2020", song_length="5 : 30", is_liked=False, is_playing=False, parent=None):
         super().__init__(parent=parent)
         self.song_title = song_title
         self.artist_name = artist_name
         self.category_name = category_name
         self.date_added = date_added
         self.song_length = song_length
+        self.is_liked = is_liked
+        self.is_playing = is_playing
         self.setup_layout()
 
     def setup_layout(self):
@@ -95,7 +97,7 @@ class SongEntry(QtWidgets.QFrame):
         self.pushButton_30.setIcon(icon8)
         self.pushButton_30.setIconSize(QtCore.QSize(16, 16))
         self.pushButton_30.setCheckable(True)
-        self.pushButton_30.setChecked(True)
+        self.pushButton_30.setChecked(self.is_liked)
         self.pushButton_30.setObjectName("pushButton_30")
         self.gridLayout_27.addWidget(self.pushButton_30, 0, 0, 1, 1)
         self.gridLayout_15.addWidget(self.frame_79, 0, 1, 1, 1)
@@ -116,10 +118,14 @@ class SongEntry(QtWidgets.QFrame):
         self.pushButton_13.setMinimumSize(QtCore.QSize(16, 16))
         self.pushButton_13.setMaximumSize(QtCore.QSize(16, 16))
         self.pushButton_13.setText("")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(":/icons/48x48/filled/icons/48x48/filled/filled_play_arrow_white_48dp.png"),
-                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_13.setIcon(icon7)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/48x48/filled/icons/48x48/filled/filled_play_arrow_white_48dp.png"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icons/48x48/filled/icons/48x48/filled/filled_pause_white_48dp.png"), QtGui.QIcon.Normal,
+                       QtGui.QIcon.On)
+        self.pushButton_13.setIcon(icon)
+        self.pushButton_13.setCheckable(True)
+        self.pushButton_13.setChecked(self.is_playing)
         self.pushButton_13.setObjectName("pushButton_13")
         self.gridLayout_28.addWidget(self.pushButton_13, 0, 0, 1, 1)
         self.gridLayout_15.addWidget(self.frame_174, 0, 0, 1, 1)

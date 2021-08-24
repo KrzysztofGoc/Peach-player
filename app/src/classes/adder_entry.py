@@ -9,6 +9,7 @@ class AdderEntry(QtWidgets.QFrame):
         adder_type : int
             defines the Adder as 1 - CategoryAdder, 2 - AlbumAdder, 3 - AuthorAdder
     """
+    clicked = QtCore.Signal()
 
     def __init__(self, adder_type: int, parent=None):
         super().__init__(parent=parent)
@@ -82,3 +83,10 @@ class AdderEntry(QtWidgets.QFrame):
         spacerItem42 = QtWidgets.QSpacerItem(155, 27, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout_248.addItem(spacerItem42)
         self.verticalLayout_247.addWidget(self.frame_400)
+
+    def mousePressEvent(self, event):
+        self.clicked.emit()
+        return super(AdderEntry, self).mousePressEvent(event)
+
+
+

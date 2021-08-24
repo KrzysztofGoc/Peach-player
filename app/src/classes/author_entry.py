@@ -3,7 +3,10 @@ from app.src import resources_peach_player
 
 
 class AuthorEntry(QtWidgets.QFrame):
-    def __init__(self, parent=None):
+    clicked = QtCore.Signal()
+
+    def __init__(self, parent=None, author_name=""):
+        self.author_name = author_name
         super().__init__(parent=parent)
         self.setup_layout()
 
@@ -61,7 +64,7 @@ class AuthorEntry(QtWidgets.QFrame):
         self.verticalLayout_86.setSpacing(0)
         self.verticalLayout_86.setObjectName("verticalLayout_86")
         self.label_3 = QtWidgets.QLabel(self.frame_99)
-        self.label_3.setText("Pellentesque dolor")
+        self.label_3.setText(self.author_name)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_86.addWidget(self.label_3)
         self.label_4 = QtWidgets.QLabel(self.frame_99)
@@ -70,3 +73,7 @@ class AuthorEntry(QtWidgets.QFrame):
         self.label_4.setObjectName("label_4")
         self.verticalLayout_86.addWidget(self.label_4)
         self.verticalLayout_85.addWidget(self.frame_99)
+
+    def mousePressEvent(self, event):
+        self.clicked.emit()
+        return super(AuthorEntry, self).mousePressEvent(event)

@@ -3,8 +3,11 @@ from app.src import resources_peach_player
 
 
 class CategoryEntry(QtWidgets.QFrame):
-    def __init__(self, parent=None):
+    clicked = QtCore.Signal()
+
+    def __init__(self, parent=None, category=""):
         super().__init__(parent=parent)
+        self.category = category
         self.setup_layout()
 
     def setup_layout(self):
@@ -68,7 +71,7 @@ class CategoryEntry(QtWidgets.QFrame):
         self.label_140.setStyleSheet("font: 87 11pt \"Heebo Black\";\n"
                                                            "color: white;\n"
                                                            "")
-        self.label_140.setText("Pellentesque dolor")
+        self.label_140.setText(self.category)
         self.label_140.setObjectName("label_140")
         self.verticalLayout_95.addWidget(self.label_140)
         self.label_34 = QtWidgets.QLabel(self.frame_143)
@@ -77,3 +80,7 @@ class CategoryEntry(QtWidgets.QFrame):
         self.label_34.setObjectName("label_34")
         self.verticalLayout_95.addWidget(self.label_34)
         self.verticalLayout_94.addWidget(self.frame_143)
+
+    def mousePressEvent(self, event):
+        self.clicked.emit()
+        return super(CategoryEntry, self).mousePressEvent(event)
