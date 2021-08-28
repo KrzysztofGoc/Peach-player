@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets, QtCore, QtGui
+from PySide2 import QtWidgets, QtCore, QtGui
 from app.src import resources_peach_player
 
 
@@ -90,10 +90,12 @@ class SongEntry(QtWidgets.QFrame):
         self.pushButton_30.setMaximumSize(QtCore.QSize(16, 16))
         self.pushButton_30.setSizeIncrement(QtCore.QSize(0, 0))
         self.pushButton_30.setText("")
+
         icon8 = QtGui.QIcon()
         icon8.addPixmap(
             QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_favorite_border_gray_48dp.png"),
             QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
         self.pushButton_30.setIcon(icon8)
         self.pushButton_30.setIconSize(QtCore.QSize(16, 16))
         self.pushButton_30.setCheckable(True)

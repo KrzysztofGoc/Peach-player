@@ -1,11 +1,11 @@
-from PySide6 import QtWidgets, QtCore, QtGui
+from PySide2 import QtWidgets, QtCore, QtGui
 from app.src import resources_peach_player
 
 
 class AdderEntry(QtWidgets.QFrame):
     """Adder type ui entry with predefined layout.
 
-    Attributes:
+    :Attributes:
         adder_type : int
             defines the Adder as 1 - CategoryAdder, 2 - AlbumAdder, 3 - AuthorAdder
     """

@@ -1,5 +1,5 @@
 from functools import partial
-from PySide6 import QtCore, QtWidgets, QtGui
+from PySide2 import QtCore, QtWidgets, QtGui
 from app.src.classes import navbar_frame
 from app_model import *
 import requests
@@ -14,8 +14,12 @@ from classes.song_entry import SongEntry
 from classes.album_entry import AlbumEntry
 from classes.category_entry import CategoryEntry
 from classes.playlist_entry import PlaylistEntry
-from classes.adder_entry import AdderEntry
 from classes.author_entry import AuthorEntry
+from classes.adder_entry import AdderEntry
+from classes.dialogs.categoryInputDialog import categoryInputDialog
+from classes.dialogs.playlistInputDialog import playlistInputDialog
+from classes.dialogs.authorInputDialog import authorInputDialog
+from classes.dialogs.albumInputDialog import albumInputDialog
 
 
 scrollbar_recently_used = False
@@ -67,6 +71,13 @@ class Controller:
         self.ui.mainPageAuthorSongsButton.clicked.connect(self.change_widget_author_songs)
         self.ui.mainPageAuthorPlaylistsButton.clicked.connect(self.change_widget_author_playlists)
         self.ui.mainPageAuthorAlbumsButton.clicked.connect(self.change_widget_author_albums)
+        self.ui.mainPageLeftMenuCreatePlaylistQPushButton.clicked.connect(self.create_playlist_button_slot)
+        self.ui.leftMenuAllSongsButton.clicked.connect(self.all_songs_button_slot)
+        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongQPushButton.clicked.connect(
+            self.song_adder_song_file_button_clicked_slot)
+        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongMiniatureQPushButton.clicked.connect(
+            self.song_adder_song_miniature_button_clicked_slot)
+
         # Sort buttons' slots
         self.ui.mainPageLikedSongsSortButtonsQButtonGroup.buttonClicked.connect(
             self.liked_songs_sort_buttons_qbuttongroup_slot)
@@ -905,7 +916,7 @@ class Controller:
             row += 1
             column = 0
         album_adder = AdderEntry(adder_type=2, parent=self.ui.frame_265)
-        album_adder.clicked.connect(self.add_new_album)
+        album_adder.clicked.connect(self.album_adder_clicked_slot)
         self.ui.mainPageAlbumsAlbumsGridQGridLayout.addWidget(album_adder, row, column, 1, 1)
 
     def load_album_page(self, album):
@@ -951,7 +962,7 @@ class Controller:
             row += 1
             column = 0
         author_adder = AdderEntry(adder_type=3, parent=self.ui.mainPageAuthorsGrid)
-        author_adder.clicked.connect(self.add_new_author)
+        author_adder.clicked.connect(self.author_adder_clicked_slot)
         self.ui.mainPageAuthorsAuthorsGridQGridLayout.addWidget(author_adder, row, column, 1, 1)
 
     def load_author_page(self, author):
@@ -1053,6 +1064,7 @@ class Controller:
         """Prepare categories page and change mainPageStackedWidget to categories' index"""
         self.setup_main_page_categories()
         self.ui.set_main_page_stacked_widget_index(1)
+
         music_categories = []
         self.category_frames = []
         row = column = 0
@@ -1071,6 +1083,14 @@ class Controller:
             )
             self.category_frames.append(category_frame)
             column += 1
+        category_adder = AdderEntry(adder_type=1)
+        category_adder.clicked.connect(self.category_adder_clicked_slot)
+        self.ui.mainPageCategoriesCategoriesEntriesQGridLayout.addWidget(category_adder, row, column, 1, 1)
+
+    def category_adder_clicked_slot(self):
+        """Create new category input dialog and call its exec method."""
+        category_input_dialog = categoryInputDialog(parent=self.ui.window)
+        category_input_dialog.exec_()
 
     def now_playing_button_slot(self):
         """Prepare nowPlaying page and change mainPageStackedWidget to nowPlaying's index"""
@@ -1265,11 +1285,13 @@ class Controller:
     def change_widget_author_playlists(self):
         self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(2)
 
-    def add_new_album(self):
-        print("ADD NEW ALBUM")
+    def album_adder_clicked_slot(self):
+        album_input_dialog = albumInputDialog(parent=self.ui.window)
+        album_input_dialog.exec()
 
-    def add_new_author(self):
-        print("ADD NEW AUTHOR")
+    def author_adder_clicked_slot(self):
+        author_input_dialog = authorInputDialog(parent=self.ui.window)
+        author_input_dialog.exec()
 
     def get_user_data(self):
         user = User.query.first()
@@ -1341,3 +1363,70 @@ class Controller:
     def turn_off_playing_songs(self):
         Songs.query.update({"is_playing": False})
         db.session.commit()
+
+    def create_playlist_button_slot(self):
+        """Create new playlistInputDialog and handle new playlist creation"""
+        playlist_input_dialog = self.run_playlist_input_dialog()
+        self.create_new_playlist()
+
+    def create_new_playlist(self):
+        """Get new playlist info and create new playlist in database"""
+        pass
+
+    def run_playlist_input_dialog(self):
+        create_playlist_dialog = playlistInputDialog(parent=self.ui.window)
+        create_playlist_dialog.exec()
+        return create_playlist_dialog
+
+    def all_songs_button_slot(self):
+        self.ui.set_main_page_stacked_widget_index(11)
+
+    def song_adder_song_file_button_clicked_slot(self):
+        """Create new QFileDialog and handle song file to create new song"""
+        song_file_dialog = self.create_song_file_input_dialog()
+        print(f"Files selected by song file input dialog {song_file_dialog.selectedFiles()}")
+        self.handle_new_song_file(song_file_dialog)
+
+    def handle_new_song_file(self, filled_file_dialog):
+        """Get song file and handle it to create new song
+
+        Parameters:
+            filled_file_dialog (QtWidgets.QFileDialog): File dialog with selected song file
+
+        """
+        pass
+
+    def create_song_file_input_dialog(self):
+        """Creates new QFileDialog and calls its exec_() method.
+
+        Returns:
+            QtWidgets.QFileDialog: New file dialog
+        """
+        song_file_dialog = QtWidgets.QFileDialog(self.ui.window)
+        song_file_dialog.exec_()
+        return song_file_dialog
+
+    def song_adder_song_miniature_button_clicked_slot(self):
+        """Create new QFileDialog and handle song miniature to create new song"""
+        song_miniature_dialog = self.create_song_miniature_input_dialog()
+        print(f"Files selected by song miniature input dialog {song_miniature_dialog.selectedFiles()}")
+        self.handle_new_song_miniature(song_miniature_dialog)
+
+    def handle_new_song_miniature(self, filled_miniature_dialog):
+        """Get song file and handle it to create new song
+
+        Parameters:
+            filled_miniature_dialog (QtWidgets.QFileDialog): File dialog with selected song file
+
+        """
+        pass
+
+    def create_song_miniature_input_dialog(self):
+        """Creates new QFileDialog and calls its exec_() method.
+
+                Returns:
+                    QtWidgets.QFileDialog: New file dialog
+                """
+        song_miniature_dialog = QtWidgets.QFileDialog(self.ui.window)
+        song_miniature_dialog.exec_()
+        return song_miniature_dialog
