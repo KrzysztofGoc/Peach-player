@@ -2,7 +2,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
-
+from PySide2.QtCore import QThread
+from PySide2.QtWidgets import QApplication
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///localdb.db'
@@ -35,6 +37,7 @@ class Songs(db.Model):
     category = relationship("MusicCategories", back_populates="song")
     playlist = relationship("PlaylistSongs")
     album_songs = relationship("AlbumSongs")
+    last_played = relationship("LastPlayedSongs")
 
 
 class MusicCategories(db.Model):
@@ -97,8 +100,19 @@ class AuthorPlaylists(db.Model):
     playlist = relationship("Playlist", back_populates="author")
 
 
-class Test(db.Model):
+class LastPlayedSongs(db.Model):
     id = Column(Integer, primary_key=True)
-    test_bool = Column(Boolean)
+    song_id = Column(Integer, ForeignKey("songs.id"))
+    song = relationship("Songs", back_populates="last_played")
+
+
+class PlaySongThread(QThread):
+    def run(self):
+        for i in range(0, 100):
+            QApplication.processEvents()
+            print("BOZO")
+            time.sleep(2)
+            i += 1
+
 
 db.create_all()
