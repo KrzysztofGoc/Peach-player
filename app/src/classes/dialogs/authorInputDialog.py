@@ -1,5 +1,6 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from app.src.classes.widgets.labeled_qlineedit import LabeledQLineEdit
+from app.src.classes.widgets.clicked_signal_qlabel import ClickedSignalQLabel
 
 
 class authorInputDialog(QtWidgets.QDialog):
@@ -11,7 +12,6 @@ class authorInputDialog(QtWidgets.QDialog):
             self.setParent(parent)
         self.setupUi(self)
         self.authorInputDialogExitButton.clicked.connect(self.reject)
-        self.authorInputDialogAddButton.clicked.connect(self.accept)
 
     def setupUi(self, authorInputDialog):
         """Setup predefined layout."""
@@ -180,7 +180,7 @@ class authorInputDialog(QtWidgets.QDialog):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_6.addItem(spacerItem1)
-        self.authorInputDialogAuthorMiniatureQLabel = QtWidgets.QLabel(self.frame_9)
+        self.authorInputDialogAuthorMiniatureQLabel = ClickedSignalQLabel(self.frame_9)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

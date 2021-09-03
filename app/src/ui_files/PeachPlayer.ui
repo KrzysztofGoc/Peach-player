@@ -79,7 +79,7 @@
        <string notr="true">border: none;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="centralPageAppPage">
        <property name="styleSheet">
@@ -28626,7 +28626,7 @@ QLineEdit:focus{
                    <widget class="QWidget" name="scrollAreaWidgetContents_6">
                     <property name="geometry">
                      <rect>
-                      <x>-443</x>
+                      <x>0</x>
                       <y>0</y>
                       <width>1674</width>
                       <height>614</height>
@@ -33550,7 +33550,6 @@ QScrollBar::sub-line:vertical{
 }
 QScrollBar:vertical {
 	width: 12px;
-	margin-top: 42px;
     background: transparent;
 }
 QScrollBar::handle:vertical{
@@ -33631,7 +33630,7 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
+                <width>788</width>
                 <height>713</height>
                </rect>
               </property>
@@ -35080,7 +35079,6 @@ QScrollBar::sub-line:vertical{
 }
 QScrollBar:vertical {
 	width: 12px;
-	margin-top: 42px;
     background: transparent;
 }
 QScrollBar::handle:vertical{
@@ -35161,7 +35159,7 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
+                <width>788</width>
                 <height>650</height>
                </rect>
               </property>

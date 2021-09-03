@@ -25,7 +25,6 @@ from classes.dialogs.playlistInputDialog import playlistInputDialog
 from classes.dialogs.authorInputDialog import authorInputDialog
 from classes.dialogs.albumInputDialog import albumInputDialog
 
-
 scrollbar_recently_used = False
 
 
@@ -910,6 +909,7 @@ class Controller:
     def setup_main_page_queue(self):
         """Prepare mainPage's nowPlaying page."""
         pass
+
     """
     def queue_button_slot(self):
         Prepare authors page and change mainPageStackedWidget to authors's index
@@ -1016,7 +1016,7 @@ class Controller:
             song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
             song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
             song_frame.mainPageLikedSongsCategoryButton.clicked.connect(partial(self.load_selected_category_page,
-                                                                        song.category.category_name))
+                                                                                song.category.category_name))
             self.loaded_selected_author_songs.append(song_frame)
 
     def load_selected_author_albums(self, author):
@@ -1128,9 +1128,35 @@ class Controller:
         self.ui.mainPageCategoriesCategoriesEntriesQGridLayout.addWidget(category_adder, row, column, 1, 1)
 
     def category_adder_clicked_slot(self):
-        """Create new category input dialog and call its exec method."""
+        """Create new categoryInputDialog and run its show() method, run handle_new_category_creation() to validate
+         and create new category.
+
+        """
         category_input_dialog = categoryInputDialog(parent=self.ui.window)
-        category_input_dialog.exec_()
+        category_input_dialog.show()
+
+        miniature_file_dialog = self.handle_new_miniature_file_dialog(
+            category_input_dialog.categoryInputDialogCategoryMiniatureQLabel)
+
+        category_input_dialog.categoryInputDialogAddButton.clicked.connect(
+            partial(self.handle_new_category_creation, category_input_dialog, miniature_file_dialog))
+
+    @staticmethod
+    def handle_new_category_creation(category_dialog, category_miniature_dialog):
+        """Handle new category creation. Collect input from category_dialog and miniature_file_dialog then create new playlist.
+
+            Parameters:
+                category_dialog (categoryInputDialogInputDialog): categoryInputDialog used to collect data to create category from.
+                category_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new category.
+        """
+        print(f"Handling category creation...\n"
+              f"---------------------------------------------------------------------------------------\n"
+              f"Category_miniature_dialog files: {category_miniature_dialog.selectedFiles()}\n"
+              f"Category name: {category_dialog.categoryInputDialogCategoryNameQLineEdit.text()}\n"
+              f"---------------------------------------------------------------------------------------")
+        # do stuff
+        print("Created new category in database.")
+        category_dialog.accept()
 
     def now_playing_button_slot(self):
         """Prepare nowPlaying page and change mainPageStackedWidget to nowPlaying's index"""
@@ -1365,6 +1391,7 @@ class Controller:
             self.player.play()
             self.now_playing_song = song_frame
             self.now_playing_song.is_playing = True
+
     """
     def queue_button_slot(self):
         Prepare authors page and change mainPageStackedWidget to authors's index
@@ -1393,6 +1420,7 @@ class Controller:
         self.setup_main_page_queue()
         self.ui.set_main_page_stacked_widget_index(9)
     """
+
     def queue_button_slot(self):
         """Prepare authors page and change mainPageStackedWidget to authors's index"""
         self.ui.verticalLayout_59.addWidget(self.now_playing_song)
@@ -1438,7 +1466,7 @@ class Controller:
 
     def handle_media_status_changed(self, status):
         if status == self.player.BufferedMedia:
-            self.song_duration = round(self.player.duration()/1000, 2)
+            self.song_duration = round(self.player.duration() / 1000, 2)
             song_duration_in_seconds = math.floor(self.song_duration)
             minutes_amount = int(song_duration_in_seconds / 60)
             seconds_amount = song_duration_in_seconds - minutes_amount * 60
@@ -1467,7 +1495,7 @@ class Controller:
 
     def song_time_slider_value_changed(self):
         if self.now_playing_song:
-            new_value = math.floor(self.ui.songTimeSlider.value()/100)
+            new_value = math.floor(self.ui.songTimeSlider.value() / 100)
             if new_value != self.current_playing_song_second:
                 self.current_playing_song_second = new_value
                 minutes_amount = int(self.current_playing_song_second / 60)
@@ -1496,6 +1524,7 @@ class Controller:
             self.player.setMuted(False)
         else:
             self.player.setMuted(True)
+
     """
     def play_pause_song(self, song_id):
         song = Songs.query.filter_by(id=song_id).first()
@@ -1554,7 +1583,6 @@ class Controller:
             song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
         db.session.commit()
 """
-
 
     """
 
@@ -1619,12 +1647,78 @@ class Controller:
         self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(2)
 
     def album_adder_clicked_slot(self):
+        """Create new AlbumInputDialog and run its show() method, run handle_new_album_creation() to validate
+         and create new album.
+
+        """
         album_input_dialog = albumInputDialog(parent=self.ui.window)
-        album_input_dialog.exec()
+        album_input_dialog.show()
+
+        miniature_file_dialog = self.handle_new_miniature_file_dialog(
+            album_input_dialog.albumInputDialogAlbumsMiniatureQLabel)
+
+        album_input_dialog.albumInputDialogAddButton.clicked.connect(partial(self.handle_new_album_creation,
+                                                                             album_input_dialog, miniature_file_dialog))
+    @staticmethod
+    def handle_new_album_creation(album_dialog, album_miniature_dialog):
+        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new album.
+
+            Parameters:
+                album_dialog (albumInputDialog): albumInputDialog used to collect data to create album from.
+                album_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new album.
+        """
+        print(f"Handling album creation...\n"
+              f"---------------------------------------------------------------------------------------\n"
+              f"Album_miniature_dialog files: {album_miniature_dialog.selectedFiles()}\n"
+              f"Album name: {album_dialog.albumInputDialogAlbumNameQLineEdit.text()}\n"
+              f"Album category: {album_dialog.albumInputDialogCategoryQComboBox.currentText()}\n"
+              f"Album author: {album_dialog.albumInputDialogAuthorQComboBox.currentText()}\n"
+              f"---------------------------------------------------------------------------------------")
+        # do stuff
+        print("Created new album in database.")
+        album_dialog.accept()
+
+    def handle_new_miniature_file_dialog(self, dialog_exec_widget):
+        """Create new QFileDialog and return it.
+
+        Parameters:
+            dialog_exec_widget: Widget with clicked method to connect with QFileDialog exec method.
+
+        """
+        file_dialog = QtWidgets.QFileDialog(self.ui.window)
+        dialog_exec_widget.clicked.connect(file_dialog.exec_)
+        return file_dialog
 
     def author_adder_clicked_slot(self):
+        """Create new authorInputDialog and run its show() method, run handle_new_author_creation() to validate
+                 and create new playlist.
+
+                """
         author_input_dialog = authorInputDialog(parent=self.ui.window)
-        author_input_dialog.exec()
+        author_input_dialog.show()
+
+        miniature_file_dialog = self.handle_new_miniature_file_dialog(
+            author_input_dialog.authorInputDialogAuthorMiniatureQLabel)
+
+        author_input_dialog.authorInputDialogAddButton.clicked.connect(
+            partial(self.handle_new_author_creation, author_input_dialog, miniature_file_dialog))
+
+    @staticmethod
+    def handle_new_author_creation(author_dialog, author_miniature_dialog):
+        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new playlist.
+
+            Parameters:
+                author_dialog (authorInputDialogInputDialog): authorInputDialog used to collect data to create author from.
+                author_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new author.
+        """
+        print(f"Handling author creation...\n"
+              f"---------------------------------------------------------------------------------------\n"
+              f"Author_miniature_dialog files: {author_miniature_dialog.selectedFiles()}\n"
+              f"Author name: {author_dialog.authorInputDialogAuthorNameQLineEdit.text()}\n"
+              f"---------------------------------------------------------------------------------------")
+        # do stuff
+        print("Created new author in database.")
+        author_dialog.accept()
 
     def get_user_data(self):
         user = User.query.first()
@@ -1698,13 +1792,36 @@ class Controller:
         db.session.commit()
 
     def create_playlist_button_slot(self):
-        """Create new playlistInputDialog and handle new playlist creation"""
-        playlist_input_dialog = self.run_playlist_input_dialog()
-        self.create_new_playlist()
+        """Create new playlistInputDialog and run its show() method, run handle_new_playlist_creation() to validate
+         and create new playlist.
 
-    def create_new_playlist(self):
-        """Get new playlist info and create new playlist in database"""
-        pass
+        """
+        playlist_input_dialog = playlistInputDialog(parent=self.ui.window)
+        playlist_input_dialog.show()
+
+        miniature_file_dialog = self.handle_new_miniature_file_dialog(
+            playlist_input_dialog.playlistInputDialogPlaylistsMiniatureQLabel)
+
+        playlist_input_dialog.playlistInputDialogAddButton.clicked.connect(
+            partial(self.handle_new_playlist_creation, playlist_input_dialog, miniature_file_dialog))
+
+    @staticmethod
+    def handle_new_playlist_creation(playlist_dialog, playlist_miniature_dialog):
+        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new playlist.
+
+            Parameters:
+                playlist_dialog (playlistInputDialog): playlistInputDialog used to collect data to create playlist from.
+                playlist_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new playlist.
+        """
+        print(f"Handling playlist creation...\n"
+              f"---------------------------------------------------------------------------------------\n"
+              f"Playlist_miniature_dialog files: {playlist_miniature_dialog.selectedFiles()}\n"
+              f"Playlist name: {playlist_dialog.playlistInputDialogPlaylistNameQLineEdit.text()}\n"
+              f"Playlist category: {playlist_dialog.playlistInputDialogCategoryQComboBox.currentText()}\n"
+              f"---------------------------------------------------------------------------------------")
+        # do stuff
+        print("Created new playlist in database.")
+        playlist_dialog.accept()
 
     def run_playlist_input_dialog(self):
         create_playlist_dialog = playlistInputDialog(parent=self.ui.window)

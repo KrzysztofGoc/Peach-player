@@ -583,6 +583,11 @@ class Ui_MainWindow:
                                                  "    margin-top: 42px;\n"
                                                  "    background: transparent;\n"
                                                  "}\n"
+                                                 "QComboBox QScrollBar:vertical{\n"
+                                                 "    width: 16px;\n"
+                                                 "    margin-top: 0px;\n"
+                                                 "    background: transparent;\n"
+                                                 "}\n"
                                                  "QScrollBar::handle:vertical{\n"
                                                  "    background: rgba(179, 179, 179, 0.45);\n"
                                                  "}\n"
@@ -607,8 +612,7 @@ class Ui_MainWindow:
                                                  "    height: 0px;\n"
                                                  "    border: none;\n"
                                                  "    background: none;\n"
-                                                 "}\n"
-                                                 "")
+                                                 "}\n")
         self.mainPageStackedWidget.setLineWidth(0)
         self.mainPageStackedWidget.setObjectName("mainPageStackedWidget")
         self.mainPageNowPlaying = ResizeSignalWidget()

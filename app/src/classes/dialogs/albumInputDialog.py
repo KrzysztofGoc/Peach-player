@@ -1,7 +1,7 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from app.src.classes.widgets.labeled_qcombobox import LabeledQComboBox
 from app.src.classes.widgets.labeled_qlineedit import LabeledQLineEdit
-
+from app.src.classes.widgets.clicked_signal_qlabel import ClickedSignalQLabel
 
 class albumInputDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
@@ -10,7 +10,6 @@ class albumInputDialog(QtWidgets.QDialog):
             self.setParent(parent)
         self.setupUi(self)
         self.albumInputDialogExitButton.clicked.connect(self.reject)
-        self.albumInputDialogAddButton.clicked.connect(self.accept)
 
     def setupUi(self, albumInputDialog):
         albumInputDialog.setObjectName("albumInputDialog")
@@ -60,8 +59,38 @@ class albumInputDialog(QtWidgets.QDialog):
                                    "}\n"
                                    "#albumInputDialogSynchronizeQRadioButton{\n"
                                    "    color: rgb(179, 179, 179);\n"
-                                   "    \n"
                                    "    font: 57 10pt \"Heebo Medium\";\n"
+                                   "}\n"
+                                   "\n"
+                                   "QScrollBar:vertical {\n"
+                                   "    width: 16px;\n"
+                                   "    background: transparent;\n"
+                                   "}\n"
+                                   "QScrollBar::handle:vertical{\n"
+                                   "    margin-right: -10px;\n"
+                                   "    background: rgba(179, 179, 179, 0.45);\n"
+                                   "}\n"
+                                   "QScrollBar::handle:hover:vertical{\n"
+                                   "    background: rgba(179, 179, 179, 0.55);\n"
+                                   "}\n"
+                                   "QScrollBar::sub-page:vertical{\n"
+                                   "    background: transparent;\n"
+                                   "}\n"
+                                   "QScrollBar::add-page:vertical{\n"
+                                   "    background: transparent;\n"
+                                   "}\n"
+                                   "\n"
+                                   "QScrollBar::add-line:vertical{\n"
+                                   "    widgth: 0px;\n"
+                                   "    height: 0px;\n"
+                                   "    background: none;\n"
+                                   "    border: none;\n"
+                                   "}\n"
+                                   "QScrollBar::sub-line:vertical{\n"
+                                   "    widgth: 0px;\n"
+                                   "    height: 0px;\n"
+                                   "    border: none;\n"
+                                   "    background: none;\n"
                                    "}\n")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -181,7 +210,7 @@ class albumInputDialog(QtWidgets.QDialog):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_6.addItem(spacerItem1)
-        self.albumInputDialogAlbumsMiniatureQLabel = QtWidgets.QLabel(self.frame_9)
+        self.albumInputDialogAlbumsMiniatureQLabel = ClickedSignalQLabel(self.frame_9)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -234,6 +263,7 @@ class albumInputDialog(QtWidgets.QDialog):
         self.verticalLayout_16.setObjectName("verticalLayout_16")
 
         self.labeledLineEdit = LabeledQLineEdit(parent=self.groupBox1_3, input_title="Album Name")
+        self.albumInputDialogAlbumNameQLineEdit = self.labeledLineEdit.lineEdit_2
         self.lineEdit = self.labeledLineEdit.lineEdit_2
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
@@ -309,7 +339,7 @@ class albumInputDialog(QtWidgets.QDialog):
 
         self.groupBox1_2 = LabeledQComboBox(parent=self.frame_7, input_title="Category Name")
         self.albumInputDialogCategoryQComboBox = self.groupBox1_2.comboBox1
-        self.albumInputDialogCategoryQComboBox.setMaxVisibleItems(3)
+        self.albumInputDialogCategoryQComboBox.setMaxVisibleItems(4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -335,7 +365,7 @@ class albumInputDialog(QtWidgets.QDialog):
 
         self.groupBox1 = LabeledQComboBox(parent=self.frame_7, input_title="Author Name")
         self.albumInputDialogAuthorQComboBox = self.groupBox1.comboBox1
-        self.albumInputDialogAuthorQComboBox.setMaxVisibleItems(3)
+        self.albumInputDialogAuthorQComboBox.setMaxVisibleItems(4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -357,9 +387,8 @@ class albumInputDialog(QtWidgets.QDialog):
 
         self.albumInputDialogAuthorQComboBox.setItemText(0, "No Author")
         self.albumInputDialogAuthorQComboBox.addItem("No Author")
+
         self.verticalLayout_15.addWidget(self.groupBox1)
-
-
         self.horizontalLayout_3.addWidget(self.frame_7)
         self.verticalLayout_5.addWidget(self.frame_6)
         self.frame_8 = QtWidgets.QFrame(self.frame_2)

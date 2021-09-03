@@ -1,7 +1,7 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from app.src.classes.widgets.labeled_qlineedit import LabeledQLineEdit
 from app.src.classes.widgets.labeled_qcombobox import LabeledQComboBox
-
+from app.src.classes.widgets.clicked_signal_qlabel import ClickedSignalQLabel
 
 class playlistInputDialog(QtWidgets.QDialog):
     """Base playlist input dialog with predefined layout, allows user to add new playlist."""
@@ -11,7 +11,6 @@ class playlistInputDialog(QtWidgets.QDialog):
             self.setParent(parent)
         self.setupUi(self)
         self.playlistInputDialogExitButton.clicked.connect(self.reject)
-        self.playlistInputDialogAddButton.clicked.connect(self.accept)
 
     def setupUi(self, playlistInputDialog):
         """Setup predefined layout."""
@@ -180,7 +179,7 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_6.addItem(spacerItem1)
-        self.playlistInputDialogPlaylistsMiniatureQLabel = QtWidgets.QLabel(self.frame_9)
+        self.playlistInputDialogPlaylistsMiniatureQLabel = ClickedSignalQLabel(self.frame_9)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -321,6 +320,7 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.playlistInputDialogCategoryQComboBox = self.groupBox1_2.comboBox1
+        self.playlistInputDialogCategoryQComboBox.setMaxVisibleItems(4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -341,10 +341,9 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.playlistInputDialogCategoryQComboBox.setPlaceholderText("")
         self.playlistInputDialogCategoryQComboBox.setFrame(True)
         self.playlistInputDialogCategoryQComboBox.setObjectName("playlistInputDialogCategoryQComboBox")
+
         self.playlistInputDialogCategoryQComboBox.addItem("")
         self.playlistInputDialogCategoryQComboBox.setItemText(0, "No category")
-
-
 
         self.verticalLayout_15.addWidget(self.groupBox1_2)
         self.horizontalLayout_3.addWidget(self.frame_7)
