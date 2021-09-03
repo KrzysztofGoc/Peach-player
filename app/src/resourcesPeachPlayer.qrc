@@ -81,6 +81,8 @@
     <file>icons/48x48/filled/baseline_picture_in_picture_white_48dp.png</file>
   </qresource>
   <qresource prefix="/icons/48x48/outlined">
+    <file>icons/48x48/outlined/outline_arrow_drop_down_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_arrow_drop_down_white_48dp.png</file>
     <file>icons/48x48/outlined/outline_logout_white_48dp.png</file>
     <file>icons/48x48/outlined/outline_person_white_48dp.png</file>
     <file>icons/48x48/outlined/outline_maximize_white_48dp.png</file>
