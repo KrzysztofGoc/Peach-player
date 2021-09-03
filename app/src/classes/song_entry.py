@@ -9,14 +9,17 @@ class SongEntry(QtWidgets.QFrame):
 
     """
 
-    def __init__(self, *, song_title="Nam tristique", artist_name=None, category_name="",
-                 date_added="24 Dec 2020", song_length="5 : 30", is_liked=False, is_playing=False, parent=None):
+    def __init__(self, *, song_id=None, song_title="None", artist_name=None, category_name="",
+                 date_added="24 Dec 2020", song_length="5 : 30",
+                 path=None, is_liked=False, is_playing=False, parent=None):
         super().__init__(parent=parent)
+        self.song_id = song_id
         self.song_title = song_title
         self.artist_name = artist_name
         self.category_name = category_name
         self.date_added = date_added
         self.song_length = song_length
+        self.path = path
         self.is_liked = is_liked
         self.is_playing = is_playing
         self.setup_layout()
