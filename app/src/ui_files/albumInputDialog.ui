@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>524</width>
-    <height>326</height>
+    <height>330</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,30 +19,20 @@
   <property name="minimumSize">
    <size>
     <width>524</width>
-    <height>326</height>
+    <height>330</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>524</width>
-    <height>326</height>
+    <height>330</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#frame_3{
-	border-radius: 8px;
-	background-color: rgb(33, 33, 33);
-}
-#scrollArea{
-	background-color: transparent;
-}
-#scrollAreaWidgetContents{
-		background-color: transparent;
-}
-</string>
+   <string notr="true">border: none;</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -62,8 +52,111 @@
    </property>
    <item>
     <widget class="QFrame" name="frame_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>524</width>
+       <height>330</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>524</width>
+       <height>330</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
      <property name="styleSheet">
-      <string notr="true">border: none;</string>
+      <string notr="true">#frame_3{
+	border-radius: 8px;
+	background-color: rgb(40, 40, 40);
+}
+#albumInputDialogExitButton{
+	background-color: none;
+	border-radius: 16px;
+}
+#albumInputDialogExitButton:hover{
+	background-color: rgba(179, 179, 179, 0.25);
+}
+#albumInputDialogExitButton:pressed{
+	background-color: rgba(179, 179, 179, 0.35);
+}
+#label{
+	color: white;
+	font: 87 17pt &quot;Heebo Black&quot;;
+}
+#albumInputDialogAddButton{
+	border-radius: 16px;
+	background-color: white;
+	color: black;
+	font: 87 9pt &quot;Heebo Medium&quot;;
+}
+#albumInputDialogSynchronizeQRadioButton{
+	color: rgb(179, 179, 179);
+	
+	font: 57 10pt &quot;Heebo Medium&quot;;
+}
+
+
+
+QComboBox QAbstractItemView {
+	outline: none;
+	border: 1px solid rgba(179, 179, 179, 0.25);
+}
+
+QComboBox {
+	font: 57 10pt &quot;Heebo Black&quot;;
+	color: rgba(255, 255, 255, 128);
+	border: none;	
+	background-color: transparent;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+QComboBox:hover{
+	color: white;
+}
+QComboBox::drop-down {
+	heigth: 40px;
+	width: 32px;
+}
+QComboBox:down-arrow {
+	image: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_arrow_drop_down_gray_48dp.png);
+}
+QGroupBox {
+	font: 57 8pt &quot;Heebo Black&quot;;
+	background-color: rgba(179, 179, 179, 0.25);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+QGroupBox::title {
+	color: rgb(173, 173, 173);
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 3px 0 3px;
+}
+
+
+
+QLineEdit {
+	font: 57 10pt &quot;Heebo Black&quot;;
+	color: white;
+	background-color: transparent;
+	border: none;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -76,589 +169,1014 @@
        <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>0</number>
+       <number>24</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>24</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>24</number>
       </property>
       <property name="bottomMargin">
-       <number>0</number>
+       <number>24</number>
       </property>
       <item>
-       <widget class="QScrollArea" name="scrollArea">
-        <property name="widgetResizable">
-         <bool>true</bool>
+       <widget class="QFrame" name="frame_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>524</width>
-           <height>326</height>
-          </rect>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="spacing">
+          <number>0</number>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>24</number>
-          </property>
-          <property name="topMargin">
-           <number>24</number>
-          </property>
-          <property name="rightMargin">
-           <number>24</number>
-          </property>
-          <property name="bottomMargin">
-           <number>24</number>
-          </property>
-          <item>
-           <widget class="QFrame" name="frame">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QFrame" name="frame">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>0</number>
             </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>76</height>
-             </size>
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>76</height>
-             </size>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(0, 170, 127);</string>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+            <property name="bottomMargin">
+             <number>2</number>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QFrame" name="frame_4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+            <item>
+             <widget class="QFrame" name="frame_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <property name="spacing">
+                <number>0</number>
                </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
+               <property name="leftMargin">
+                <number>0</number>
                </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+               <property name="topMargin">
+                <number>0</number>
                </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
+               <property name="rightMargin">
+                <number>0</number>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_3">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="label">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string notr="true">Add new album</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_5">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="albumInputDialogExitButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>32</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>32</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>:/icons/48x48/outlined/icons/48x48/outlined/outline_close_white_48dp.png</normaloff>:/icons/48x48/outlined/icons/48x48/outlined/outline_close_white_48dp.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QFrame" name="frame_9">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>198</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="albumInputDialogAlbumsMiniatureQLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>180</width>
+                   <height>180</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>180</width>
+                   <height>180</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap>:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>198</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_15">
+               <property name="spacing">
+                <number>16</number>
+               </property>
+               <property name="leftMargin">
+                <number>16</number>
+               </property>
+               <property name="topMargin">
+                <number>10</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QGroupBox" name="groupBox1_3">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>280</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Heebo Black</family>
+                   <pointsize>8</pointsize>
+                   <weight>7</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="title">
+                  <string notr="true">Album Name</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_16">
+                  <property name="spacing">
+                   <number>0</number>
                   </property>
-                  <property name="text">
-                   <string notr="true">Add new album</string>
+                  <property name="leftMargin">
+                   <number>0</number>
                   </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>324</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_5">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QPushButton" name="albumInputDialogExitButton">
-                  <property name="minimumSize">
-                   <size>
-                    <width>32</width>
-                    <height>32</height>
-                   </size>
+                  <property name="topMargin">
+                   <number>0</number>
                   </property>
-                  <property name="text">
-                   <string notr="true">Exit</string>
+                  <property name="rightMargin">
+                   <number>0</number>
                   </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(85, 255, 127);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_10">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QFrame" name="frame_6">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(170, 170, 127);</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_16">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QFrame" name="frame_8">
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgb(170, 85, 127);</string>
+                  <property name="bottomMargin">
+                   <number>0</number>
                   </property>
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                  <item>
+                   <widget class="QLineEdit" name="albumInputDialogAlbumNameQLineEdit">
+                    <property name="palette">
+                     <palette>
+                      <active>
+                       <colorrole role="WindowText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Button">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Text">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="ButtonText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Base">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Window">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="PlaceholderText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="128">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                      </active>
+                      <inactive>
+                       <colorrole role="WindowText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Button">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Text">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="ButtonText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Base">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Window">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="PlaceholderText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="128">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                      </inactive>
+                      <disabled>
+                       <colorrole role="WindowText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Button">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Text">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="ButtonText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="255">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Base">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="Window">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="0">
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                       <colorrole role="PlaceholderText">
+                        <brush brushstyle="SolidPattern">
+                         <color alpha="128">
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>255</blue>
+                         </color>
+                        </brush>
+                       </colorrole>
+                      </disabled>
+                     </palette>
+                    </property>
+                    <property name="inputMask">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string notr="true"/>
+                    </property>
+                    <property name="placeholderText">
+                     <string notr="true">Album name</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox1_2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>280</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Heebo Black</family>
+                   <pointsize>8</pointsize>
+                   <weight>7</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="title">
+                  <string notr="true">Category Name</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                  <property name="spacing">
+                   <number>0</number>
                   </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
+                  <property name="leftMargin">
+                   <number>0</number>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_6">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QLineEdit" name="albumInputDialogAlbumNameQLineEdit">
-                     <property name="inputMask">
-                      <string notr="true"/>
-                     </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QComboBox" name="albumInputDialogCategoryQComboBox">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Heebo Black</family>
+                      <pointsize>10</pointsize>
+                      <weight>7</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="currentText">
+                     <string notr="true">bozo</string>
+                    </property>
+                    <property name="maxVisibleItems">
+                     <number>3</number>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>50</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="placeholderText">
+                     <string notr="true"/>
+                    </property>
+                    <property name="frame">
+                     <bool>true</bool>
+                    </property>
+                    <item>
                      <property name="text">
-                      <string>Album name</string>
+                      <string notr="true">bozo</string>
                      </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_9">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(170, 170, 127);</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_17">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QFrame" name="frame_11">
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgb(170, 85, 127);</string>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_7">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QComboBox" name="albumInputDialogCategoryQComboBox">
-                     <item>
-                      <property name="text">
-                       <string notr="true">noCategory</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string notr="true">category1</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string notr="true">category2</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_12">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(170, 170, 127);</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_18">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QFrame" name="frame_13">
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgb(170, 85, 127);</string>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_9">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QComboBox" name="albumInputDialogAuthorQComboBox">
-                     <item>
-                      <property name="text">
-                       <string notr="true">noAuthor</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string notr="true">author1</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string notr="true">author2</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_7">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>50</height>
-                </size>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QRadioButton" name="albumInputDialogSynchronizeQRadioButton">
-                  <property name="text">
-                   <string notr="true">Synchronize</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_2">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>366</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QFrame" name="frame_10">
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_8">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QPushButton" name="albumInputDialogAddButton">
-                     <property name="minimumSize">
-                      <size>
-                       <width>90</width>
-                       <height>32</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background-color: rgb(255, 255, 0);</string>
-                     </property>
+                    </item>
+                    <item>
                      <property name="text">
-                      <string notr="true">Add</string>
+                      <string notr="true">bozoo</string>
                      </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string notr="true">bozo1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string notr="true">bozo2</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox1">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>280</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Heebo Black</family>
+                   <pointsize>8</pointsize>
+                   <weight>7</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="title">
+                  <string notr="true">Author Name</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_13">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QComboBox" name="albumInputDialogAuthorQComboBox">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Heebo Black</family>
+                      <pointsize>10</pointsize>
+                      <weight>7</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="currentText">
+                     <string notr="true">bozo</string>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>50</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="placeholderText">
+                     <string notr="true"/>
+                    </property>
+                    <property name="frame">
+                     <bool>true</bool>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string notr="true">bozo</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string notr="true">bozo1</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string notr="true">bozo2</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_8">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>16</number>
+            </property>
+            <property name="rightMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_10">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="albumInputDialogAddButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>90</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>90</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Heebo Medium</family>
+                   <pointsize>9</pointsize>
+                   <weight>10</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                   <kerning>true</kerning>
+                  </font>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LeftToRight</enum>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string notr="true">ADD</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -666,6 +1184,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resourcesPeachPlayer.qrc"/>
+ </resources>
  <connections/>
 </ui>

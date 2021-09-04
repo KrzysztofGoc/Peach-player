@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
-    <height>678</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -79,7 +79,7 @@
        <string notr="true">border: none;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="centralPageAppPage">
        <property name="styleSheet">
@@ -1207,7 +1207,7 @@ QScrollBar::sub-line:vertical{
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>11</number>
             </property>
             <widget class="QWidget" name="mainPageNowPlaying">
              <property name="sizePolicy">
@@ -24782,7 +24782,7 @@ SongEntry QPushButton:hover{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>569</height>
+                      <height>573</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -28478,6 +28478,52 @@ QFrame#frame_402 QPushButton{
 	icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_add_gray_48dp.png);
 }
 
+QComboBox {
+	color: rgb(185, 185, 185);
+	background-color: rgba(179, 179, 179, 0.25);
+    border: 1px solid transparent;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-radius: 4px;
+	font: 57 10pt &quot;Heebo Medium&quot;;
+}
+QComboBox:on{
+    border: 1px solid rgba(179, 179, 179, 0.25);
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	background-color: rgb(51, 51, 51);
+}
+QComboBox:hover{
+	color: white;
+}
+QComboBox::drop-down {
+	border: none;
+}
+QComboBox:down-arrow {
+	image: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_arrow_drop_down_gray_48dp.png);
+	width: 26px;
+    height: 26px;
+	right: 10px;
+}
+
+QLineEdit {
+	font: 57 10pt &quot;Heebo Medium&quot;;
+	color: white;
+	background-color: rgba(179, 179, 179, 0.25);
+    border: 1px solid transparent;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-radius: 4px;
+}
+QLineEdit:focus{
+    border: 1px solid rgba(179, 179, 179, 0.25);
+	background-color: rgb(51, 51, 51);
+}
+
 
 
 </string>
@@ -28583,7 +28629,7 @@ QFrame#frame_402 QPushButton{
                       <x>0</x>
                       <y>0</y>
                       <width>1674</width>
-                      <height>610</height>
+                      <height>614</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -29174,7 +29220,7 @@ font: 87 17pt &quot;Heebo Black&quot;;</string>
                                </widget>
                               </item>
                               <item>
-                               <widget class="SongAdder" name="frame_407">
+                               <widget class="SongAdder" name="mainPageAllSongsSongAdderQFrame">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                   <horstretch>0</horstretch>
@@ -29575,18 +29621,24 @@ QPushButton:checked{
                                       </property>
                                       <property name="minimumSize">
                                        <size>
-                                        <width>125</width>
-                                        <height>0</height>
+                                        <width>175</width>
+                                        <height>40</height>
+                                       </size>
+                                      </property>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>175</width>
+                                        <height>40</height>
                                        </size>
                                       </property>
                                       <property name="inputMask">
                                        <string notr="true"/>
                                       </property>
                                       <property name="text">
-                                       <string notr="true">Song title</string>
+                                       <string notr="true"/>
                                       </property>
                                       <property name="placeholderText">
-                                       <string notr="true"/>
+                                       <string notr="true">Song title</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -29642,8 +29694,14 @@ QPushButton:checked{
                                       </property>
                                       <property name="minimumSize">
                                        <size>
-                                        <width>125</width>
-                                        <height>0</height>
+                                        <width>175</width>
+                                        <height>40</height>
+                                       </size>
+                                      </property>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>175</width>
+                                        <height>40</height>
                                        </size>
                                       </property>
                                       <item>
@@ -29712,8 +29770,14 @@ QPushButton:checked{
                                       </property>
                                       <property name="minimumSize">
                                        <size>
-                                        <width>125</width>
-                                        <height>0</height>
+                                        <width>175</width>
+                                        <height>40</height>
+                                       </size>
+                                      </property>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>175</width>
+                                        <height>40</height>
                                        </size>
                                       </property>
                                       <item>
@@ -29782,8 +29846,14 @@ QPushButton:checked{
                                       </property>
                                       <property name="minimumSize">
                                        <size>
-                                        <width>125</width>
-                                        <height>0</height>
+                                        <width>175</width>
+                                        <height>40</height>
+                                       </size>
+                                      </property>
+                                      <property name="maximumSize">
+                                       <size>
+                                        <width>175</width>
+                                        <height>40</height>
                                        </size>
                                       </property>
                                       <item>
@@ -33480,7 +33550,6 @@ QScrollBar::sub-line:vertical{
 }
 QScrollBar:vertical {
 	width: 12px;
-	margin-top: 42px;
     background: transparent;
 }
 QScrollBar::handle:vertical{
@@ -33561,8 +33630,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>841</width>
-                <height>697</height>
+                <width>788</width>
+                <height>713</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_63">
@@ -35010,7 +35079,6 @@ QScrollBar::sub-line:vertical{
 }
 QScrollBar:vertical {
 	width: 12px;
-	margin-top: 42px;
     background: transparent;
 }
 QScrollBar::handle:vertical{
@@ -35091,8 +35159,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
-                <height>638</height>
+                <width>788</width>
+                <height>650</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_70">
