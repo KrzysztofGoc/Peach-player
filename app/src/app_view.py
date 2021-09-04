@@ -561,7 +561,7 @@ class Ui_MainWindow:
         sizePolicy.setHeightForWidth(self.volumeSlider.sizePolicy().hasHeightForWidth())
         self.volumeSlider.setSizePolicy(sizePolicy)
         self.volumeSlider.setMinimumSize(QtCore.QSize(90, 0))
-        self.volumeSlider.setProperty("value", 37)
+        self.volumeSlider.setProperty("value", 5)
         self.volumeSlider.setOrientation(QtCore.Qt.Horizontal)
         self.volumeSlider.setTickPosition(QtWidgets.QSlider.NoTicks)
         self.volumeSlider.setObjectName("volumeSlider")

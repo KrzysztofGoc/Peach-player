@@ -1,7 +1,7 @@
 from functools import partial
 from PySide2 import QtCore, QtWidgets, QtGui
 from PySide2.QtCore import QUrl, QTimer
-from PySide2.QtMultimedia import QMediaPlayer, QMediaContent
+from PySide2.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 
 from app.src.classes import navbar_frame
 from app_model import *
@@ -33,10 +33,11 @@ class Controller:
     def __init__(self, ui):
         self.ui = ui
         self.player = QMediaPlayer()
+        self.playlist = QMediaPlaylist()
         self.timer = QTimer()
         self.connect_signals_with_slots()
         self.category_frames = []
-        self.loaded_liked_songs = []
+        # self.loaded_liked_songs = []
         self.loaded_songs = []
         self.loaded_album_page_songs = []
         self.loaded_albums = []
@@ -47,6 +48,7 @@ class Controller:
         self.loaded_playlist_page_songs = []
         self.now_playing_song = None
         self.songs_in_queue = []
+        self.previous_playlist_songs = []
         self.user_data = None
         self.get_user_data()
         self.log_in_with_token()
@@ -54,6 +56,7 @@ class Controller:
         self.turn_off_playing_songs()
         self.song_duration = None
         self.current_playing_song_second = None
+        self.current_loaded_songs_frames = []
 
     def connect_signals_with_slots(self):
         """Connects Ui's widgets with respective slots"""
@@ -95,7 +98,15 @@ class Controller:
         self.ui.songTimeSlider.valueChanged.connect(self.song_time_slider_value_changed)
         self.ui.volumeSlider.valueChanged.connect(self.volume_slider_value_changed)
         self.ui.bottomPlayerMuteButton.clicked.connect(self.set_muted)
-
+        self.ui.playlistPlayPauseButton_2.clicked.connect(self.start_playlist)
+        self.playlist.currentIndexChanged.connect(self.playlist_index_changed)
+        # self.ui.playerPreviousButton.clicked.connect()
+        # self.ui.playerNextButton.clicked.connect()
+        # self.ui.playerLoopButton.clicked.connect()
+        # self.ui.playerShuffleButton.clicked.connect()
+        # self.ui.mainPageCategoriesAlphabeticallySortQPushButton.clicked.connect()
+        # self.ui.mainPageCategoriesRecentlyAddedSortQPushButton.clicked.connect()
+        # self.ui.mainPageCategoriesMostListenedSortQPushButton.clicked.connect()
         # Sort buttons' slots
         self.ui.mainPageLikedSongsSortButtonsQButtonGroup.buttonClicked.connect(
             self.liked_songs_sort_buttons_qbuttongroup_slot)
@@ -1047,15 +1058,16 @@ class Controller:
             author_playlists_ids.append(i.playlist_id)
         playlists = Playlist.query.filter(Playlist.id.in_(author_playlists_ids)).all()
         row = column = 0
-        for playlist in playlists:
-            if column % 8 == 0:
-                row += 1
-                column = 0
-            playlist_frame = PlaylistEntry(self.ui.frame_62, playlist_name=playlist.playlist_name)
-            playlist_frame.clicked.connect(partial(self.load_playlist_page, playlist))
-            self.ui.mainPageAuthorPagePlaylistsGridQGridLayout.addWidget(playlist_frame, row, column, 1, 1)
-            self.loaded_selected_author_playlists.append(playlist_frame)
-            column += 1
+        if playlists:
+            for playlist in playlists:
+                if column % 8 == 0:
+                    row += 1
+                    column = 0
+                playlist_frame = PlaylistEntry(self.ui.frame_62, playlist_name=playlist.playlist_name)
+                playlist_frame.clicked.connect(partial(self.load_playlist_page, playlist))
+                self.ui.mainPageAuthorPagePlaylistsGridQGridLayout.addWidget(playlist_frame, row, column, 1, 1)
+                self.loaded_selected_author_playlists.append(playlist_frame)
+                column += 1
 
     def last_played_button_slot(self):
         """Prepare lastPlayed page and change mainPageStackedWidget to lastPlayed's index"""
@@ -1064,41 +1076,42 @@ class Controller:
 
     def liked_songs_button_slot(self):
         """Prepare likedSongs page and change mainPageStackedWidget to likedSongs' index"""
-        if len(self.loaded_liked_songs) != 0:
-            for i in self.loaded_liked_songs:
+        if len(self.current_loaded_songs_frames) != 0:
+            for i in self.current_loaded_songs_frames:
                 i.setParent(None)
-            self.loaded_liked_songs = []
+            self.current_loaded_songs_frames = []
         self.setup_main_page_liked_songs()
         self.ui.set_main_page_stacked_widget_index(2)
         liked_songs = Songs.query.filter_by(liked_by=self.user_data["hashed_name"]).all()
-        for song in liked_songs:
-            is_playing = song.is_playing
-            liked_song_frame = SongEntry(
-                song_id=song.id,
-                song_title=song.title,
-                artist_name=song.author.author_name,
-                category_name=song.category.category_name,
-                path=song.path,
-                is_liked=True,
-                is_playing=is_playing
-            )
-            if self.now_playing_song and song.id == self.now_playing_song.song_id:
-                self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(self.now_playing_song)
-                # is_playing = self.now_playing_song.is_playing
-                # print(self.now_playing_song.is_playing)
-                # self.now_playing_song = liked_song_frame
-                # self.now_playing_song.is_playing = is_playing
-                # self.now_playing_song.pushButton_13.setChecked(is_playing)
-                self.loaded_liked_songs.append(self.now_playing_song)
-            else:
-                liked_song_frame.pushButton_30.clicked.connect(partial(self.like_song, liked_song_frame))
-                liked_song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, liked_song_frame))
-                liked_song_frame.mainPageLikedSongsArtistButton.clicked.connect(
-                    partial(self.load_author_page, song.author))
-                liked_song_frame.mainPageLikedSongsCategoryButton.clicked.connect(
-                    partial(self.load_selected_category_page, song.category.category_name))
-                self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(liked_song_frame)
-                self.loaded_liked_songs.append(liked_song_frame)
+        if liked_songs:
+            for song in liked_songs:
+                is_playing = song.is_playing
+                liked_song_frame = SongEntry(
+                    song_id=song.id,
+                    song_title=song.title,
+                    artist_name=song.author.author_name,
+                    category_name=song.category.category_name,
+                    path=song.path,
+                    is_liked=True,
+                    is_playing=is_playing
+                )
+                if self.now_playing_song and song.id == self.now_playing_song.song_id:
+                    self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(self.now_playing_song)
+                    # is_playing = self.now_playing_song.is_playing
+                    # print(self.now_playing_song.is_playing)
+                    # self.now_playing_song = liked_song_frame
+                    # self.now_playing_song.is_playing = is_playing
+                    # self.now_playing_song.pushButton_13.setChecked(is_playing)
+                    self.current_loaded_songs_frames.append(self.now_playing_song)
+                else:
+                    liked_song_frame.pushButton_30.clicked.connect(partial(self.like_song, liked_song_frame))
+                    liked_song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, liked_song_frame))
+                    liked_song_frame.mainPageLikedSongsArtistButton.clicked.connect(
+                        partial(self.load_author_page, song.author))
+                    liked_song_frame.mainPageLikedSongsCategoryButton.clicked.connect(
+                        partial(self.load_selected_category_page, song.category.category_name))
+                    self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(liked_song_frame)
+                    self.current_loaded_songs_frames.append(liked_song_frame)
 
     def categories_button_slot(self):
         """Prepare categories page and change mainPageStackedWidget to categories' index"""
@@ -1288,52 +1301,28 @@ class Controller:
         if song_to_like.liked_by == self.user_data["hashed_name"]:
             song_to_like.liked_by = ""
             song_frame.is_liked = False
-            if self.now_playing_song:
-                if song_to_like.id == self.now_playing_song.song_id:
-                    self.now_playing_song.is_liked = False
+            # if self.now_playing_song:
+                # if song_to_like.id == self.now_playing_song.song_id:
+                    # self.now_playing_song.is_liked = False
         else:
             song_to_like.liked_by = self.user_data["hashed_name"]
             song_frame.is_liked = True
-            if self.now_playing_song:
-                self.now_playing_song.is_liked = True
+            # if self.now_playing_song:
+                # self.now_playing_song.is_liked = True
         db.session.commit()
-
-    def temp(self, song_id):
-        song = Songs.query.filter_by(id=song_id).first()
-        if song.is_playing:
-            song.is_playing = False
-        else:
-            current_playing_song = Songs.query.filter_by(is_playing=True).first()
-            current_playing_song.is_playing = False
-            song.is_playing = True
-            if self.now_playing_song:
-                self.now_playing_song = None
-                is_liked = False
-                if song.liked_by == self.user_data["hashed_name"]:
-                    is_liked = True
-                song_frame = SongEntry(
-                    song_id=song.id,
-                    song_title=song.title,
-                    date_added=song.date_added,
-                    song_length=song.length,
-                    is_liked=is_liked,
-                    is_playing=song.is_playing
-                )
-                self.now_playing_song = song_frame
-                self.ui.verticalLayout_59.addWidget(song_frame)
 
     def play_pause_song(self, song_frame):
         # print(self.player.isAudioAvailable())
         # print(self.player.mediaStatus())
         # print(self.player.position())
         # self.ui.playerPausePlayButton.setCheckable(True)
-        widget_index = self.ui.mainPageStackedWidget.currentIndex()
-        if widget_index == 2:
-            for i in self.loaded_liked_songs:
-                if i.song_id != song_frame.song_id:
-                    if i.pushButton_13.isChecked():
-                        i.pushButton_13.setChecked(False)
-                        i.is_playing = False
+        # widget_index = self.ui.mainPageStackedWidget.currentIndex()
+        # if widget_index == 2:
+            # for i in self.current_loaded_songs_frames:
+                # if i.song_id != song_frame.song_id:
+                    # if i.pushButton_13.isChecked():
+                        # i.pushButton_13.setChecked(False)
+                        # i.is_playing = False
         if self.now_playing_song:
             if song_frame.song_id == self.now_playing_song.song_id:
                 if self.player.state() == self.player.PlayingState:
@@ -1350,8 +1339,6 @@ class Controller:
             elif song_frame.song_id != self.now_playing_song.song_id:
                 url = QUrl.fromLocalFile(song_frame.path)
                 content = QMediaContent(url)
-                # self.ui.playerPausePlayButton.setCheckable(True)
-                # self.ui.playerPausePlayButton.setChecked(True)
                 self.player.setMedia(content)
                 self.player.play()
                 self.now_playing_song = song_frame
@@ -1365,37 +1352,44 @@ class Controller:
             self.player.play()
             self.now_playing_song = song_frame
             self.now_playing_song.is_playing = True
-    """
-    def queue_button_slot(self):
-        Prepare authors page and change mainPageStackedWidget to authors's index
-        if self.now_playing_song_frame_queue_page:
-            self.now_playing_song_frame_queue_page.setParent(None)
-            self.now_playing_song_frame_queue_page = None
-        if self.now_playing_song:
-            self.now_playing_song_frame_queue_page = SongEntry(
-                song_id=self.now_playing_song.song_id,
-                song_title=self.now_playing_song.song_title,
-                artist_name=self.now_playing_song.artist_name,
-                category_name=self.now_playing_song.category_name,
-                date_added=self.now_playing_song.date_added,
-                song_length=self.now_playing_song.song_length,
-                is_playing=self.now_playing_song.is_playing,
-                is_liked=self.now_playing_song.is_liked
-            )
-            # print(self.now_playing_song.is_liked)
-            self.now_playing_song_frame_queue_page.pushButton_30.clicked.connect(partial(self.like_song, self.now_playing_song_frame_queue_page))
-            self.now_playing_song_frame_queue_page.pushButton_13.clicked.connect(partial(self.play_pause_song, self.now_playing_song_frame_queue_page))
-            self.now_playing_song_frame_queue_page.mainPageLikedSongsArtistButton.clicked.connect(
-                partial(self.load_author_page, self.now_playing_song.artist_name))
-            self.now_playing_song_frame_queue_page.mainPageLikedSongsCategoryButton.clicked.connect(
-                partial(self.load_selected_category_page, self.now_playing_song.category_name))
-            self.ui.verticalLayout_59.addWidget(self.now_playing_song_frame_queue_page)
-        self.setup_main_page_queue()
-        self.ui.set_main_page_stacked_widget_index(9)
-    """
+
+    def start_playlist(self):
+        self.player.stop()
+        self.playlist.clear()
+        self.now_playing_song = None
+        if self.current_loaded_songs_frames:
+            for i in self.current_loaded_songs_frames:
+                if self.now_playing_song:
+                    self.songs_in_queue.append(i)
+                else:
+                    self.now_playing_song = i
+                    self.now_playing_song.is_playing = True
+                    self.now_playing_song.pushButton_13.setChecked(True)
+                new_media = QMediaContent(QUrl.fromLocalFile(i.path))
+                self.playlist.addMedia(new_media)
+            self.player.setPlaylist(self.playlist)
+            self.player.setVolume(self.ui.volumeSlider.value())
+            self.player.play()
+
+    def playlist_index_changed(self):
+        if self.playlist.currentIndex() == 0:
+            if self.now_playing_song:
+                self.now_playing_song.is_playing = True
+                self.now_playing_song.pushButton_13.setChecked(True)
+        else:
+            self.now_playing_song.is_playing = False
+            self.now_playing_song.pushButton_13.setChecked(False)
+            self.now_playing_song = self.songs_in_queue[0]
+            self.songs_in_queue.pop(0)
+            self.now_playing_song.is_playing = True
+            self.now_playing_song.pushButton_13.setChecked(True)
+            self.ui.songTimeSlider.setSliderPosition(0)
+            self.ui.songCurrentTimestampLabel.setText("00:00")
+
     def queue_button_slot(self):
         """Prepare authors page and change mainPageStackedWidget to authors's index"""
-        self.ui.verticalLayout_59.addWidget(self.now_playing_song)
+        if self.now_playing_song:
+            self.ui.verticalLayout_59.addWidget(self.now_playing_song)
         self.setup_main_page_queue()
         self.ui.set_main_page_stacked_widget_index(9)
 
@@ -1420,18 +1414,20 @@ class Controller:
                 self.ui.songTimeSlider.SliderSingleStepAdd,
                 thresholdTime=0,
                 repeatTime=10)
-            # print("PLAYING")
+            print("PLAYING")
         elif state == self.player.StoppedState:
             self.player.setPosition(0)
             self.ui.songTimeSlider.setSliderPosition(0)
-            self.now_playing_song.pushButton_13.setChecked(False)
+            if self.now_playing_song:
+                self.now_playing_song.pushButton_13.setChecked(False)
             self.now_playing_song = None
             self.ui.songTimeSlider.setRepeatAction(self.ui.songTimeSlider.SliderNoAction)
             self.ui.playerPausePlayButton.setChecked(False)
             self.ui.playerPausePlayButton.setCheckable(False)
-            # print("Finished")
+            print("Finished")
+
         elif state == self.player.PausedState:
-            # print("PAUSED")
+            print("PAUSED")
             self.now_playing_song.pushButton_13.setChecked(False)
             self.ui.playerPausePlayButton.setChecked(False)
             self.ui.songTimeSlider.setRepeatAction(self.ui.songTimeSlider.SliderNoAction)
@@ -1554,8 +1550,6 @@ class Controller:
             song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
         db.session.commit()
 """
-
-
     """
 
 
