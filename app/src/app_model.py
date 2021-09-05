@@ -106,13 +106,4 @@ class LastPlayedSongs(db.Model):
     song = relationship("Songs", back_populates="last_played")
 
 
-class PlaySongThread(QThread):
-    def run(self):
-        for i in range(0, 100):
-            QApplication.processEvents()
-            print("BOZO")
-            time.sleep(2)
-            i += 1
-
-
 db.create_all()
