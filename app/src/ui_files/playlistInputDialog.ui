@@ -892,7 +892,7 @@ QLineEdit {
                      </font>
                     </property>
                     <property name="currentText">
-                     <string notr="true">bozo</string>
+                     <string notr="true">No category</string>
                     </property>
                     <property name="maxVisibleItems">
                      <number>3</number>
@@ -911,22 +911,22 @@ QLineEdit {
                     </property>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo</string>
+                      <string notr="true">No category</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozoo</string>
+                      <string notr="true">Category1</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo1</string>
+                      <string notr="true">Category2</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo2</string>
+                      <string notr="true">Category3</string>
                      </property>
                     </item>
                    </widget>

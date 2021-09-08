@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1298</width>
+    <height>739</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -79,7 +79,7 @@
        <string notr="true">border: none;</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="centralPageAppPage">
        <property name="styleSheet">
@@ -447,15 +447,25 @@ QPushButton#playerShuffleButton:checked:hover{
 	icon: url(:/icons/48x48/filled/icons/48x48/filled/baseline_shuffle_lightpeach_48dp.png);
 }
 
-
-QPushButton#playerLoopButton:hover:!checked{
-	icon: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_white_48dp.png);
+#playerLoopButton::indicator{
+	width: 18px;
+	height: 18px;
+	image: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_gray_48dp.png);
 }
-QPushButton#playerLoopButton:checked{ 
-	icon: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_peach_48dp.png);
+#playerLoopButton::indicator:hover:!checked:!indeterminate{
+	image: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_white_48dp.png);
 }
-QPushButton#playerLoopButton:checked:hover{ 
-	icon: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_lightpeach_48dp.png);
+#playerLoopButton::indicator:indeterminate{
+	image: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_peach_48dp.png);
+}
+#playerLoopButton::indicator:hover:indeterminate{
+	image: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_lightpeach_48dp.png);
+}
+#playerLoopButton::indicator:checked{
+	image: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_one_peach.PNG);
+}
+#playerLoopButton::indicator::hover:checked{
+	image: url(:/icons/48x48/filled/icons/48x48/filled/baseline_loop_one_light_peach.PNG);
 }
 
 
@@ -599,7 +609,7 @@ QFrame#playerCentralPanel{
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,3,0,3,3">
+                    <layout class="QHBoxLayout" name="horizontalLayout">
                      <property name="spacing">
                       <number>0</number>
                      </property>
@@ -615,7 +625,7 @@ QFrame#playerCentralPanel{
                      <property name="bottomMargin">
                       <number>0</number>
                      </property>
-                     <item alignment="Qt::AlignLeft">
+                     <item>
                       <widget class="QPushButton" name="playerShuffleButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -656,7 +666,7 @@ QFrame#playerCentralPanel{
                        </property>
                       </widget>
                      </item>
-                     <item alignment="Qt::AlignLeft">
+                     <item>
                       <widget class="QPushButton" name="playerPreviousButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -739,7 +749,7 @@ QFrame#playerCentralPanel{
                        </property>
                       </widget>
                      </item>
-                     <item alignment="Qt::AlignRight">
+                     <item>
                       <widget class="QPushButton" name="playerNextButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -783,8 +793,8 @@ QFrame#playerCentralPanel{
                        </property>
                       </widget>
                      </item>
-                     <item alignment="Qt::AlignRight">
-                      <widget class="QPushButton" name="playerLoopButton">
+                     <item>
+                      <widget class="QCheckBox" name="playerLoopButton">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -809,10 +819,6 @@ QFrame#playerCentralPanel{
                        <property name="text">
                         <string notr="true"/>
                        </property>
-                       <property name="icon">
-                        <iconset resource="../resourcesPeachPlayer.qrc">
-                         <normaloff>:/icons/48x48/filled/icons/48x48/filled/baseline_loop_gray_48dp.png</normaloff>:/icons/48x48/filled/icons/48x48/filled/baseline_loop_gray_48dp.png</iconset>
-                       </property>
                        <property name="iconSize">
                         <size>
                          <width>18</width>
@@ -820,6 +826,9 @@ QFrame#playerCentralPanel{
                         </size>
                        </property>
                        <property name="checkable">
+                        <bool>true</bool>
+                       </property>
+                       <property name="tristate">
                         <bool>true</bool>
                        </property>
                       </widget>
@@ -24943,7 +24952,7 @@ font: 87 17pt &quot;Heebo Black&quot;;</string>
                              <property name="frameShadow">
                               <enum>QFrame::Raised</enum>
                              </property>
-                             <layout class="QVBoxLayout" name="verticalLayout_59">
+                             <layout class="QVBoxLayout" name="mainPageSongQueueNowPlayingSongQVBoxLayout">
                               <property name="spacing">
                                <number>0</number>
                               </property>
@@ -25470,7 +25479,7 @@ QPushButton:checked{
                           <property name="frameShadow">
                            <enum>QFrame::Raised</enum>
                           </property>
-                          <layout class="QVBoxLayout" name="mainPageLastPlayedSongListQVBoxLayout_2">
+                          <layout class="QVBoxLayout" name="mainPageSongQueueSongListQVBoxLayout">
                            <property name="spacing">
                             <number>0</number>
                            </property>
@@ -28626,10 +28635,10 @@ QLineEdit:focus{
                    <widget class="QWidget" name="scrollAreaWidgetContents_6">
                     <property name="geometry">
                      <rect>
-                      <x>0</x>
+                      <x>-578</x>
                       <y>0</y>
                       <width>1674</width>
-                      <height>614</height>
+                      <height>650</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -33049,7 +33058,7 @@ QScrollBar::sub-line:vertical{
                      <x>0</x>
                      <y>0</y>
                      <width>198</width>
-                     <height>173</height>
+                     <height>231</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -33630,7 +33639,7 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>788</width>
+                <width>496</width>
                 <height>713</height>
                </rect>
               </property>
@@ -35159,7 +35168,7 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>788</width>
+                <width>496</width>
                 <height>650</height>
                </rect>
               </property>
@@ -36837,7 +36846,6 @@ QScrollBar::sub-line:vertical{
  </customwidgets>
  <resources>
   <include location="../resourcesPeachPlayer.qrc"/>
-  <include location="resourcesPeachPlayer.qrc"/>
  </resources>
  <connections/>
 </ui>

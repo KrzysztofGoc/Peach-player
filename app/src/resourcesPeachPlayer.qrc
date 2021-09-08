@@ -53,6 +53,8 @@
     <file>icons/48x48/filled/filled_play_arrow_white_48dp.png</file>
     <file>icons/48x48/filled/filled_favorite_peach_48dp.png</file>
     <file>icons/48x48/filled/baseline_loop_lightpeach_48dp.png</file>
+    <file>icons/48x48/filled/baseline_loop_one_light_peach.PNG</file>
+    <file>icons/48x48/filled/baseline_loop_one_peach.PNG</file>
     <file>icons/48x48/filled/baseline_shuffle_lightpeach_48dp.png</file>
     <file>icons/48x48/filled/baseline_queue_music_lightpeach_48dp.png</file>
     <file>icons/48x48/filled/baseline_volume_max_gray_48dp.png</file>
@@ -81,6 +83,9 @@
     <file>icons/48x48/filled/baseline_picture_in_picture_white_48dp.png</file>
   </qresource>
   <qresource prefix="/icons/48x48/outlined">
+    <file>icons/48x48/outlined/outline_logout_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_sync_alt_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_sync_alt_white_48dp.png</file>
     <file>icons/48x48/outlined/outline_arrow_drop_down_gray_48dp.png</file>
     <file>icons/48x48/outlined/outline_arrow_drop_down_white_48dp.png</file>
     <file>icons/48x48/outlined/outline_logout_white_48dp.png</file>

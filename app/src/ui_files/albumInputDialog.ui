@@ -383,7 +383,7 @@ QLineEdit {
                   <string notr="true"/>
                  </property>
                  <property name="icon">
-                  <iconset>
+                  <iconset resource="../resourcesPeachPlayer.qrc">
                    <normaloff>:/icons/48x48/outlined/icons/48x48/outlined/outline_close_white_48dp.png</normaloff>:/icons/48x48/outlined/icons/48x48/outlined/outline_close_white_48dp.png</iconset>
                  </property>
                  <property name="iconSize">
@@ -509,7 +509,7 @@ QLineEdit {
                   <string notr="true"/>
                  </property>
                  <property name="pixmap">
-                  <pixmap>:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
+                  <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -896,7 +896,7 @@ QLineEdit {
                      </font>
                     </property>
                     <property name="currentText">
-                     <string notr="true">bozo</string>
+                     <string notr="true">No category</string>
                     </property>
                     <property name="maxVisibleItems">
                      <number>3</number>
@@ -915,22 +915,22 @@ QLineEdit {
                     </property>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo</string>
+                      <string notr="true">No category</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozoo</string>
+                      <string notr="true">Category1</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo1</string>
+                      <string notr="true">Category2</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo2</string>
+                      <string notr="true">Category3</string>
                      </property>
                     </item>
                    </widget>
@@ -1010,7 +1010,7 @@ QLineEdit {
                      </font>
                     </property>
                     <property name="currentText">
-                     <string notr="true">bozo</string>
+                     <string notr="true">No author</string>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -1026,17 +1026,17 @@ QLineEdit {
                     </property>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo</string>
+                      <string notr="true">No author</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo1</string>
+                      <string notr="true">Author1</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string notr="true">bozo2</string>
+                      <string notr="true">Author2</string>
                      </property>
                     </item>
                    </widget>
