@@ -47,7 +47,8 @@ class Controller:
         self.loaded_selected_author_playlists = []
         self.loaded_playlist_page_songs = []
         self.now_playing_song = None
-        self.songs_in_queue = []
+        # self.songs_in_queue = []
+        self.current_playlist_songs = []
         self.previous_playlist_songs = []
         self.user_data = None
         self.get_user_data()
@@ -57,6 +58,7 @@ class Controller:
         self.song_duration = None
         self.current_playing_song_second = None
         self.current_loaded_songs_frames = []
+        self.is_current_song_looped = False
 
     def connect_signals_with_slots(self):
         """Connects Ui's widgets with respective slots"""
@@ -119,9 +121,6 @@ class Controller:
         ##########################################################################
         self.handle_song_adder_inputs()
 
-        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongMiniatureQPushButton.clicked.connect(
-            self.song_adder_song_miniature_button_clicked_slot)
-
         ##########################################################################
         # Sort buttons' slots
         ##########################################################################
@@ -142,9 +141,10 @@ class Controller:
         self.ui.playerPausePlayButton.clicked.connect(self.pause_play_button)
         self.ui.bottomPlayerMuteButton.clicked.connect(self.set_muted)
         self.ui.playlistPlayPauseButton_2.clicked.connect(self.start_playlist)
-        # self.ui.playerPreviousButton.clicked.connect()
-        # self.ui.playerNextButton.clicked.connect()
-        # self.ui.playerLoopButton.clicked.connect()
+        self.playlist.currentIndexChanged.connect(self.playlist_index_changed)
+        self.ui.playerPreviousButton.clicked.connect(self.play_previous_playlist_song)
+        self.ui.playerNextButton.clicked.connect(self.play_next_playlist_song)
+        self.ui.playerLoopButton.clicked.connect(self.loop_current_song)
         # self.ui.playerShuffleButton.clicked.connect()
         # self.ui.mainPageCategoriesAlphabeticallySortQPushButton.clicked.connect()
         # self.ui.mainPageCategoriesRecentlyAddedSortQPushButton.clicked.connect()
@@ -1147,7 +1147,13 @@ class Controller:
                     liked_song_frame.mainPageLikedSongsCategoryButton.clicked.connect(
                         partial(self.load_selected_category_page, song.category.category_name))
                     self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(liked_song_frame)
-                    self.current_loaded_songs_frames.append(liked_song_frame)
+                    if len(self.current_playlist_songs) > 0:
+                        for i in self.current_playlist_songs:
+                            if i.song_id == liked_song_frame.song_id:
+                                self.current_playlist_songs[self.current_playlist_songs.index(i)] = liked_song_frame
+                                self.current_loaded_songs_frames.append(liked_song_frame)
+                    else:
+                        self.current_loaded_songs_frames.append(liked_song_frame)
 
     def categories_button_slot(self):
         """Prepare categories page and change mainPageStackedWidget to categories' index"""
@@ -1370,28 +1376,12 @@ class Controller:
         if song_to_like.liked_by == self.user_data["hashed_name"]:
             song_to_like.liked_by = ""
             song_frame.is_liked = False
-            # if self.now_playing_song:
-                # if song_to_like.id == self.now_playing_song.song_id:
-                    # self.now_playing_song.is_liked = False
         else:
             song_to_like.liked_by = self.user_data["hashed_name"]
             song_frame.is_liked = True
-            # if self.now_playing_song:
-                # self.now_playing_song.is_liked = True
         db.session.commit()
 
     def play_pause_song(self, song_frame):
-        # print(self.player.isAudioAvailable())
-        # print(self.player.mediaStatus())
-        # print(self.player.position())
-        # self.ui.playerPausePlayButton.setCheckable(True)
-        # widget_index = self.ui.mainPageStackedWidget.currentIndex()
-        # if widget_index == 2:
-            # for i in self.current_loaded_songs_frames:
-                # if i.song_id != song_frame.song_id:
-                    # if i.pushButton_13.isChecked():
-                        # i.pushButton_13.setChecked(False)
-                        # i.is_playing = False
         if self.now_playing_song:
             if song_frame.song_id == self.now_playing_song.song_id:
                 if self.player.state() == self.player.PlayingState:
@@ -1406,12 +1396,17 @@ class Controller:
                 else:
                     print("ERROR")
             elif song_frame.song_id != self.now_playing_song.song_id:
-                url = QUrl.fromLocalFile(song_frame.path)
-                content = QMediaContent(url)
-                self.player.setMedia(content)
-                self.player.play()
-                self.now_playing_song = song_frame
-                self.now_playing_song.is_playing = True
+                if self.current_playlist_songs and song_frame in self.current_playlist_songs:
+                    index = self.current_playlist_songs.index(song_frame)
+                    self.playlist.setCurrentIndex(index)
+                else:
+                    url = QUrl.fromLocalFile(song_frame.path)
+                    content = QMediaContent(url)
+                    self.ui.playerLoopButton.setChecked(False)
+                    self.player.setMedia(content)
+                    self.player.play()
+                    self.now_playing_song = song_frame
+                    self.now_playing_song.is_playing = True
         else:
             self.player.setVolume(self.ui.volumeSlider.value())
             self.ui.playerPausePlayButton.setChecked(True)
@@ -1426,41 +1421,66 @@ class Controller:
         self.player.stop()
         self.playlist.clear()
         self.now_playing_song = None
+        self.current_playlist_songs = []
         if self.current_loaded_songs_frames:
             for i in self.current_loaded_songs_frames:
-                if self.now_playing_song:
-                    self.songs_in_queue.append(i)
-                else:
-                    self.now_playing_song = i
-                    self.now_playing_song.is_playing = True
-                    self.now_playing_song.pushButton_13.setChecked(True)
+                self.current_playlist_songs.append(i)
                 new_media = QMediaContent(QUrl.fromLocalFile(i.path))
                 self.playlist.addMedia(new_media)
+            self.now_playing_song = self.current_playlist_songs[0]
             self.player.setPlaylist(self.playlist)
             self.player.setVolume(self.ui.volumeSlider.value())
             self.player.play()
 
     def playlist_index_changed(self):
-        if self.playlist.currentIndex() == 0:
-            if self.now_playing_song:
-                self.now_playing_song.is_playing = True
-                self.now_playing_song.pushButton_13.setChecked(True)
-        else:
+        widget_index = self.ui.mainPageStackedWidget.currentIndex()
+        if self.now_playing_song:
+            if widget_index == 9:
+                self.now_playing_song.setParent(None)
             self.now_playing_song.is_playing = False
             self.now_playing_song.pushButton_13.setChecked(False)
-            self.now_playing_song = self.songs_in_queue[0]
-            self.songs_in_queue.pop(0)
+        if self.playlist.currentIndex() >= 0:
+            self.now_playing_song = self.current_playlist_songs[self.playlist.currentIndex()]
             self.now_playing_song.is_playing = True
             self.now_playing_song.pushButton_13.setChecked(True)
+            if widget_index == 9:
+                self.ui.mainPageSongQueueNowPlayingSongQVBoxLayout.addWidget(self.now_playing_song)
+                for i in self.current_playlist_songs[self.playlist.currentIndex() + 1:]:
+                    self.ui.mainPageSongQueueSongListQVBoxLayout.addWidget(i)
+                for i in self.current_playlist_songs[:self.playlist.currentIndex()]:
+                    i.setParent(None)
+            if self.player.state() == self.player.PausedState:
+                self.player.play()
             self.ui.songTimeSlider.setSliderPosition(0)
+            self.ui.songTimeSlider.setRepeatAction(self.ui.songTimeSlider.SliderNoAction)
             self.ui.songCurrentTimestampLabel.setText("00:00")
 
     def queue_button_slot(self):
         """Prepare authors page and change mainPageStackedWidget to authors's index"""
         if self.now_playing_song:
             self.ui.mainPageSongQueueNowPlayingSongQVBoxLayout.addWidget(self.now_playing_song)
+            if self.now_playing_song in self.current_playlist_songs:
+                index = self.current_playlist_songs.index(self.now_playing_song)
+                for i in self.current_playlist_songs[index+1:]:
+                    self.ui.mainPageSongQueueSongListQVBoxLayout.addWidget(i)
         self.setup_main_page_queue()
         self.ui.set_main_page_stacked_widget_index(9)
+
+    def play_previous_playlist_song(self):
+        current_index = self.playlist.currentIndex()
+        if current_index != 0:
+            self.playlist.setCurrentIndex(current_index-1)
+
+    def play_next_playlist_song(self):
+        current_index = self.playlist.currentIndex()
+        if current_index != len(self.current_playlist_songs) - 1:
+            self.playlist.setCurrentIndex(current_index + 1)
+
+    def loop_current_song(self):
+        if self.ui.playerLoopButton.isChecked():
+            self.playlist.setPlaybackMode(self.playlist.Loop)
+        else:
+            self.playlist.setPlaybackMode(self.playlist.CurrentItemOnce)
 
     def pause_play_button(self):
         if self.now_playing_song:
@@ -1479,21 +1499,26 @@ class Controller:
         if state == self.player.PlayingState:
             self.ui.playerPausePlayButton.setCheckable(True)
             self.ui.playerPausePlayButton.setChecked(True)
-            self.ui.songTimeSlider.setRepeatAction(
-                self.ui.songTimeSlider.SliderSingleStepAdd,
-                thresholdTime=0,
-                repeatTime=10)
+            if self.player.mediaStatus() == self.player.BufferedMedia:
+                self.ui.songTimeSlider.setRepeatAction(
+                    self.ui.songTimeSlider.SliderSingleStepAdd,
+                    thresholdTime=0,
+                    repeatTime=10)
             print("PLAYING")
         elif state == self.player.StoppedState:
+            print("Finished")
             self.player.setPosition(0)
             self.ui.songTimeSlider.setSliderPosition(0)
-            if self.now_playing_song:
-                self.now_playing_song.pushButton_13.setChecked(False)
-            self.now_playing_song = None
-            self.ui.songTimeSlider.setRepeatAction(self.ui.songTimeSlider.SliderNoAction)
-            self.ui.playerPausePlayButton.setChecked(False)
-            self.ui.playerPausePlayButton.setCheckable(False)
-            print("Finished")
+            if self.playlist.isEmpty() and self.ui.playerLoopButton.isChecked():
+                self.player.play()
+            else:
+                if self.now_playing_song:
+                    self.now_playing_song.pushButton_13.setChecked(False)
+                self.now_playing_song = None
+                self.ui.songTimeSlider.setRepeatAction(self.ui.songTimeSlider.SliderNoAction)
+                self.ui.playerPausePlayButton.setChecked(False)
+                self.ui.playerPausePlayButton.setCheckable(False)
+                self.ui.songMaximumTimestampLabel.setText("00:00")
 
         elif state == self.player.PausedState:
             print("PAUSED")
@@ -1523,6 +1548,10 @@ class Controller:
                     maximum_song_timestamp = f"00:0{seconds_amount}"
             self.ui.songMaximumTimestampLabel.setText(maximum_song_timestamp)
             self.ui.songTimeSlider.setMaximum(self.song_duration * 100)
+            self.ui.songTimeSlider.setRepeatAction(
+                self.ui.songTimeSlider.SliderSingleStepAdd,
+                thresholdTime=0,
+                repeatTime=10)
 
     def song_time_slider_pressed(self):
         self.player.pause()
