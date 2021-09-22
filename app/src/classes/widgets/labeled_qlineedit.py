@@ -1,10 +1,11 @@
 from PySide2 import QtCore, QtGui, QtWidgets
-from app.src.classes.widgets.focus_signals_qlineedit import FocusSignalsQLineEdit
+from app.src.classes.widgets.helper_widgets.focus_signals_qlineedit import FocusSignalsQLineEdit
 
 
 class LabeledQLineEdit(QtWidgets.QGroupBox):
-    def __init__(self, input_title, parent=None):
+    def __init__(self, input_title, placeholder_text, parent=None):
         super().__init__(parent=parent)
+        self.placeholder_text = placeholder_text
         self.input_title = input_title
         self.setupUi()
         self.lineEdit_2.focusIn.connect(self.line_edit_focus_in_event)
@@ -53,9 +54,9 @@ class LabeledQLineEdit(QtWidgets.QGroupBox):
         self.verticalLayout_15.setSpacing(0)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.lineEdit_2 = FocusSignalsQLineEdit(self)
+        self.lineEdit_2.setPlaceholderText(self.placeholder_text)
         self.lineEdit_2.setInputMask("")
         self.lineEdit_2.setText("")
-        self.lineEdit_2.setPlaceholderText("Album name")
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.verticalLayout_15.addWidget(self.lineEdit_2)
 

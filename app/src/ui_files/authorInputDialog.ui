@@ -145,7 +145,18 @@ QLineEdit {
 	padding-left: 12px;
 	padding-top: 12px;
 	padding-bottom: 12px;
-}</string>
+}
+#authorInputDialogMiniatureQToolButton{
+	font: 57 11pt &quot;Heebo Medium&quot;;
+	color: white;
+	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png);
+	margin-top: 45px;
+}
+#authorInputDialogMiniatureQToolButton:hover{
+	background-color: rgba(0, 0, 0, 0.25);
+	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_edit_white_48dp.png);
+}
+</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -475,6 +486,43 @@ QLineEdit {
                 </spacer>
                </item>
                <item>
+                <widget class="QToolButton" name="authorInputDialogMiniatureQToolButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>180</width>
+                   <height>180</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>180</width>
+                   <height>180</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string notr="true">Choose photo</string>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>52</width>
+                   <height>52</height>
+                  </size>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolButtonStyle">
+                  <enum>Qt::ToolButtonTextUnderIcon</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QLabel" name="authorInputDialogAuthorMiniatureQLabel">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -497,15 +545,14 @@ QLineEdit {
                  <property name="text">
                   <string notr="true"/>
                  </property>
-                 <property name="pixmap">
-                  <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
-                 </property>
                  <property name="scaledContents">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
               </layout>
+              <zorder>authorInputDialogAuthorMiniatureQLabel</zorder>
+              <zorder>authorInputDialogMiniatureQToolButton</zorder>
              </widget>
             </item>
             <item>

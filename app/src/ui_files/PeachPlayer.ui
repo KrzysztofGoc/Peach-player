@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1298</width>
-    <height>739</height>
+    <width>950</width>
+    <height>687</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -3639,7 +3639,7 @@ SongEntry QPushButton:hover{
                             <number>24</number>
                            </property>
                            <item>
-                            <widget class="QLabel" name="playlistMiniatureLabel_2">
+                            <widget class="QLabel" name="likedSongsMiniatureLabel">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -6390,7 +6390,7 @@ QFrame#frame_189{
                       <x>0</x>
                       <y>0</y>
                       <width>1174</width>
-                      <height>497</height>
+                      <height>598</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -10180,7 +10180,7 @@ QWidget#widget_7{
                               <string notr="true"/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>:/icons/temporary/icons/playlistCoverExample.png</pixmap>
+                              <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
                              </property>
                              <property name="scaledContents">
                               <bool>true</bool>
@@ -22969,7 +22969,7 @@ QWidget#widget_9{
                               <string notr="true"/>
                              </property>
                              <property name="pixmap">
-                              <pixmap>:/icons/temporary/icons/playlistCoverExample.png</pixmap>
+                              <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
                              </property>
                              <property name="scaledContents">
                               <bool>true</bool>
@@ -24791,7 +24791,7 @@ SongEntry QPushButton:hover{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>573</height>
+                      <height>598</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -28635,10 +28635,10 @@ QLineEdit:focus{
                    <widget class="QWidget" name="scrollAreaWidgetContents_6">
                     <property name="geometry">
                      <rect>
-                      <x>-578</x>
+                      <x>0</x>
                       <y>0</y>
                       <width>1674</width>
-                      <height>650</height>
+                      <height>614</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -33058,7 +33058,7 @@ QScrollBar::sub-line:vertical{
                      <x>0</x>
                      <y>0</y>
                      <width>198</width>
-                     <height>231</height>
+                     <height>179</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">

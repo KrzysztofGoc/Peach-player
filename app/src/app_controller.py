@@ -1,17 +1,9 @@
-from functools import partial
 from PySide2 import QtCore, QtWidgets, QtGui
 from PySide2.QtCore import QUrl, QTimer
 from PySide2.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 
-from app.src.classes import navbar_frame
 from app_model import *
 import requests
-from classes.category_entry import CategoryEntry
-from tkinter.filedialog import askopenfilename
-import os
-import shutil
-import io
-import zipfile
 import math
 from functools import partial
 from classes.song_entry import SongEntry
@@ -24,7 +16,7 @@ from classes.dialogs.categoryInputDialog import categoryInputDialog
 from classes.dialogs.playlistInputDialog import playlistInputDialog
 from classes.dialogs.authorInputDialog import authorInputDialog
 from classes.dialogs.albumInputDialog import albumInputDialog
-from classes.widgets.clicked_signal_qframe import ClickedSignalQFrame
+from app.src.classes.widgets.helper_widgets.clicked_signal_qframe import ClickedSignalQFrame
 
 scrollbar_recently_used = False
 
@@ -1187,29 +1179,39 @@ class Controller:
          and create new category.
 
         """
+
+        # Blacked out semi-transparent frame over whole app, closes dialog when clicked
         app_layer_frame = ClickedSignalQFrame(self.ui.centralwidget)
         category_input_dialog = categoryInputDialog(parent=self.ui.window)
 
-        category_input_dialog.categoryInputDialogExitButton.clicked.connect(partial(self.handle_dialog_closing,
-                                                                              app_layer_frame, category_input_dialog))
-        app_layer_frame.clicked.connect(partial(self.handle_dialog_closing, app_layer_frame, category_input_dialog))
+        # Dialog's exit button clicked slot
+        category_input_dialog.categoryInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection,
+                                                                                    app_layer_frame,
+                                                                                    category_input_dialog))
+        # App layer frame's clicked slot
+        app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, category_input_dialog))
 
+        # Show app layer_frame and dialog on the screen
         app_layer_frame.show()
         category_input_dialog.show()
 
+        # Create and handle dialog's miniature selection dialog
         miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(
-            category_input_dialog.categoryInputDialogCategoryMiniatureQLabel)
+            category_input_dialog.categoryInputDialogMiniatureQToolButton, category_input_dialog)
 
+        # Dialog's add button clicked slot
         category_input_dialog.categoryInputDialogAddButton.clicked.connect(
-            partial(self.handle_new_category_creation, category_input_dialog, miniature_file_dialog))
+            partial(self.handle_new_category_creation, category_input_dialog, miniature_file_dialog, app_layer_frame))
 
-    @staticmethod
-    def handle_new_category_creation(category_dialog, category_miniature_dialog):
-        """Handle new category creation. Collect input from category_dialog and miniature_file_dialog then create new playlist.
+    def handle_new_category_creation(self, category_dialog, category_miniature_dialog, app_layer_frame):
+        """Handle new category creation. Collect input from category_dialog and miniature_file_dialog then create new
+            playlist.
 
             Parameters:
-                category_dialog (categoryInputDialogInputDialog): categoryInputDialog used to collect data to create category from.
-                category_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new category.
+                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it shown along it.
+                category_dialog (categoryInputDialog): categoryInputDialog used to collect data to create category from.
+                category_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new
+                 category.
         """
         print(f"Handling category creation...\n"
               f"---------------------------------------------------------------------------------------\n"
@@ -1218,7 +1220,18 @@ class Controller:
               f"---------------------------------------------------------------------------------------")
         # handle adding new category to database here.
         print("Created new category in database.")
-        category_dialog.accept()
+        self.handle_dialog_acceptation(app_layer_frame, category_dialog)
+
+    @staticmethod
+    def handle_dialog_acceptation(app_layer_frame, dialog):
+        """Call dialog's accept() method and app_layer_frame's deleteLater() to remove both from the screen.
+
+        Parameters:
+            app_layer_frame (ClickedSignalQFrame): Frame that gets shown over whole app when dialog is created.
+            dialog (QtWidgets.QDialog): Dialog that was shown along app_layer_frame.
+        """
+        dialog.accept()
+        app_layer_frame.deleteLater()
 
     def now_playing_button_slot(self):
         """Prepare nowPlaying page and change mainPageStackedWidget to nowPlaying's index"""
@@ -1461,7 +1474,7 @@ class Controller:
             self.ui.mainPageSongQueueNowPlayingSongQVBoxLayout.addWidget(self.now_playing_song)
             if self.now_playing_song in self.current_playlist_songs:
                 index = self.current_playlist_songs.index(self.now_playing_song)
-                for i in self.current_playlist_songs[index+1:]:
+                for i in self.current_playlist_songs[index + 1:]:
                     self.ui.mainPageSongQueueSongListQVBoxLayout.addWidget(i)
         self.setup_main_page_queue()
         self.ui.set_main_page_stacked_widget_index(9)
@@ -1469,7 +1482,7 @@ class Controller:
     def play_previous_playlist_song(self):
         current_index = self.playlist.currentIndex()
         if current_index != 0:
-            self.playlist.setCurrentIndex(current_index-1)
+            self.playlist.setCurrentIndex(current_index - 1)
 
     def play_next_playlist_song(self):
         current_index = self.playlist.currentIndex()
@@ -1711,7 +1724,7 @@ class Controller:
     def change_widget_author_playlists(self):
         self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(2)
 
-    def handle_dialog_closing(self, app_layer_frame, dialog):
+    def handle_dialog_rejection(self, app_layer_frame, dialog):
         """Call dialog's reject() method and app_layer_frame's deleteLater() to remove both from the screen.
 
         Parameters:
@@ -1726,27 +1739,37 @@ class Controller:
          and create new album.
 
         """
+
+        # Blacked out semi-transparent frame over whole app, closes dialog when clicked
         app_layer_frame = ClickedSignalQFrame(self.ui.centralwidget)
         album_input_dialog = albumInputDialog(parent=self.ui.window)
 
-        album_input_dialog.albumInputDialogExitButton.clicked.connect(partial(self.handle_dialog_closing,
+        # Dialog's exit button clicked slot
+        album_input_dialog.albumInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection,
                                                                               app_layer_frame, album_input_dialog))
-        app_layer_frame.clicked.connect(partial(self.handle_dialog_closing, app_layer_frame, album_input_dialog))
 
+        # App layer frame's clicked slot
+        app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, album_input_dialog))
+
+        # Show app layer_frame and dialog on the screen
         app_layer_frame.show()
         album_input_dialog.show()
 
+        # Create and handle dialog's miniature selection dialog
         miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(
-            album_input_dialog.albumInputDialogAlbumsMiniatureQLabel)
+            album_input_dialog.albumInputDialogMiniatureQToolButton, album_input_dialog)
 
+        # Dialog's add button clicked slot
         album_input_dialog.albumInputDialogAddButton.clicked.connect(partial(self.handle_new_album_creation,
-                                                                             album_input_dialog, miniature_file_dialog))
+                                                                             album_input_dialog, miniature_file_dialog,
+                                                                             app_layer_frame))
 
-    @staticmethod
-    def handle_new_album_creation(album_dialog, album_miniature_dialog):
-        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new album.
+    def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame):
+        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new
+            album.
 
             Parameters:
+                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it shown along it.
                 album_dialog (albumInputDialog): albumInputDialog used to collect data to create album from.
                 album_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new album.
         """
@@ -1759,47 +1782,67 @@ class Controller:
               f"---------------------------------------------------------------------------------------")
         # handle adding new album to database here
         print("Created new album in database.")
-        album_dialog.accept()
+        self.handle_dialog_acceptation(app_layer_frame, album_dialog)
 
-    def handle_and_connect_new_miniature_file_dialog(self, clickable_widget):
-        """Create new QFileDialog, connect clickable_widget clicked signal with file dialog exec_ method and return it.
+    def handle_and_connect_new_miniature_file_dialog(self, clickable_widget, dialog):
+        """Create new QFileDialog, connect clickable_widget clicked signal with QFileDialog exec_ method and return it.
 
         Parameters:
+            dialog: Dialog window used to set miniature preview after selection
             clickable_widget: Widget with clicked method to connect with QFileDialog exec method.
 
         """
-        file_dialog = QtWidgets.QFileDialog(self.ui.window)
-        clickable_widget.clicked.connect(file_dialog.exec_)
+        # Create miniature QFileDialog and connect clickable_widget's clicked method to handle_miniature_selection()
+        file_dialog = QtWidgets.QFileDialog()
+        clickable_widget.clicked.connect(partial(self.handle_miniature_selection, file_dialog, dialog))
         return file_dialog
+
+    def handle_miniature_selection(self, file_dialog, dialog):
+        """Wait for file_dialog to exit and set selected file url as dialog's miniature preview."""
+        file_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
+        url = file_dialog.getOpenFileUrl(parent=self.ui.window, filter="*.bmp *.jpg *.jpeg *.png *.ppm *.xbm *.xpm")
+        if not url[0].isEmpty():
+            dialog.set_dialogs_miniature_preview_pixmap(url[0])
 
     def author_adder_clicked_slot(self):
         """Create new authorInputDialog and run its show() method, run handle_new_author_creation() to validate
-                 and create new playlist.
+                 and create new author.
 
-                """
+        """
+
+        # Blacked out semi-transparent frame over whole app, closes dialog when clicked
         app_layer_frame = ClickedSignalQFrame(self.ui.centralwidget)
         author_input_dialog = authorInputDialog(parent=self.ui.window)
 
-        author_input_dialog.authorInputDialogExitButton.clicked.connect(partial(self.handle_dialog_closing,
-                                                                               app_layer_frame, author_input_dialog))
-        app_layer_frame.clicked.connect(partial(self.handle_dialog_closing, app_layer_frame, author_input_dialog))
+        # Dialog's exit button clicked slot
+        author_input_dialog.authorInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection,
+                                                                                app_layer_frame, author_input_dialog))
 
+        # App layer frame's clicked slot
+        app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, author_input_dialog))
+
+        # Show app layer_frame and dialog on the screen
         app_layer_frame.show()
         author_input_dialog.show()
 
+        # Create and handle dialog's miniature selection dialog
         miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(
-            author_input_dialog.authorInputDialogAuthorMiniatureQLabel)
+            author_input_dialog.authorInputDialogMiniatureQToolButton, author_input_dialog)
 
+        # Dialog's add button clicked slot
         author_input_dialog.authorInputDialogAddButton.clicked.connect(
-            partial(self.handle_new_author_creation, author_input_dialog, miniature_file_dialog))
+            partial(self.handle_new_author_creation, author_input_dialog, miniature_file_dialog, app_layer_frame))
 
-    @staticmethod
-    def handle_new_author_creation(author_dialog, author_miniature_dialog):
-        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new playlist.
+    def handle_new_author_creation(self, author_dialog, author_miniature_dialog, app_layer_frame):
+        """Handle new author creation. Collect input from author_dialog and miniature_file_dialog then create new
+            author.
 
             Parameters:
-                author_dialog (authorInputDialogInputDialog): authorInputDialog used to collect data to create author from.
-                author_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new author.
+                app_layer_frame (QtWidgets.QFrame): blacked-out QFrame behind dialog that it shown along it.
+                author_dialog (authorInputDialog): authorInputDialog used to collect data to create author
+                 from.
+                author_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new
+                 author.
         """
         print(f"Handling author creation...\n"
               f"---------------------------------------------------------------------------------------\n"
@@ -1808,7 +1851,7 @@ class Controller:
               f"---------------------------------------------------------------------------------------")
         # handle adding new author to database here
         print("Created new author in database.")
-        author_dialog.accept()
+        self.handle_dialog_acceptation(app_layer_frame, author_dialog)
 
     def get_user_data(self):
         user = User.query.first()
@@ -1886,29 +1929,39 @@ class Controller:
          and create new playlist.
 
         """
+        # Blacked out semi-transparent frame over whole app, closes dialog when clicked
         app_layer_frame = ClickedSignalQFrame(self.ui.centralwidget)
         playlist_input_dialog = playlistInputDialog(parent=self.ui.window)
 
-        playlist_input_dialog.playlistInputDialogExitButton.clicked.connect(partial(self.handle_dialog_closing,
-                                                                              app_layer_frame, playlist_input_dialog))
-        app_layer_frame.clicked.connect(partial(self.handle_dialog_closing, app_layer_frame, playlist_input_dialog))
+        # Dialog's exit button clicked slot
+        playlist_input_dialog.playlistInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection,
+                                                                                    app_layer_frame,
+                                                                                    playlist_input_dialog))
 
+        # App layer frame's clicked slot
+        app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, playlist_input_dialog))
+
+        # Show app layer_frame and dialog on the screen
         app_layer_frame.show()
         playlist_input_dialog.show()
 
+        # Create and handle dialog's miniature selection dialog
         miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(
-            playlist_input_dialog.playlistInputDialogPlaylistsMiniatureQLabel)
+            playlist_input_dialog.playlistInputDialogMiniatureQToolButton, playlist_input_dialog)
 
+        # Dialog's add button clicked slot
         playlist_input_dialog.playlistInputDialogAddButton.clicked.connect(
-            partial(self.handle_new_playlist_creation, playlist_input_dialog, miniature_file_dialog))
+            partial(self.handle_new_playlist_creation, playlist_input_dialog, miniature_file_dialog, app_layer_frame))
 
-    @staticmethod
-    def handle_new_playlist_creation(playlist_dialog, playlist_miniature_dialog):
-        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new playlist.
+    def handle_new_playlist_creation(self, playlist_dialog, playlist_miniature_dialog, app_layer_frame):
+        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new
+            playlist.
 
             Parameters:
+                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it shown along it.
                 playlist_dialog (playlistInputDialog): playlistInputDialog used to collect data to create playlist from.
-                playlist_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new playlist.
+                playlist_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new
+                 playlist.
         """
         print(f"Handling playlist creation...\n"
               f"---------------------------------------------------------------------------------------\n"
@@ -1919,17 +1972,13 @@ class Controller:
         # handle adding new playlist to database here.
         print("Created new playlist in database.")
         # close dialog
-        playlist_dialog.accept()
-
-    def run_playlist_input_dialog(self):
-        create_playlist_dialog = playlistInputDialog(parent=self.ui.window)
-        create_playlist_dialog.exec()
-        return create_playlist_dialog
+        self.handle_dialog_acceptation(app_layer_frame, playlist_dialog)
 
     def all_songs_button_slot(self):
         self.ui.set_main_page_stacked_widget_index(11)
 
-    def handle_new_file_dialog(self):
+    @staticmethod
+    def handle_new_file_dialog():
         """Create new QFileDialog and return it."""
         file_dialog = QtWidgets.QFileDialog()
         return file_dialog
@@ -1937,14 +1986,15 @@ class Controller:
     def handle_song_adder_inputs(self):
         """Connect SongAdder's song and miniature QFileDialogs and addSong button."""
         song_file_dialog = self.handle_new_file_dialog()
-        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongQPushButton.clicked.connect(song_file_dialog.exec_)
+        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongQPushButton.clicked.connect(
+            song_file_dialog.exec_)
 
         miniature_file_dialog = self.handle_new_file_dialog()
-        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongMiniatureQPushButton.clicked.connect(miniature_file_dialog.exec_)
+        self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongMiniatureQPushButton.clicked.connect(
+            miniature_file_dialog.exec_)
 
         self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongAddSongQPushButton.clicked.connect(partial(
             self.handle_new_song_creation, song_file_dialog, miniature_file_dialog))
-
 
     def handle_new_song_creation(self, song_file_dialog, miniature_file_dialog):
         """Handle new song creation. Collect input from song_file_dialog, miniature_file_dialog and SongAdder's QLineEdits

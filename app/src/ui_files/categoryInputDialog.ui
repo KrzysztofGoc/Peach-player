@@ -144,9 +144,6 @@ QGroupBox::title {
     left: 10px;
     padding: 0 3px 0 3px;
 }
-
-
-
 QLineEdit {
 	font: 57 10pt &quot;Heebo Black&quot;;
 	color: white;
@@ -156,6 +153,16 @@ QLineEdit {
 	padding-left: 12px;
 	padding-top: 12px;
 	padding-bottom: 12px;
+}
+#categoryInputDialogMiniatureQToolButton{
+	font: 57 11pt &quot;Heebo Medium&quot;;
+	color: white;
+	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png);
+	margin-top: 45px;
+}
+#categoryInputDialogMiniatureQToolButton:hover{
+	background-color: rgba(0, 0, 0, 0.25);
+	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_edit_white_48dp.png);
 }</string>
      </property>
      <property name="frameShape">
@@ -403,7 +410,7 @@ QLineEdit {
          <item>
           <widget class="QFrame" name="frame_6">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -411,7 +418,7 @@ QLineEdit {
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>0</height>
+             <height>214</height>
             </size>
            </property>
            <property name="frameShape">
@@ -473,20 +480,44 @@ QLineEdit {
                 <number>0</number>
                </property>
                <item>
-                <spacer name="verticalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                <widget class="QToolButton" name="categoryInputDialogMiniatureQToolButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
                  </property>
-                 <property name="sizeHint" stdset="0">
+                 <property name="minimumSize">
                   <size>
-                   <width>0</width>
-                   <height>0</height>
+                   <width>180</width>
+                   <height>180</height>
                   </size>
                  </property>
-                </spacer>
+                 <property name="maximumSize">
+                  <size>
+                   <width>180</width>
+                   <height>180</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string notr="true">Choose photo</string>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>52</width>
+                   <height>52</height>
+                  </size>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolButtonStyle">
+                  <enum>Qt::ToolButtonTextUnderIcon</enum>
+                 </property>
+                </widget>
                </item>
                <item>
-                <widget class="QLabel" name="categoryInputDialogCategoryMiniatureQLabel">
+                <widget class="QLabel" name="categoryInputDialogCategorysMiniatureQLabel">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -507,9 +538,6 @@ QLineEdit {
                  </property>
                  <property name="text">
                   <string notr="true"/>
-                 </property>
-                 <property name="pixmap">
-                  <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/temporary/icons/playlistCoverExample1.png</pixmap>
                  </property>
                  <property name="scaledContents">
                   <bool>true</bool>
@@ -550,7 +578,7 @@ QLineEdit {
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_15">
                <property name="spacing">
-                <number>16</number>
+                <number>0</number>
                </property>
                <property name="leftMargin">
                 <number>16</number>
@@ -567,14 +595,14 @@ QLineEdit {
                <item>
                 <widget class="QGroupBox" name="groupBox1_3">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>280</width>
+                   <width>0</width>
                    <height>40</height>
                   </size>
                  </property>
@@ -611,6 +639,12 @@ QLineEdit {
                   </property>
                   <item>
                    <widget class="QLineEdit" name="categoryInputDialogCategoryNameQLineEdit">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
                     <property name="palette">
                      <palette>
                       <active>
@@ -833,7 +867,7 @@ QLineEdit {
          <item>
           <widget class="QFrame" name="frame_8">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -858,7 +892,7 @@ QLineEdit {
              <number>0</number>
             </property>
             <property name="topMargin">
-             <number>16</number>
+             <number>0</number>
             </property>
             <property name="rightMargin">
              <number>1</number>

@@ -1,20 +1,11 @@
 from PySide2 import QtCore, QtGui, QtWidgets
-from classes.album_entry import AlbumEntry
-from classes.author_entry import AuthorEntry
-from classes.category_entry import CategoryEntry
-from classes.playlist_entry import PlaylistEntry
-from classes.song_entry import SongEntry
-from classes.adder_entry import AdderEntry
 from classes.resize_signal_scroll_area import ResizeSignalScrollArea
 from classes.resize_signal_widget import ResizeSignalWidget
 from classes.resize_signal_stacked_widget import ResizeSignalStackedWidget
 from classes.navbar_frame import NavbarFrame
 from classes.widgets.song_adder import SongAdder
 
-from classes.widgets.clicked_signal_qframe import ClickedSignalQFrame
-
 import resources_peach_player
-
 
 class Ui_MainWindow:
     def __init__(self, window):
@@ -1126,20 +1117,29 @@ class Ui_MainWindow:
         self.horizontalLayout_16.setContentsMargins(32, 84, 32, 24)
         self.horizontalLayout_16.setSpacing(0)
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
-        self.playlistMiniatureLabel_2 = QtWidgets.QLabel(self.frame_15)
+        self.likedSongsMiniatureLabel = QtWidgets.QLabel(self.frame_15)
+
+        self.shadow = QtWidgets.QGraphicsDropShadowEffect()
+        self.shadow.setBlurRadius(250)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QtGui.QColor(0, 0, 0, 192))
+
+        self.likedSongsMiniatureLabel.setGraphicsEffect(self.shadow)
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.playlistMiniatureLabel_2.sizePolicy().hasHeightForWidth())
-        self.playlistMiniatureLabel_2.setSizePolicy(sizePolicy)
-        self.playlistMiniatureLabel_2.setMinimumSize(QtCore.QSize(232, 232))
-        self.playlistMiniatureLabel_2.setMaximumSize(QtCore.QSize(232, 232))
-        self.playlistMiniatureLabel_2.setStyleSheet("")
-        self.playlistMiniatureLabel_2.setText("")
-        self.playlistMiniatureLabel_2.setPixmap(QtGui.QPixmap(":/minatures/icons/likedSongsMinature.png"))
-        self.playlistMiniatureLabel_2.setScaledContents(True)
-        self.playlistMiniatureLabel_2.setObjectName("playlistMiniatureLabel_2")
-        self.horizontalLayout_16.addWidget(self.playlistMiniatureLabel_2)
+        sizePolicy.setHeightForWidth(self.likedSongsMiniatureLabel.sizePolicy().hasHeightForWidth())
+        self.likedSongsMiniatureLabel.setSizePolicy(sizePolicy)
+        self.likedSongsMiniatureLabel.setMinimumSize(QtCore.QSize(232, 232))
+        self.likedSongsMiniatureLabel.setMaximumSize(QtCore.QSize(232, 232))
+        self.likedSongsMiniatureLabel.setStyleSheet("")
+        self.likedSongsMiniatureLabel.setText("")
+        self.likedSongsMiniatureLabel.setPixmap(QtGui.QPixmap(":/minatures/icons/likedSongsMinature.png"))
+        self.likedSongsMiniatureLabel.setScaledContents(True)
+        self.likedSongsMiniatureLabel.setObjectName("likedSongsMiniatureLabel")
+        self.horizontalLayout_16.addWidget(self.likedSongsMiniatureLabel)
         self.frame_18 = QtWidgets.QFrame(self.frame_15)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -2271,6 +2271,15 @@ class Ui_MainWindow:
         self.horizontalLayout_15.setSpacing(0)
         self.horizontalLayout_15.setObjectName("horizontalLayout_15")
         self.mainPagePlaylistMiniatureQLabel = QtWidgets.QLabel(self.frame_9)
+
+        self.shadow2 = QtWidgets.QGraphicsDropShadowEffect()
+        self.shadow2.setBlurRadius(250)
+        self.shadow2.setXOffset(0)
+        self.shadow2.setYOffset(0)
+        self.shadow2.setColor(QtGui.QColor(0, 0, 0, 192))
+
+        self.mainPagePlaylistMiniatureQLabel.setGraphicsEffect(self.shadow2)
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -2280,7 +2289,7 @@ class Ui_MainWindow:
         self.mainPagePlaylistMiniatureQLabel.setMaximumSize(QtCore.QSize(232, 232))
         self.mainPagePlaylistMiniatureQLabel.setStyleSheet("")
         self.mainPagePlaylistMiniatureQLabel.setText("")
-        self.mainPagePlaylistMiniatureQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample.png"))
+        self.mainPagePlaylistMiniatureQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
         self.mainPagePlaylistMiniatureQLabel.setScaledContents(True)
         self.mainPagePlaylistMiniatureQLabel.setObjectName("mainPagePlaylistMiniatureQLabel")
         self.horizontalLayout_15.addWidget(self.mainPagePlaylistMiniatureQLabel)
@@ -4388,6 +4397,15 @@ class Ui_MainWindow:
         self.horizontalLayout_17.setSpacing(0)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
         self.mainPageAlbumMiniatureOfAlbumQLabel = QtWidgets.QLabel(self.frame_258)
+
+        self.shadow3 = QtWidgets.QGraphicsDropShadowEffect()
+        self.shadow3.setBlurRadius(250)
+        self.shadow3.setXOffset(0)
+        self.shadow3.setYOffset(0)
+        self.shadow3.setColor(QtGui.QColor(0, 0, 0, 192))
+
+        self.mainPageAlbumMiniatureOfAlbumQLabel.setGraphicsEffect(self.shadow3)
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -4397,7 +4415,7 @@ class Ui_MainWindow:
         self.mainPageAlbumMiniatureOfAlbumQLabel.setMaximumSize(QtCore.QSize(232, 232))
         self.mainPageAlbumMiniatureOfAlbumQLabel.setStyleSheet("")
         self.mainPageAlbumMiniatureOfAlbumQLabel.setText("")
-        self.mainPageAlbumMiniatureOfAlbumQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample.png"))
+        self.mainPageAlbumMiniatureOfAlbumQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
         self.mainPageAlbumMiniatureOfAlbumQLabel.setScaledContents(True)
         self.mainPageAlbumMiniatureOfAlbumQLabel.setObjectName("mainPageAlbumMiniatureOfAlbumQLabel")
         self.horizontalLayout_17.addWidget(self.mainPageAlbumMiniatureOfAlbumQLabel)
@@ -7762,7 +7780,7 @@ class Ui_MainWindow:
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.centralStackedWidget.setCurrentIndex(1)
-        self.mainPageStackedWidget.setCurrentIndex(11)
+        self.mainPageStackedWidget.setCurrentIndex(5)
         self.mainPageAuthorPageStackedWidget.setCurrentIndex(0)
         self.mainPageCategoryPageStackedWidget.setCurrentIndex(0)
 
