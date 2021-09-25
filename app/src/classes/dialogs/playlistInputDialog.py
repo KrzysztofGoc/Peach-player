@@ -1,10 +1,12 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from app.src.classes.widgets.labeled_qlineedit import LabeledQLineEdit
 from app.src.classes.widgets.labeled_qcombobox import LabeledQComboBox
-from app.src.classes.widgets.clicked_signal_qlabel import ClickedSignalQLabel
+from app.src.classes.widgets.helper_widgets.hover_signal_qpushbutton import HoverSignalQToolButton
+
 
 class playlistInputDialog(QtWidgets.QDialog):
     """Base playlist input dialog with predefined layout, allows user to add new playlist."""
+
     def __init__(self, parent=None):
         super().__init__()
         if parent:
@@ -23,7 +25,8 @@ class playlistInputDialog(QtWidgets.QDialog):
         playlistInputDialog.setSizePolicy(sizePolicy)
         playlistInputDialog.setMinimumSize(QtCore.QSize(524, 330))
         playlistInputDialog.setMaximumSize(QtCore.QSize(524, 330))
-        playlistInputDialog.setStyleSheet("border: none;\n")
+        playlistInputDialog.setStyleSheet("border: none;\n"
+                                          "")
         self.verticalLayout = QtWidgets.QVBoxLayout(playlistInputDialog)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
@@ -60,6 +63,45 @@ class playlistInputDialog(QtWidgets.QDialog):
                                    "    background-color: white;\n"
                                    "    color: black;\n"
                                    "    font: 87 9pt \"Heebo Medium\";\n"
+                                   "}\n"
+                                   "QScrollBar:vertical {\n"
+                                   "    width: 16px;\n"
+                                   "    background: transparent;\n"
+                                   "}\n"
+                                   "QScrollBar::handle:vertical{\n"
+                                   "    margin-right: -10px;\n"
+                                   "    background: rgba(179, 179, 179, 0.45);\n"
+                                   "}\n"
+                                   "QScrollBar::handle:hover:vertical{\n"
+                                   "    background: rgba(179, 179, 179, 0.55);\n"
+                                   "}\n"
+                                   "QScrollBar::sub-page:vertical{\n"
+                                   "    background: transparent;\n"
+                                   "}\n"
+                                   "QScrollBar::add-page:vertical{\n"
+                                   "    background: transparent;\n"
+                                   "}\n"
+                                   "\n"
+                                   "QScrollBar::add-line:vertical{\n"
+                                   "    widgth: 0px;\n"
+                                   "    height: 0px;\n"
+                                   "    background: none;\n"
+                                   "    border: none;\n"
+                                   "}\n"
+                                   "QScrollBar::sub-line:vertical{\n"
+                                   "    widgth: 0px;\n"
+                                   "    height: 0px;\n"
+                                   "    border: none;\n"
+                                   "    background: none;\n"
+                                   "}\n"
+                                   "#playlistInputDialogPlaylistsMiniatureQLabel{\n"
+                                   "    background-color: rgb(40, 40, 40);\n"
+                                   "}\n"
+                                   "#playlistInputDialogMiniatureQToolButton{\n"
+                                   "    color: white;\n"
+                                   "    font: 57 11pt \"Heebo Medium\";\n"
+                                   "    padding-top: 55px;\n"
+                                   "    padding-bottom: 26px;\n"
                                    "}\n")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -155,7 +197,8 @@ class playlistInputDialog(QtWidgets.QDialog):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_6.sizePolicy().hasHeightForWidth())
         self.frame_6.setSizePolicy(sizePolicy)
-        self.frame_6.setMinimumSize(QtCore.QSize(0, 0))
+        self.frame_6.setMinimumSize(QtCore.QSize(0, 198))
+        self.frame_6.setMaximumSize(QtCore.QSize(16777215, 198))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_6.setObjectName("frame_6")
@@ -163,60 +206,30 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.frame_9 = QtWidgets.QFrame(self.frame_6)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_9.sizePolicy().hasHeightForWidth())
-        self.frame_9.setSizePolicy(sizePolicy)
-        self.frame_9.setMinimumSize(QtCore.QSize(0, 198))
-        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_9.setObjectName("frame_9")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame_9)
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName("verticalLayout_6")
-        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_6.addItem(spacerItem1)
-        self.playlistInputDialogPlaylistsMiniatureQLabel = ClickedSignalQLabel(self.frame_9)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.playlistInputDialogPlaylistsMiniatureQLabel.sizePolicy().hasHeightForWidth())
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setSizePolicy(sizePolicy)
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setMinimumSize(QtCore.QSize(180, 180))
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setMaximumSize(QtCore.QSize(180, 180))
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setText("")
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setPixmap(
-            QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setScaledContents(True)
-        self.playlistInputDialogPlaylistsMiniatureQLabel.setObjectName("playlistInputDialogPlaylistsMiniatureQLabel")
-        self.verticalLayout_6.addWidget(self.playlistInputDialogPlaylistsMiniatureQLabel)
-        self.horizontalLayout_3.addWidget(self.frame_9)
         self.frame_7 = QtWidgets.QFrame(self.frame_6)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_7.sizePolicy().hasHeightForWidth())
         self.frame_7.setSizePolicy(sizePolicy)
-        self.frame_7.setMinimumSize(QtCore.QSize(0, 0))
+        self.frame_7.setMinimumSize(QtCore.QSize(0, 198))
         self.frame_7.setMaximumSize(QtCore.QSize(16777215, 198))
         self.frame_7.setStyleSheet("")
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_7)
-        self.verticalLayout_15.setContentsMargins(16, 10, 0, 0)
+        self.verticalLayout_15.setContentsMargins(213, 10, 0, 0)
         self.verticalLayout_15.setSpacing(16)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.groupBox1_3 = LabeledQLineEdit(parent=self.frame_7, input_title="Playlist Name")
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.groupBox1_3 = LabeledQLineEdit(parent=self.frame_7, input_title="Name", placeholder_text="Playlist name")
+        self.playlistInputDialogPlaylistNameQLineEdit = self.groupBox1_3.lineEdit_2
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox1_3.sizePolicy().hasHeightForWidth())
         self.groupBox1_3.setSizePolicy(sizePolicy)
-        self.groupBox1_3.setMinimumSize(QtCore.QSize(280, 40))
+        self.groupBox1_3.setMinimumSize(QtCore.QSize(0, 55))
         font = QtGui.QFont()
         font.setFamily("Heebo Black")
         font.setPointSize(8)
@@ -229,7 +242,6 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.playlistInputDialogPlaylistNameQLineEdit = self.groupBox1_3.lineEdit_2
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -295,18 +307,15 @@ class playlistInputDialog(QtWidgets.QDialog):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
         self.playlistInputDialogPlaylistNameQLineEdit.setPalette(palette)
-        self.playlistInputDialogPlaylistNameQLineEdit.setInputMask("")
-        self.playlistInputDialogPlaylistNameQLineEdit.setText("")
-        self.playlistInputDialogPlaylistNameQLineEdit.setPlaceholderText("Playlist name")
-        self.playlistInputDialogPlaylistNameQLineEdit.setObjectName("playlistInputDialogPlaylistNameQLineEdit")
         self.verticalLayout_15.addWidget(self.groupBox1_3)
-        self.groupBox1_2 = LabeledQComboBox(parent=self.frame_7, input_title="Category Name")
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.groupBox1_2 = LabeledQComboBox(parent=self.frame_7, input_title="Category name")
+        self.playlistInputDialogCategoryQComboBox = self.groupBox1_2.comboBox1
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox1_2.sizePolicy().hasHeightForWidth())
         self.groupBox1_2.setSizePolicy(sizePolicy)
-        self.groupBox1_2.setMinimumSize(QtCore.QSize(280, 40))
+        self.groupBox1_2.setMinimumSize(QtCore.QSize(0, 55))
         font = QtGui.QFont()
         font.setFamily("Heebo Black")
         font.setPointSize(8)
@@ -319,32 +328,19 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
-        self.playlistInputDialogCategoryQComboBox = self.groupBox1_2.comboBox1
-        self.playlistInputDialogCategoryQComboBox.setMaxVisibleItems(4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.playlistInputDialogCategoryQComboBox.sizePolicy().hasHeightForWidth())
-        self.playlistInputDialogCategoryQComboBox.setSizePolicy(sizePolicy)
-        self.playlistInputDialogCategoryQComboBox.setMinimumSize(QtCore.QSize(0, 0))
-        self.playlistInputDialogCategoryQComboBox.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Heebo Black")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(7)
-        self.playlistInputDialogCategoryQComboBox.setFont(font)
-        self.playlistInputDialogCategoryQComboBox.setCurrentText("bozo")
-        self.playlistInputDialogCategoryQComboBox.setMaxVisibleItems(3)
-        self.playlistInputDialogCategoryQComboBox.setIconSize(QtCore.QSize(50, 50))
-        self.playlistInputDialogCategoryQComboBox.setPlaceholderText("")
-        self.playlistInputDialogCategoryQComboBox.setFrame(True)
-        self.playlistInputDialogCategoryQComboBox.setObjectName("playlistInputDialogCategoryQComboBox")
 
+        self.playlistInputDialogCategoryQComboBox.setMaxVisibleItems(4)
         self.playlistInputDialogCategoryQComboBox.addItem("")
         self.playlistInputDialogCategoryQComboBox.setItemText(0, "No category")
-
+        self.playlistInputDialogCategoryQComboBox.addItem("")
+        self.playlistInputDialogCategoryQComboBox.setItemText(1, "Category1")
+        self.playlistInputDialogCategoryQComboBox.addItem("")
+        self.playlistInputDialogCategoryQComboBox.setItemText(2, "Category2")
+        self.playlistInputDialogCategoryQComboBox.addItem("")
+        self.playlistInputDialogCategoryQComboBox.setItemText(3, "Category3")
         self.verticalLayout_15.addWidget(self.groupBox1_2)
         self.horizontalLayout_3.addWidget(self.frame_7)
         self.verticalLayout_5.addWidget(self.frame_6)
@@ -362,8 +358,8 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.horizontalLayout_2.setContentsMargins(0, 16, 1, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
+        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
         self.frame_10 = QtWidgets.QFrame(self.frame_8)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -402,3 +398,221 @@ class playlistInputDialog(QtWidgets.QDialog):
         self.verticalLayout_5.addWidget(self.frame_8)
         self.verticalLayout_2.addWidget(self.frame_2)
         self.verticalLayout.addWidget(self.frame_3)
+
+        self.playlistInputDialogPlaylistsMiniatureQLabel = QtWidgets.QLabel(self.frame_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.playlistInputDialogPlaylistsMiniatureQLabel.sizePolicy().hasHeightForWidth())
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setSizePolicy(sizePolicy)
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setFixedSize(180, 180)
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setText("")
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setScaledContents(True)
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setObjectName("playlistInputDialogPlaylistsMiniatureQLabel")
+        self.playlistInputDialogPlaylistsMiniatureQLabel.move(24, 78)
+        # self.playlistInputDialogPlaylistsMiniatureQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
+        # self._adjust_dialogs_stylesheet()
+
+        #############################################################################################
+        # Miniature label DropDownShadowEffect
+        #############################################################################################
+        self.shadow = QtWidgets.QGraphicsDropShadowEffect()
+        self.shadow.setBlurRadius(250)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QtGui.QColor(0, 0, 0, 192))
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setGraphicsEffect(self.shadow)
+
+        self.playlistInputDialogMiniatureQToolButton = HoverSignalQToolButton(
+            self.playlistInputDialogPlaylistsMiniatureQLabel)
+        self.playlistInputDialogMiniatureQToolButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+        self.playlistInputDialogMiniatureQToolButton.setObjectName("playlistInputDialogMiniatureQToolButton")
+        self.playlistInputDialogMiniatureQToolButton.setIconSize(QtCore.QSize(52, 52))
+        self.playlistInputDialogMiniatureQToolButton.setFixedSize(180, 180)
+
+        #############################################################################################
+        # if playlistInputDialogPlaylistsMiniatureQLabel doesn't have pixmap set base icon to
+        # playlistInputDialogMiniatureQToolButton
+        #############################################################################################
+        if not self.playlistInputDialogPlaylistsMiniatureQLabel.pixmap():
+            icon11 = QtGui.QIcon()
+            icon11.addPixmap(
+                QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png"),
+                QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.playlistInputDialogMiniatureQToolButton.setIcon(icon11)
+
+        #############################################################################################
+        # Connect playlistInputDialogMiniatureQToolButton hover, unhover slots
+        #############################################################################################
+        self.playlistInputDialogMiniatureQToolButton.mouseIn.connect(self.miniature_qtoolbutton_hover_slot)
+        self.playlistInputDialogMiniatureQToolButton.mouseOut.connect(self.miniature_qtoolbutton_unhover_slot)
+
+    def miniature_qtoolbutton_hover_slot(self):
+        """Change playlistInputDialogMiniatureQToolButton's icon and text when it's hovered."""
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_edit_white_48dp.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.playlistInputDialogMiniatureQToolButton.setIcon(icon12)
+        self.playlistInputDialogMiniatureQToolButton.setText("Choose photo")
+
+    def miniature_qtoolbutton_unhover_slot(self):
+        """Set playlistInputDialogMiniatureQToolButton's icon and remove text when mouse leaves it's rect depending on
+        if playlistInputDialogPlaylistsMiniatureQLabel has pixmap set.
+
+        """
+        if self.playlistInputDialogPlaylistsMiniatureQLabel.pixmap():
+            icon13 = QtGui.QIcon()
+        else:
+            icon13 = QtGui.QIcon()
+            icon13.addPixmap(
+                QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png"),
+                QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.playlistInputDialogMiniatureQToolButton.setIcon(icon13)
+        self.playlistInputDialogMiniatureQToolButton.setText("")
+
+    def set_dialogs_miniature_preview_pixmap(self, url):
+        """Set playlistInputDialogPlaylistsMiniatureQLabel to pixmap from url and call _adjust_dialogs_stylesheet.
+
+        Parameters:
+            url (QtCore.QUrl): path to miniature.
+        """
+        self.playlistInputDialogPlaylistsMiniatureQLabel.setPixmap(QtGui.QPixmap(url.toLocalFile()))
+        self._adjust_dialogs_stylesheet()
+        self.miniature_qtoolbutton_unhover_slot()
+
+    def _adjust_dialogs_stylesheet(self):
+        """Adjust dialogs stylesheet. Add black background on hover to playlistInputDialogMiniatureQToolButton if
+         playlistInputDialogPlaylistsMiniatureQLabel has pixmap else remove hover effect.
+
+         """
+        if self.playlistInputDialogPlaylistsMiniatureQLabel.pixmap():
+            self.frame_3.setStyleSheet("#frame_3{\n"
+                                       "    border-radius: 8px;\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#playlistInputDialogExitButton{\n"
+                                       "    background-color: none;\n"
+                                       "    border-radius: 16px;\n"
+                                       "}\n"
+                                       "#playlistInputDialogExitButton:hover{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.25);\n"
+                                       "}\n"
+                                       "#playlistInputDialogExitButton:pressed{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.35);\n"
+                                       "}\n"
+                                       "#label{\n"
+                                       "    color: white;\n"
+                                       "    font: 87 17pt \"Heebo Black\";\n"
+                                       "}\n"
+                                       "#playlistInputDialogAddButton{\n"
+                                       "    border-radius: 16px;\n"
+                                       "    background-color: white;\n"
+                                       "    color: black;\n"
+                                       "    font: 87 9pt \"Heebo Medium\";\n"
+                                       "}\n"
+                                       "QScrollBar:vertical {\n"
+                                       "    width: 16px;\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::handle:vertical{\n"
+                                       "    margin-right: -10px;\n"
+                                       "    background: rgba(179, 179, 179, 0.45);\n"
+                                       "}\n"
+                                       "QScrollBar::handle:hover:vertical{\n"
+                                       "    background: rgba(179, 179, 179, 0.55);\n"
+                                       "}\n"
+                                       "QScrollBar::sub-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::add-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QScrollBar::add-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    background: none;\n"
+                                       "    border: none;\n"
+                                       "}\n"
+                                       "QScrollBar::sub-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    border: none;\n"
+                                       "    background: none;\n"
+                                       "}\n"
+                                       "#playlistInputDialogPlaylistsMiniatureQLabel{\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#playlistInputDialogMiniatureQToolButton{\n"
+                                       "    color: white;\n"
+                                       "    font: 57 11pt \"Heebo Medium\";\n"
+                                       "    padding-top: 55px;\n"
+                                       "    padding-bottom: 26px;\n"
+                                       "}\n"
+                                       "#playlistInputDialogMiniatureQToolButton:hover{\n"
+                                       "    background-color: rgba(0, 0, 0, 0.65);\n"
+                                       "}\n")
+        else:
+            self.frame_3.setStyleSheet("#frame_3{\n"
+                                       "    border-radius: 8px;\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#playlistInputDialogExitButton{\n"
+                                       "    background-color: none;\n"
+                                       "    border-radius: 16px;\n"
+                                       "}\n"
+                                       "#playlistInputDialogExitButton:hover{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.25);\n"
+                                       "}\n"
+                                       "#playlistInputDialogExitButton:pressed{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.35);\n"
+                                       "}\n"
+                                       "#label{\n"
+                                       "    color: white;\n"
+                                       "    font: 87 17pt \"Heebo Black\";\n"
+                                       "}\n"
+                                       "#playlistInputDialogAddButton{\n"
+                                       "    border-radius: 16px;\n"
+                                       "    background-color: white;\n"
+                                       "    color: black;\n"
+                                       "    font: 87 9pt \"Heebo Medium\";\n"
+                                       "}\n"
+                                       "QScrollBar:vertical {\n"
+                                       "    width: 16px;\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::handle:vertical{\n"
+                                       "    margin-right: -10px;\n"
+                                       "    background: rgba(179, 179, 179, 0.45);\n"
+                                       "}\n"
+                                       "QScrollBar::handle:hover:vertical{\n"
+                                       "    background: rgba(179, 179, 179, 0.55);\n"
+                                       "}\n"
+                                       "QScrollBar::sub-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::add-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QScrollBar::add-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    background: none;\n"
+                                       "    border: none;\n"
+                                       "}\n"
+                                       "QScrollBar::sub-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    border: none;\n"
+                                       "    background: none;\n"
+                                       "}\n"
+                                       "#playlistInputDialogPlaylistsMiniatureQLabel{\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#playlistInputDialogMiniatureQToolButton{\n"
+                                       "    color: white;\n"
+                                       "    font: 57 11pt \"Heebo Medium\";\n"
+                                       "    padding-top: 55px;\n"
+                                       "    padding-bottom: 26px;\n"
+                                       "}\n")

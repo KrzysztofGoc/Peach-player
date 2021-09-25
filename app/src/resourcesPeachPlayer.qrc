@@ -83,6 +83,8 @@
     <file>icons/48x48/filled/baseline_picture_in_picture_white_48dp.png</file>
   </qresource>
   <qresource prefix="/icons/48x48/outlined">
+    <file>icons/48x48/outlined/outline_music_note_gray_48dp.png</file>
+    <file>icons/48x48/outlined/outline_edit_white_48dp.png</file>
     <file>icons/48x48/outlined/outline_logout_gray_48dp.png</file>
     <file>icons/48x48/outlined/outline_sync_alt_gray_48dp.png</file>
     <file>icons/48x48/outlined/outline_sync_alt_white_48dp.png</file>

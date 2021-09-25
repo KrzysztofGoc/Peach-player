@@ -1,7 +1,8 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from app.src.classes.widgets.labeled_qcombobox import LabeledQComboBox
 from app.src.classes.widgets.labeled_qlineedit import LabeledQLineEdit
-from app.src.classes.widgets.clicked_signal_qlabel import ClickedSignalQLabel
+from app.src.classes.widgets.helper_widgets.hover_signal_qpushbutton import HoverSignalQToolButton
+
 
 class albumInputDialog(QtWidgets.QDialog):
     def __init__(self, parent=None):
@@ -57,11 +58,6 @@ class albumInputDialog(QtWidgets.QDialog):
                                    "    color: black;\n"
                                    "    font: 87 9pt \"Heebo Medium\";\n"
                                    "}\n"
-                                   "#albumInputDialogSynchronizeQRadioButton{\n"
-                                   "    color: rgb(179, 179, 179);\n"
-                                   "    font: 57 10pt \"Heebo Medium\";\n"
-                                   "}\n"
-                                   "\n"
                                    "QScrollBar:vertical {\n"
                                    "    width: 16px;\n"
                                    "    background: transparent;\n"
@@ -91,6 +87,15 @@ class albumInputDialog(QtWidgets.QDialog):
                                    "    height: 0px;\n"
                                    "    border: none;\n"
                                    "    background: none;\n"
+                                   "}\n"
+                                   "#albumInputDialogAlbumsMiniatureQLabel{\n"
+                                   "    background-color: rgb(40, 40, 40);\n"
+                                   "}\n"
+                                   "#albumInputDialogMiniatureQToolButton{\n"
+                                   "    color: white;\n"
+                                   "    font: 57 11pt \"Heebo Medium\";\n"
+                                   "    padding-top: 55px;\n"
+                                   "    padding-bottom: 26px;\n"
                                    "}\n")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -194,37 +199,6 @@ class albumInputDialog(QtWidgets.QDialog):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.frame_9 = QtWidgets.QFrame(self.frame_6)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_9.sizePolicy().hasHeightForWidth())
-        self.frame_9.setSizePolicy(sizePolicy)
-        self.frame_9.setMinimumSize(QtCore.QSize(0, 198))
-        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_9.setObjectName("frame_9")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame_9)
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName("verticalLayout_6")
-        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_6.addItem(spacerItem1)
-        self.albumInputDialogAlbumsMiniatureQLabel = ClickedSignalQLabel(self.frame_9)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.albumInputDialogAlbumsMiniatureQLabel.sizePolicy().hasHeightForWidth())
-        self.albumInputDialogAlbumsMiniatureQLabel.setSizePolicy(sizePolicy)
-        self.albumInputDialogAlbumsMiniatureQLabel.setMinimumSize(QtCore.QSize(180, 180))
-        self.albumInputDialogAlbumsMiniatureQLabel.setMaximumSize(QtCore.QSize(180, 180))
-        self.albumInputDialogAlbumsMiniatureQLabel.setText("")
-        self.albumInputDialogAlbumsMiniatureQLabel.setPixmap(
-            QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
-        self.albumInputDialogAlbumsMiniatureQLabel.setScaledContents(True)
-        self.albumInputDialogAlbumsMiniatureQLabel.setObjectName("albumInputDialogAlbumsMiniatureQLabel")
-        self.verticalLayout_6.addWidget(self.albumInputDialogAlbumsMiniatureQLabel)
-        self.horizontalLayout_3.addWidget(self.frame_9)
         self.frame_7 = QtWidgets.QFrame(self.frame_6)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -238,33 +212,27 @@ class albumInputDialog(QtWidgets.QDialog):
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_7)
-        self.verticalLayout_15.setContentsMargins(16, 10, 0, 0)
+        self.verticalLayout_15.setContentsMargins(213, 10, 0, 0)
         self.verticalLayout_15.setSpacing(16)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.groupBox1_3 = QtWidgets.QGroupBox(self.frame_7)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.groupBox1_3 = LabeledQLineEdit(parent=self.frame_7, input_title="Name", placeholder_text="Album name")
+        self.albumInputDialogAlbumNameQLineEdit = self.groupBox1_3.lineEdit_2
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox1_3.sizePolicy().hasHeightForWidth())
         self.groupBox1_3.setSizePolicy(sizePolicy)
-        self.groupBox1_3.setMinimumSize(QtCore.QSize(280, 40))
+        self.groupBox1_3.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setFamily("Heebo Black")
         font.setPointSize(8)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(7)
-        self.groupBox1_3.setFont(font)
-        self.groupBox1_3.setStyleSheet("")
-        self.groupBox1_3.setObjectName("groupBox1_3")
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.groupBox1_3)
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-
-        self.labeledLineEdit = LabeledQLineEdit(parent=self.groupBox1_3, input_title="Album Name")
-        self.albumInputDialogAlbumNameQLineEdit = self.labeledLineEdit.lineEdit_2
-        self.lineEdit = self.labeledLineEdit.lineEdit_2
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -329,23 +297,16 @@ class albumInputDialog(QtWidgets.QDialog):
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.lineEdit.setPalette(palette)
-        self.lineEdit.setInputMask("")
-        self.lineEdit.setText("")
-        self.lineEdit.setPlaceholderText("Album name")
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout_16.addWidget(self.labeledLineEdit)
+        self.albumInputDialogAlbumNameQLineEdit.setPalette(palette)
         self.verticalLayout_15.addWidget(self.groupBox1_3)
-
         self.groupBox1_2 = LabeledQComboBox(parent=self.frame_7, input_title="Category Name")
         self.albumInputDialogCategoryQComboBox = self.groupBox1_2.comboBox1
-        self.albumInputDialogCategoryQComboBox.setMaxVisibleItems(4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox1_2.sizePolicy().hasHeightForWidth())
         self.groupBox1_2.setSizePolicy(sizePolicy)
-        self.groupBox1_2.setMinimumSize(QtCore.QSize(280, 40))
+        self.groupBox1_2.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setFamily("Heebo Black")
         font.setPointSize(8)
@@ -353,25 +314,36 @@ class albumInputDialog(QtWidgets.QDialog):
         font.setItalic(False)
         font.setWeight(7)
         self.groupBox1_2.setFont(font)
+        self.groupBox1_2.setTitle("Category Name")
         self.groupBox1_2.setObjectName("groupBox1_2")
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.groupBox1_2)
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_14.setSpacing(0)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
+        font = QtGui.QFont()
+        font.setFamily("Heebo Black")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(7)
+        self.albumInputDialogCategoryQComboBox.setMaxVisibleItems(4)
+        self.albumInputDialogCategoryQComboBox.addItem("")
+        self.albumInputDialogCategoryQComboBox.setItemText(0, "No category")
+        self.albumInputDialogCategoryQComboBox.addItem("")
+        self.albumInputDialogCategoryQComboBox.setItemText(1, "Category1")
+        self.albumInputDialogCategoryQComboBox.addItem("")
+        self.albumInputDialogCategoryQComboBox.setItemText(2, "Category2")
+        self.albumInputDialogCategoryQComboBox.addItem("")
+        self.albumInputDialogCategoryQComboBox.setItemText(3, "Category3")
         self.verticalLayout_15.addWidget(self.groupBox1_2)
-
-        self.albumInputDialogCategoryQComboBox.setItemText(0, "No Category")
-        self.albumInputDialogCategoryQComboBox.addItem("No Category")
-
         self.groupBox1 = LabeledQComboBox(parent=self.frame_7, input_title="Author Name")
         self.albumInputDialogAuthorQComboBox = self.groupBox1.comboBox1
-        self.albumInputDialogAuthorQComboBox.setMaxVisibleItems(4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox1.sizePolicy().hasHeightForWidth())
         self.groupBox1.setSizePolicy(sizePolicy)
-        self.groupBox1.setMinimumSize(QtCore.QSize(280, 40))
+        self.groupBox1.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setFamily("Heebo Black")
         font.setPointSize(8)
@@ -379,14 +351,20 @@ class albumInputDialog(QtWidgets.QDialog):
         font.setItalic(False)
         font.setWeight(7)
         self.groupBox1.setFont(font)
+        self.groupBox1.setTitle("Author Name")
         self.groupBox1.setObjectName("groupBox1")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.groupBox1)
         self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
 
-        self.albumInputDialogAuthorQComboBox.setItemText(0, "No Author")
-        self.albumInputDialogAuthorQComboBox.addItem("No Author")
+        self.albumInputDialogAuthorQComboBox.setMaxVisibleItems(4)
+        self.albumInputDialogAuthorQComboBox.addItem("")
+        self.albumInputDialogAuthorQComboBox.setItemText(0, "No author")
+        self.albumInputDialogAuthorQComboBox.addItem("")
+        self.albumInputDialogAuthorQComboBox.setItemText(1, "Author1")
+        self.albumInputDialogAuthorQComboBox.addItem("")
+        self.albumInputDialogAuthorQComboBox.setItemText(2, "Author2")
 
         self.verticalLayout_15.addWidget(self.groupBox1)
         self.horizontalLayout_3.addWidget(self.frame_7)
@@ -405,8 +383,8 @@ class albumInputDialog(QtWidgets.QDialog):
         self.horizontalLayout_2.setContentsMargins(0, 16, 1, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
+        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
         self.frame_10 = QtWidgets.QFrame(self.frame_8)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -445,3 +423,209 @@ class albumInputDialog(QtWidgets.QDialog):
         self.verticalLayout_5.addWidget(self.frame_8)
         self.verticalLayout_2.addWidget(self.frame_2)
         self.verticalLayout.addWidget(self.frame_3)
+
+        self.albumInputDialogAlbumsMiniatureQLabel = QtWidgets.QLabel(self.frame_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.albumInputDialogAlbumsMiniatureQLabel.sizePolicy().hasHeightForWidth())
+        self.albumInputDialogAlbumsMiniatureQLabel.setSizePolicy(sizePolicy)
+        self.albumInputDialogAlbumsMiniatureQLabel.setFixedSize(180, 180)
+        self.albumInputDialogAlbumsMiniatureQLabel.setText("")
+        self.albumInputDialogAlbumsMiniatureQLabel.setScaledContents(True)
+        self.albumInputDialogAlbumsMiniatureQLabel.setObjectName("albumInputDialogAlbumsMiniatureQLabel")
+        self.albumInputDialogAlbumsMiniatureQLabel.move(24, 78)
+        # self.albumInputDialogAlbumsMiniatureQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
+        # self._adjust_dialogs_stylesheet()
+
+        self.shadow = QtWidgets.QGraphicsDropShadowEffect()
+        self.shadow.setBlurRadius(250)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QtGui.QColor(0, 0, 0, 192))
+        self.albumInputDialogAlbumsMiniatureQLabel.setGraphicsEffect(self.shadow)
+
+        self.albumInputDialogMiniatureQToolButton = HoverSignalQToolButton(self.albumInputDialogAlbumsMiniatureQLabel)
+        self.albumInputDialogMiniatureQToolButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+
+        # if albumInputDialogAlbumsMiniatureQLabel doesn't have pixmap set base icon to
+        # albumInputDialogMiniatureQToolButton
+        if not self.albumInputDialogAlbumsMiniatureQLabel.pixmap():
+            icon11 = QtGui.QIcon()
+            icon11.addPixmap(
+                QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png"),
+                QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.albumInputDialogMiniatureQToolButton.setIcon(icon11)
+
+        self.albumInputDialogMiniatureQToolButton.setObjectName("albumInputDialogMiniatureQToolButton")
+        self.albumInputDialogMiniatureQToolButton.setIconSize(QtCore.QSize(52, 52))
+        self.albumInputDialogMiniatureQToolButton.setFixedSize(180, 180)
+
+        self.albumInputDialogMiniatureQToolButton.mouseIn.connect(self.miniature_qtoolbutton_hover_slot)
+        self.albumInputDialogMiniatureQToolButton.mouseOut.connect(self.miniature_qtoolbutton_unhover_slot)
+
+    def miniature_qtoolbutton_hover_slot(self):
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_edit_white_48dp.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.albumInputDialogMiniatureQToolButton.setIcon(icon12)
+        self.albumInputDialogMiniatureQToolButton.setText("Choose photo")
+
+    def miniature_qtoolbutton_unhover_slot(self):
+        if not self.albumInputDialogAlbumsMiniatureQLabel.pixmap():
+            icon13 = QtGui.QIcon()
+            icon13.addPixmap(
+                QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png"),
+                QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.albumInputDialogMiniatureQToolButton.setIcon(icon13)
+            self.albumInputDialogMiniatureQToolButton.setText("")
+        else:
+            self.albumInputDialogMiniatureQToolButton.setIcon(QtGui.QIcon())
+            self.albumInputDialogMiniatureQToolButton.setText("")
+
+    def set_dialogs_miniature_preview_pixmap(self, url):
+        """Set albumInputDialogAlbumsMiniatureQLabel to pixmap from url and call _adjust_dialogs_stylesheet.
+
+        Parameters:
+            url (QtCore.QUrl): path to miniature.
+        """
+        self.albumInputDialogAlbumsMiniatureQLabel.setPixmap(QtGui.QPixmap(url.toLocalFile()))
+        self._adjust_dialogs_stylesheet()
+        self.miniature_qtoolbutton_unhover_slot()
+
+    def _adjust_dialogs_stylesheet(self):
+        """Adjust dialogs stylesheet. Add black background on hoover to albumInputDialogMiniatureQToolButton if
+         albumInputDialogAlbumsMiniatureQLabel has pixmap.
+
+         """
+        if self.albumInputDialogAlbumsMiniatureQLabel.pixmap():
+            self.frame_3.setStyleSheet("#frame_3{\n"
+                                       "    border-radius: 8px;\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#albumInputDialogExitButton{\n"
+                                       "    background-color: none;\n"
+                                       "    border-radius: 16px;\n"
+                                       "}\n"
+                                       "#albumInputDialogExitButton:hover{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.25);\n"
+                                       "}\n"
+                                       "#albumInputDialogExitButton:pressed{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.35);\n"
+                                       "}\n"
+                                       "#label{\n"
+                                       "    color: white;\n"
+                                       "    font: 87 17pt \"Heebo Black\";\n"
+                                       "}\n"
+                                       "#albumInputDialogAddButton{\n"
+                                       "    border-radius: 16px;\n"
+                                       "    background-color: white;\n"
+                                       "    color: black;\n"
+                                       "    font: 87 9pt \"Heebo Medium\";\n"
+                                       "}\n"
+                                       "QScrollBar:vertical {\n"
+                                       "    width: 16px;\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::handle:vertical{\n"
+                                       "    margin-right: -10px;\n"
+                                       "    background: rgba(179, 179, 179, 0.45);\n"
+                                       "}\n"
+                                       "QScrollBar::handle:hover:vertical{\n"
+                                       "    background: rgba(179, 179, 179, 0.55);\n"
+                                       "}\n"
+                                       "QScrollBar::sub-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::add-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QScrollBar::add-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    background: none;\n"
+                                       "    border: none;\n"
+                                       "}\n"
+                                       "QScrollBar::sub-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    border: none;\n"
+                                       "    background: none;\n"
+                                       "}\n"
+                                       "#albumInputDialogAlbumsMiniatureQLabel{\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#albumInputDialogMiniatureQToolButton{\n"
+                                       "    color: white;\n"
+                                       "    font: 57 11pt \"Heebo Medium\";\n"
+                                       "    padding-top: 55px;\n"
+                                       "    padding-bottom: 26px;\n"
+                                       "}\n"
+                                       "#albumInputDialogMiniatureQToolButton:hover{\n"
+                                       "    background-color: rgba(0, 0, 0, 0.65);\n"
+                                       "}\n")
+        else:
+            self.frame_3.setStyleSheet("#frame_3{\n"
+                                       "    border-radius: 8px;\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#albumInputDialogExitButton{\n"
+                                       "    background-color: none;\n"
+                                       "    border-radius: 16px;\n"
+                                       "}\n"
+                                       "#albumInputDialogExitButton:hover{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.25);\n"
+                                       "}\n"
+                                       "#albumInputDialogExitButton:pressed{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.35);\n"
+                                       "}\n"
+                                       "#label{\n"
+                                       "    color: white;\n"
+                                       "    font: 87 17pt \"Heebo Black\";\n"
+                                       "}\n"
+                                       "#albumInputDialogAddButton{\n"
+                                       "    border-radius: 16px;\n"
+                                       "    background-color: white;\n"
+                                       "    color: black;\n"
+                                       "    font: 87 9pt \"Heebo Medium\";\n"
+                                       "}\n"
+                                       "QScrollBar:vertical {\n"
+                                       "    width: 16px;\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::handle:vertical{\n"
+                                       "    margin-right: -10px;\n"
+                                       "    background: rgba(179, 179, 179, 0.45);\n"
+                                       "}\n"
+                                       "QScrollBar::handle:hover:vertical{\n"
+                                       "    background: rgba(179, 179, 179, 0.55);\n"
+                                       "}\n"
+                                       "QScrollBar::sub-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "QScrollBar::add-page:vertical{\n"
+                                       "    background: transparent;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QScrollBar::add-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    background: none;\n"
+                                       "    border: none;\n"
+                                       "}\n"
+                                       "QScrollBar::sub-line:vertical{\n"
+                                       "    widgth: 0px;\n"
+                                       "    height: 0px;\n"
+                                       "    border: none;\n"
+                                       "    background: none;\n"
+                                       "}\n"
+                                       "#albumInputDialogAlbumsMiniatureQLabel{\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#albumInputDialogMiniatureQToolButton{\n"
+                                       "    color: white;\n"
+                                       "    font: 57 11pt \"Heebo Medium\";\n"
+                                       "    padding-top: 55px;\n"
+                                       "    padding-bottom: 26px;\n"
+                                       "}\n")

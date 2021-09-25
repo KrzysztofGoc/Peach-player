@@ -1,6 +1,6 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from app.src.classes.widgets.labeled_qlineedit import LabeledQLineEdit
-from app.src.classes.widgets.clicked_signal_qlabel import ClickedSignalQLabel
+from app.src.classes.widgets.helper_widgets.hover_signal_qpushbutton import HoverSignalQToolButton
 
 
 class authorInputDialog(QtWidgets.QDialog):
@@ -61,6 +61,15 @@ class authorInputDialog(QtWidgets.QDialog):
                                    "    background-color: white;\n"
                                    "    color: black;\n"
                                    "    font: 87 9pt \"Heebo Medium\";\n"
+                                   "}\n"
+                                   "#authorInputDialogMiniatureQLabel{\n"
+                                   "    background-color: rgb(40, 40, 40);\n"
+                                   "}\n"
+                                   "#authorInputDialogMiniatureQToolButton {\n"
+                                   "    color: white;\n"
+                                   "    font: 57 11pt \"Heebo Medium\";\n"
+                                   "    padding-top: 55px;\n"
+                                   "    padding-bottom: 26px;\n"
                                    "}\n")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -164,60 +173,31 @@ class authorInputDialog(QtWidgets.QDialog):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.frame_9 = QtWidgets.QFrame(self.frame_6)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_9.sizePolicy().hasHeightForWidth())
-        self.frame_9.setSizePolicy(sizePolicy)
-        self.frame_9.setMinimumSize(QtCore.QSize(0, 198))
-        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_9.setObjectName("frame_9")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame_9)
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName("verticalLayout_6")
-        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_6.addItem(spacerItem1)
-        self.authorInputDialogAuthorMiniatureQLabel = ClickedSignalQLabel(self.frame_9)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.authorInputDialogAuthorMiniatureQLabel.sizePolicy().hasHeightForWidth())
-        self.authorInputDialogAuthorMiniatureQLabel.setSizePolicy(sizePolicy)
-        self.authorInputDialogAuthorMiniatureQLabel.setMinimumSize(QtCore.QSize(180, 180))
-        self.authorInputDialogAuthorMiniatureQLabel.setMaximumSize(QtCore.QSize(180, 180))
-        self.authorInputDialogAuthorMiniatureQLabel.setText("")
-        self.authorInputDialogAuthorMiniatureQLabel.setPixmap(
-            QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
-        self.authorInputDialogAuthorMiniatureQLabel.setScaledContents(True)
-        self.authorInputDialogAuthorMiniatureQLabel.setObjectName("authorInputDialogAuthorMiniatureQLabel")
-        self.verticalLayout_6.addWidget(self.authorInputDialogAuthorMiniatureQLabel)
-        self.horizontalLayout_3.addWidget(self.frame_9)
         self.frame_7 = QtWidgets.QFrame(self.frame_6)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_7.sizePolicy().hasHeightForWidth())
         self.frame_7.setSizePolicy(sizePolicy)
-        self.frame_7.setMinimumSize(QtCore.QSize(0, 0))
-        self.frame_7.setMaximumSize(QtCore.QSize(16777215, 198))
+        self.frame_7.setMinimumSize(QtCore.QSize(0, 214))
+        self.frame_7.setMaximumSize(QtCore.QSize(16777215, 214))
         self.frame_7.setStyleSheet("")
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_7)
-        self.verticalLayout_15.setContentsMargins(16, 10, 0, 0)
+        self.verticalLayout_15.setContentsMargins(213, 10, 0, 0)
         self.verticalLayout_15.setSpacing(16)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.groupBox1_3 = LabeledQLineEdit(parent=self.frame_7, input_title="Author Name")
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        self.groupBox1_3 = LabeledQLineEdit(parent=self.frame_7, input_title="Author Name",
+                                            placeholder_text="Author name")
+        self.authorInputDialogAuthorNameQLineEdit = self.groupBox1_3.lineEdit_2
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox1_3.sizePolicy().hasHeightForWidth())
         self.groupBox1_3.setSizePolicy(sizePolicy)
-        self.groupBox1_3.setMinimumSize(QtCore.QSize(280, 40))
+        self.groupBox1_3.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setFamily("Heebo Black")
         font.setPointSize(8)
@@ -230,7 +210,6 @@ class authorInputDialog(QtWidgets.QDialog):
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_16.setSpacing(0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.authorInputDialogAuthorNameQLineEdit = self.groupBox1_3.lineEdit_2
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -295,11 +274,6 @@ class authorInputDialog(QtWidgets.QDialog):
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.authorInputDialogAuthorNameQLineEdit.setPalette(palette)
-        self.authorInputDialogAuthorNameQLineEdit.setInputMask("")
-        self.authorInputDialogAuthorNameQLineEdit.setText("")
-        self.authorInputDialogAuthorNameQLineEdit.setPlaceholderText("Author name")
-        self.authorInputDialogAuthorNameQLineEdit.setObjectName("authorInputDialogAuthorNameQLineEdit")
         self.verticalLayout_15.addWidget(self.groupBox1_3)
         self.horizontalLayout_3.addWidget(self.frame_7)
         self.verticalLayout_5.addWidget(self.frame_6)
@@ -317,8 +291,8 @@ class authorInputDialog(QtWidgets.QDialog):
         self.horizontalLayout_2.setContentsMargins(0, 16, 1, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
+        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
         self.frame_10 = QtWidgets.QFrame(self.frame_8)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -357,3 +331,148 @@ class authorInputDialog(QtWidgets.QDialog):
         self.verticalLayout_5.addWidget(self.frame_8)
         self.verticalLayout_2.addWidget(self.frame_2)
         self.verticalLayout.addWidget(self.frame_3)
+
+        self.authorInputDialogMiniatureQLabel = QtWidgets.QLabel(self.frame_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.authorInputDialogMiniatureQLabel.sizePolicy().hasHeightForWidth())
+        self.authorInputDialogMiniatureQLabel.setSizePolicy(sizePolicy)
+        self.authorInputDialogMiniatureQLabel.setFixedSize(180, 180)
+        self.authorInputDialogMiniatureQLabel.setText("")
+        self.authorInputDialogMiniatureQLabel.setScaledContents(True)
+        self.authorInputDialogMiniatureQLabel.setObjectName("authorInputDialogMiniatureQLabel")
+        self.authorInputDialogMiniatureQLabel.move(24, 78)
+        # self.authorInputDialogMiniatureQLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
+        # self._adjust_dialogs_stylesheet()
+
+        self.shadow = QtWidgets.QGraphicsDropShadowEffect()
+        self.shadow.setBlurRadius(250)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QtGui.QColor(0, 0, 0, 192))
+        self.authorInputDialogMiniatureQLabel.setGraphicsEffect(self.shadow)
+
+        self.authorInputDialogMiniatureQToolButton = HoverSignalQToolButton(self.authorInputDialogMiniatureQLabel)
+        self.authorInputDialogMiniatureQToolButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+
+        # if authorInputDialogMiniatureQLabel doesn't have pixmap set base icon to authorInputDialogMiniatureQToolButton
+        if not self.authorInputDialogMiniatureQLabel.pixmap():
+            icon11 = QtGui.QIcon()
+            icon11.addPixmap(
+                QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png"),
+                QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.authorInputDialogMiniatureQToolButton.setIcon(icon11)
+
+        self.authorInputDialogMiniatureQToolButton.setObjectName("authorInputDialogMiniatureQToolButton")
+        self.authorInputDialogMiniatureQToolButton.setFixedSize(180, 180)
+        self.authorInputDialogMiniatureQToolButton.setIconSize(QtCore.QSize(52, 52))
+
+        self.authorInputDialogMiniatureQToolButton.mouseIn.connect(self.miniature_qtoolbutton_hover_slot)
+        self.authorInputDialogMiniatureQToolButton.mouseOut.connect(self.miniature_qtoolbutton_unhover_slot)
+
+    def miniature_qtoolbutton_hover_slot(self):
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_edit_white_48dp.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.authorInputDialogMiniatureQToolButton.setIcon(icon12)
+        self.authorInputDialogMiniatureQToolButton.setText("Choose photo")
+
+    def miniature_qtoolbutton_unhover_slot(self):
+        if not self.authorInputDialogMiniatureQLabel.pixmap():
+            icon13 = QtGui.QIcon()
+            icon13.addPixmap(
+                QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_music_note_gray_48dp.png"),
+                QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.authorInputDialogMiniatureQToolButton.setIcon(icon13)
+            self.authorInputDialogMiniatureQToolButton.setText("")
+        else:
+            self.authorInputDialogMiniatureQToolButton.setIcon(QtGui.QIcon())
+            self.authorInputDialogMiniatureQToolButton.setText("")
+
+    def set_dialogs_miniature_preview_pixmap(self, url):
+        """Set categoryInputDialogMiniatureQLabel to pixmap from url and call _adjust_dialogs_stylesheet.
+
+        Parameters:
+            url (QtCore.QUrl): path to miniature.
+        """
+        self.authorInputDialogMiniatureQLabel.setPixmap(QtGui.QPixmap(url.toLocalFile()))
+        self._adjust_dialogs_stylesheet()
+        self.miniature_qtoolbutton_unhover_slot()
+
+    def _adjust_dialogs_stylesheet(self):
+        """Adjust dialogs stylesheet. Add black background on hoover to categoryInputDialogMiniatureQToolButton if
+         categoryInputDialogMiniatureQLabel has pixmap.
+
+         """
+        if self.authorInputDialogMiniatureQLabel.pixmap():
+            self.frame_3.setStyleSheet("#frame_3{\n"
+                                       "    border-radius: 8px;\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#authorInputDialogExitButton{\n"
+                                       "    background-color: none;\n"
+                                       "    border-radius: 16px;\n"
+                                       "}\n"
+                                       "#authorInputDialogExitButton:hover{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.25);\n"
+                                       "}\n"
+                                       "#authorInputDialogExitButton:pressed{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.35);\n"
+                                       "}\n"
+                                       "#label{\n"
+                                       "    color: white;\n"
+                                       "    font: 87 17pt \"Heebo Black\";\n"
+                                       "}\n"
+                                       "#authorInputDialogAddButton{\n"
+                                       "    border-radius: 16px;\n"
+                                       "    background-color: white;\n"
+                                       "    color: black;\n"
+                                       "    font: 87 9pt \"Heebo Medium\";\n"
+                                       "}\n"
+                                       "#authorInputDialogMiniatureQLabel{\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#authorInputDialogMiniatureQToolButton {\n"
+                                       "    color: white;\n"
+                                       "    font: 57 11pt \"Heebo Medium\";\n"
+                                       "    padding-top: 55px;\n"
+                                       "    padding-bottom: 26px;\n"
+                                       "}\n"
+                                       "#authorInputDialogMiniatureQToolButton:hover{\n"
+                                       "    background-color: rgba(0, 0, 0, 0.65);\n"
+                                       "}\n")
+        else:
+            self.frame_3.setStyleSheet("#frame_3{\n"
+                                       "    border-radius: 8px;\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#authorInputDialogExitButton{\n"
+                                       "    background-color: none;\n"
+                                       "    border-radius: 16px;\n"
+                                       "}\n"
+                                       "#authorInputDialogExitButton:hover{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.25);\n"
+                                       "}\n"
+                                       "#authorInputDialogExitButton:pressed{\n"
+                                       "    background-color: rgba(179, 179, 179, 0.35);\n"
+                                       "}\n"
+                                       "#label{\n"
+                                       "    color: white;\n"
+                                       "    font: 87 17pt \"Heebo Black\";\n"
+                                       "}\n"
+                                       "#authorInputDialogAddButton{\n"
+                                       "    border-radius: 16px;\n"
+                                       "    background-color: white;\n"
+                                       "    color: black;\n"
+                                       "    font: 87 9pt \"Heebo Medium\";\n"
+                                       "}\n"
+                                       "#authorInputDialogMiniatureQLabel{\n"
+                                       "    background-color: rgb(40, 40, 40);\n"
+                                       "}\n"
+                                       "#authorInputDialogMiniatureQToolButton {\n"
+                                       "    color: white;\n"
+                                       "    font: 57 11pt \"Heebo Medium\";\n"
+                                       "    padding-top: 55px;\n"
+                                       "    padding-bottom: 26px;\n"
+                                       "}\n")

@@ -1,5 +1,5 @@
 from PySide2 import QtCore, QtGui, QtWidgets
-from app.src.classes.widgets.popup_signals_combo_box import PopupSignalsComboBox
+from app.src.classes.widgets.helper_widgets.popup_signals_combo_box import PopupSignalsComboBox
 
 
 class LabeledQComboBox(QtWidgets.QGroupBox):
