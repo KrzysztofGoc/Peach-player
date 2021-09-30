@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>950</width>
-    <height>687</height>
+    <width>982</width>
+    <height>770</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1659,14 +1659,16 @@ CategoryEntry:hover{
 	background-color: rgba(179, 179, 179, 0.25);
 }
 QFrame#frame_139 QPushButton{
+	padding-left: 17px;
+	padding-right: 17px;
 	font: 57 10pt &quot;Heebo Medium&quot;;
-	border-bottom: 2px solid;
+	border-bottom: 2px solid transparent;
 }
 QFrame#frame_139 QPushButton:hover:!checked{
 	color: white;
 }
 QFrame#frame_139 QPushButton:checked{
-	border-bottom: 2px solid rgb(255, 176, 85);
+	border-bottom: 2px solid rgb(247, 178, 158);
 	color: white;
 }</string>
              </property>
@@ -6390,7 +6392,7 @@ QFrame#frame_189{
                       <x>0</x>
                       <y>0</y>
                       <width>1174</width>
-                      <height>598</height>
+                      <height>497</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -8159,6 +8161,8 @@ AuthorEntry:hover{
 	background-color: rgba(179, 179, 179, 0.25);
 }
 QFrame#frame_114 QPushButton{
+	padding-left: 17px;
+	padding-right: 17px;
 	font: 57 10pt &quot;Heebo Medium&quot;;
 	border-bottom: 2px solid rgba(255, 255, 255, 0);
 	background-color: none;
@@ -8167,7 +8171,7 @@ QFrame#frame_114 QPushButton:hover:!checked{
 	color: white;
 }
 QFrame#frame_114 QPushButton:checked{
-	border-bottom: 2px solid rgb(255, 176, 85);
+	border-bottom: 2px solid rgb(247, 178, 158);
 	color: white;
 }
 #mainPageAuthorsGrid{
@@ -12772,7 +12776,38 @@ QPushButton:checked{
 }
 #frame_352{
 	background-color: rgb(18, 18, 18);
-}</string>
+}
+#authorPagePlayPauseQPushButton{
+	border-radius: 32px;
+	background-color: rgb(247, 178, 158);
+}
+#authorPagePlayPauseQPushButton:checked{
+	icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_pause_white_48dp.png);
+}
+
+#frame_41 QPushButton{
+	text-align: center;
+	border-bottom: 2px solid rgba(255, 255, 255, 0);
+	background-color: none;
+	color: white;
+	font: 87 12pt &quot;Heebo Black&quot;;
+	padding-bottom: 5px;
+	padding-left: 17px;
+	padding-right: 17px;
+}
+#frame_41 QPushButton:hover:!checked{
+	color: white;
+	border-bottom: 2px solid rgb(255, 203, 164);
+}
+#frame_41 QPushButton:checked{
+	border-bottom: 2px solid rgb(247, 178, 158);
+	color: white;
+}
+#frame_41{
+	background-color: none;
+}
+
+</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_74">
               <property name="spacing">
@@ -12997,28 +13032,7 @@ background-color: none;</string>
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QPushButton{
-	text-align: center;
-	border-bottom: 2px solid rgba(255, 255, 255, 0);
-	background-color: none;
-	color: white;
-	font: 87 12pt &quot;Heebo Black&quot;;
-	padding-bottom: 5px;
-}
-QPushButton:hover:!checked{
-	color: white;
-	border-bottom: 2px solid rgb(255, 203, 164);
-}
-QPushButton:checked{
-	border-bottom: 2px solid rgb(255, 176, 85);
-	color: white;
-}
-
-QFrame#frame_41{
-	background-color: none;
-}
-
-</string>
+                           <string notr="true"/>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -13264,6 +13278,89 @@ QFrame#frame_66 QPushButton:hover{
                             <property name="bottomMargin">
                              <number>0</number>
                             </property>
+                            <item>
+                             <widget class="QFrame" name="frame_120">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="verticalLayout_59">
+                               <property name="spacing">
+                                <number>0</number>
+                               </property>
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>24</number>
+                               </property>
+                               <property name="rightMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>11</number>
+                               </property>
+                               <item>
+                                <widget class="QPushButton" name="authorPagePlayPauseQPushButton">
+                                 <property name="sizePolicy">
+                                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                   <horstretch>0</horstretch>
+                                   <verstretch>0</verstretch>
+                                  </sizepolicy>
+                                 </property>
+                                 <property name="minimumSize">
+                                  <size>
+                                   <width>64</width>
+                                   <height>64</height>
+                                  </size>
+                                 </property>
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>64</width>
+                                   <height>64</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string notr="true"/>
+                                 </property>
+                                 <property name="icon">
+                                  <iconset resource="../resourcesPeachPlayer.qrc">
+                                   <normaloff>:/icons/48x48/filled/icons/48x48/filled/filled_play_arrow_white_48dp.png</normaloff>:/icons/48x48/filled/icons/48x48/filled/filled_play_arrow_white_48dp.png</iconset>
+                                 </property>
+                                 <property name="iconSize">
+                                  <size>
+                                   <width>42</width>
+                                   <height>42</height>
+                                  </size>
+                                 </property>
+                                 <property name="checkable">
+                                  <bool>true</bool>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
                             <item>
                              <widget class="QFrame" name="frame_66">
                               <property name="sizePolicy">
@@ -24791,7 +24888,7 @@ SongEntry QPushButton:hover{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>598</height>
+                      <height>573</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -28480,6 +28577,12 @@ QFrame#frame_402 QPushButton{
 #frame_457{
 	border-bottom: 1px solid rgba(179, 179, 179, 0.25);
 }
+QFrame#frame_457 QPushButton:hover{
+	color: white;
+}
+QFrame#frame_457 QPushButton{
+	font: 57 10pt &quot;Heebo Medium&quot;;
+}
 #mainPageAllSongAddSongQPushButton:hover{
 	icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_add_white_48dp.png);
 }
@@ -28638,7 +28741,7 @@ QLineEdit:focus{
                       <x>0</x>
                       <y>0</y>
                       <width>1674</width>
-                      <height>614</height>
+                      <height>681</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -28801,7 +28904,7 @@ font: 87 17pt &quot;Heebo Black&quot;;</string>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_280">
                               <property name="spacing">
-                               <number>0</number>
+                               <number>9</number>
                               </property>
                               <property name="leftMargin">
                                <number>0</number>
@@ -32672,7 +32775,7 @@ QPushButton:checked{
                          <string notr="true"/>
                         </property>
                         <property name="pixmap">
-                         <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/36x36/icons/36x36/library_music_white_36dp.svg</pixmap>
+                         <pixmap resource="../resourcesPeachPlayer.qrc">:/icons/48x48/filled/icons/48x48/filled/baseline_library_music_white_48dp.png</pixmap>
                         </property>
                         <property name="scaledContents">
                          <bool>true</bool>
@@ -33058,7 +33161,7 @@ QScrollBar::sub-line:vertical{
                      <x>0</x>
                      <y>0</y>
                      <width>198</width>
-                     <height>179</height>
+                     <height>262</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -33639,8 +33742,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
-                <height>713</height>
+                <width>982</width>
+                <height>770</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_63">
@@ -35168,8 +35271,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
-                <height>650</height>
+                <width>982</width>
+                <height>770</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_70">

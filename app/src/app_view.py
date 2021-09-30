@@ -803,16 +803,18 @@ class Ui_MainWindow:
                                               "    background-color: rgba(179, 179, 179, 0.25);\n"
                                               "}\n"
                                               "QFrame#frame_139 QPushButton{\n"
+                                              "    padding-left: 17px;\n"
+                                              "    padding-right: 17px;\n"
                                               "    font: 57 10pt \"Heebo Medium\";\n"
-                                              "    border-bottom: 2px solid;\n"
+                                              "    border-bottom: 2px solid transparent;\n"
                                               "}\n"
                                               "QFrame#frame_139 QPushButton:hover:!checked{\n"
                                               "    color: white;\n"
                                               "}\n"
                                               "QFrame#frame_139 QPushButton:checked{\n"
-                                              "    border-bottom: 2px solid rgb(255, 176, 85);\n"
+                                              "    border-bottom: 2px solid rgb(247, 178, 158);\n"
                                               "    color: white;\n"
-                                              "}")
+                                              "}\n")
         self.mainPageCategories.setObjectName("mainPageCategories")
         self.verticalLayout_30 = QtWidgets.QVBoxLayout(self.mainPageCategories)
         self.verticalLayout_30.setContentsMargins(0, 0, 0, 0)
@@ -1942,6 +1944,8 @@ class Ui_MainWindow:
                                            "    background-color: rgba(179, 179, 179, 0.25);\n"
                                            "}\n"
                                            "QFrame#frame_114 QPushButton{\n"
+                                           "    padding-left: 17px;\n"
+                                           "    padding-right: 17px;\n"
                                            "    font: 57 10pt \"Heebo Medium\";\n"
                                            "    border-bottom: 2px solid rgba(255, 255, 255, 0);\n"
                                            "    background-color: none;\n"
@@ -1950,7 +1954,7 @@ class Ui_MainWindow:
                                            "    color: white;\n"
                                            "}\n"
                                            "QFrame#frame_114 QPushButton:checked{\n"
-                                           "    border-bottom: 2px solid rgb(255, 176, 85);\n"
+                                           "    border-bottom: 2px solid rgb(247, 178, 158);\n"
                                            "    color: white;\n"
                                            "}\n"
                                            "#mainPageAuthorsGrid{\n"
@@ -1958,8 +1962,7 @@ class Ui_MainWindow:
                                            "}\n"
                                            "#scrollAreaWidgetContents_7{\n"
                                            "    background-color: rgb(18, 18, 18);\n"
-                                           "}\n"
-                                           "")
+                                           "}\n")
         self.mainPageAuthors.setObjectName("mainPageAuthors")
         self.verticalLayout_64 = QtWidgets.QVBoxLayout(self.mainPageAuthors)
         self.verticalLayout_64.setContentsMargins(0, 0, 0, 0)
@@ -2819,7 +2822,36 @@ class Ui_MainWindow:
                                               "}\n"
                                               "#frame_352{\n"
                                               "    background-color: rgb(18, 18, 18);\n"
-                                              "}")
+                                              "}\n"
+                                              "#authorPagePlayPauseQPushButton{\n"
+                                              "    border-radius: 32px;\n"
+                                              "    background-color: rgb(247, 178, 158);\n"
+                                              "}\n"
+                                              "#authorPagePlayPauseQPushButton:checked{\n"
+                                              "    icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_pause_white_48dp.png);\n"
+                                              "}\n"
+                                              "\n"
+                                              "#frame_41 QPushButton{\n"
+                                              "    text-align: center;\n"
+                                              "    border-bottom: 2px solid rgba(255, 255, 255, 0);\n"
+                                              "    background-color: none;\n"
+                                              "    color: white;\n"
+                                              "    font: 87 12pt \"Heebo Black\";\n"
+                                              "    padding-bottom: 5px;\n"
+                                              "    padding-left: 17px;\n"
+                                              "    padding-right: 17px;\n"
+                                              "}\n"
+                                              "#frame_41 QPushButton:hover:!checked{\n"
+                                              "    color: white;\n"
+                                              "    border-bottom: 2px solid rgb(255, 203, 164);\n"
+                                              "}\n"
+                                              "#frame_41 QPushButton:checked{\n"
+                                              "    border-bottom: 2px solid rgb(247, 178, 158);\n"
+                                              "    color: white;\n"
+                                              "}\n"
+                                              "#frame_41{\n"
+                                              "    background-color: none;\n"
+                                              "}\n")
         self.mainPageAuthorPage.setObjectName("mainPageAuthorPage")
         self.verticalLayout_74 = QtWidgets.QVBoxLayout(self.mainPageAuthorPage)
         self.verticalLayout_74.setContentsMargins(0, 0, 0, 0)
@@ -2909,28 +2941,6 @@ class Ui_MainWindow:
         sizePolicy.setHeightForWidth(self.frame_41.sizePolicy().hasHeightForWidth())
         self.frame_41.setSizePolicy(sizePolicy)
         self.frame_41.setMinimumSize(QtCore.QSize(0, 0))
-        self.frame_41.setStyleSheet("QPushButton{\n"
-                                    "    text-align: center;\n"
-                                    "    border-bottom: 2px solid rgba(255, 255, 255, 0);\n"
-                                    "    background-color: none;\n"
-                                    "    color: white;\n"
-                                    "    font: 87 12pt \"Heebo Black\";\n"
-                                    "    padding-bottom: 5px;\n"
-                                    "}\n"
-                                    "QPushButton:hover:!checked{\n"
-                                    "    color: white;\n"
-                                    "    border-bottom: 2px solid rgb(255, 203, 164);\n"
-                                    "}\n"
-                                    "QPushButton:checked{\n"
-                                    "    border-bottom: 2px solid rgb(255, 176, 85);\n"
-                                    "    color: white;\n"
-                                    "}\n"
-                                    "\n"
-                                    "QFrame#frame_41{\n"
-                                    "    background-color: none;\n"
-                                    "}\n"
-                                    "\n"
-                                    "")
         self.frame_41.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_41.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_41.setObjectName("frame_41")
@@ -3052,6 +3062,41 @@ class Ui_MainWindow:
         self.verticalLayout_40.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_40.setSpacing(0)
         self.verticalLayout_40.setObjectName("verticalLayout_40")
+
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/icons/48x48/filled/icons/48x48/filled/filled_play_arrow_white_48dp.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+        self.frame_120 = QtWidgets.QFrame(self.widget_4)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_120.sizePolicy().hasHeightForWidth())
+        self.frame_120.setSizePolicy(sizePolicy)
+        self.frame_120.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_120.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_120.setObjectName("frame_120")
+        self.verticalLayout_59 = QtWidgets.QVBoxLayout(self.frame_120)
+        self.verticalLayout_59.setContentsMargins(0, 24, 0, 11)
+        self.verticalLayout_59.setSpacing(0)
+        self.verticalLayout_59.setObjectName("verticalLayout_59")
+        self.authorPagePlayPauseQPushButton = QtWidgets.QPushButton(self.frame_120)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.authorPagePlayPauseQPushButton.sizePolicy().hasHeightForWidth())
+        self.authorPagePlayPauseQPushButton.setSizePolicy(sizePolicy)
+        self.authorPagePlayPauseQPushButton.setMinimumSize(QtCore.QSize(64, 64))
+        self.authorPagePlayPauseQPushButton.setMaximumSize(QtCore.QSize(64, 64))
+        self.authorPagePlayPauseQPushButton.setText("")
+        self.authorPagePlayPauseQPushButton.setIcon(icon8)
+        self.authorPagePlayPauseQPushButton.setIconSize(QtCore.QSize(42, 42))
+        self.authorPagePlayPauseQPushButton.setCheckable(True)
+        self.authorPagePlayPauseQPushButton.setObjectName("authorPagePlayPauseQPushButton")
+        self.verticalLayout_59.addWidget(self.authorPagePlayPauseQPushButton)
+        self.verticalLayout_40.addWidget(self.frame_120)
+
+
         self.frame_66 = QtWidgets.QFrame(self.widget_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -3551,10 +3596,7 @@ class Ui_MainWindow:
                                                 "     x2:0 y2:0.63,\n"
                                                 "     stop:0 rgb(228, 34, 53),\n"
                                                 "    stop:1 rgb(18, 18, 18));\n"
-                                                "}\n"
-                                                "\n"
-                                                "\n"
-                                                "")
+                                                "}\n")
         self.mainPageCategoryPage.setObjectName("mainPageCategoryPage")
         self.verticalLayout_55 = QtWidgets.QVBoxLayout(self.mainPageCategoryPage)
         self.verticalLayout_55.setContentsMargins(0, 0, 0, 0)
@@ -5047,13 +5089,18 @@ class Ui_MainWindow:
                                             "#frame_457{\n"
                                             "    border-bottom: 1px solid rgba(179, 179, 179, 0.25);\n"
                                             "}\n"
+                                            "QFrame#frame_457 QPushButton:hover{\n"
+                                                "color: white;\n"
+                                            "}\n"
+                                            "QFrame#frame_457 QPushButton{\n"
+                                                "font: 57 10pt \"Heebo Medium\";\n"
+                                            "}\n"
                                             "#mainPageAllSongAddSongQPushButton:hover{\n"
                                             "    icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_add_white_48dp.png);\n"
                                             "}\n"
                                             "#mainPageAllSongAddSongQPushButton:pressed{\n"
                                             "    icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_add_gray_48dp.png);\n"
                                             "}\n"
-                                            "\n"
                                             "QComboBox {\n"
                                             "    color: rgb(185, 185, 185);\n"
                                             "    background-color: rgba(179, 179, 179, 0.25);\n"
@@ -5123,7 +5170,7 @@ class Ui_MainWindow:
         self.verticalLayout_250.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_250.setSpacing(0)
         self.verticalLayout_250.setObjectName("verticalLayout_250")
-        self.scrollArea_14 = QtWidgets.QScrollArea(self.frame_401)
+        self.scrollArea_14 = ResizeSignalScrollArea(self.frame_401)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -5135,7 +5182,7 @@ class Ui_MainWindow:
         font.setKerning(True)
         self.scrollArea_14.setFont(font)
         self.scrollArea_14.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.scrollArea_14.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.scrollArea_14.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.scrollArea_14.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.scrollArea_14.setWidgetResizable(True)
         self.scrollArea_14.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -5207,7 +5254,7 @@ class Ui_MainWindow:
         self.frame_406.setObjectName("frame_406")
         self.verticalLayout_280 = QtWidgets.QVBoxLayout(self.frame_406)
         self.verticalLayout_280.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_280.setSpacing(0)
+        self.verticalLayout_280.setSpacing(9)
         self.verticalLayout_280.setObjectName("verticalLayout_280")
         self.label_252 = QtWidgets.QLabel(self.frame_406)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -5482,6 +5529,7 @@ class Ui_MainWindow:
         self.horizontalLayout_128.setSpacing(0)
         self.horizontalLayout_128.setObjectName("horizontalLayout_128")
         self.label_275 = QtWidgets.QLabel(self.frame_460)
+        self.label_275.setVisible(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -5548,6 +5596,7 @@ class Ui_MainWindow:
         self.horizontalLayout_130.setSpacing(0)
         self.horizontalLayout_130.setObjectName("horizontalLayout_130")
         self.label_276 = QtWidgets.QLabel(self.frame_463)
+        self.label_276.setVisible(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -5614,6 +5663,7 @@ class Ui_MainWindow:
         self.horizontalLayout_132.setSpacing(0)
         self.horizontalLayout_132.setObjectName("horizontalLayout_132")
         self.label_277 = QtWidgets.QLabel(self.frame_466)
+        self.label_277.setVisible(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -5680,6 +5730,7 @@ class Ui_MainWindow:
         self.horizontalLayout_134.setSpacing(0)
         self.horizontalLayout_134.setObjectName("horizontalLayout_134")
         self.label_278 = QtWidgets.QLabel(self.frame_469)
+        self.label_278.setVisible(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -5746,6 +5797,7 @@ class Ui_MainWindow:
         self.horizontalLayout_136.setSpacing(0)
         self.horizontalLayout_136.setObjectName("horizontalLayout_136")
         self.label_279 = QtWidgets.QLabel(self.frame_472)
+        self.label_279.setVisible(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -6026,7 +6078,7 @@ class Ui_MainWindow:
         self.label_253.setSizeIncrement(QtCore.QSize(0, 1))
         self.label_253.setBaseSize(QtCore.QSize(0, 0))
         self.label_253.setText("")
-        self.label_253.setPixmap(QtGui.QPixmap(":/icons/36x36/icons/36x36/library_music_white_36dp.svg"))
+        self.label_253.setPixmap(QtGui.QPixmap(":/icons/48x48/filled/icons/48x48/filled/baseline_library_music_white_48dp.png"))
         self.label_253.setScaledContents(True)
         self.label_253.setObjectName("label_253")
         self.horizontalLayout_112.addWidget(self.label_253)
@@ -7828,6 +7880,18 @@ class Ui_MainWindow:
         self.mainPageCategorySortButtonsQButtonGroup.addButton(self.mainPageCategoryLengthSortButton)
         setattr(self.mainPageCategoryLengthSortButton, "wasChecked", False)
 
+        self.mainPageAllSongsSortButtonsQButtonGroup = QtWidgets.QButtonGroup()
+        self.mainPageAllSongsSortButtonsQButtonGroup.addButton(self.mainPageAllSongsTitleSortQPushButton)
+        setattr(self.mainPageAllSongsTitleSortQPushButton, "wasChecked", False)
+        self.mainPageAllSongsSortButtonsQButtonGroup.addButton(self.mainPageAllSongsArtistSortQPushButton)
+        setattr(self.mainPageAllSongsArtistSortQPushButton, "wasChecked", False)
+        self.mainPageAllSongsSortButtonsQButtonGroup.addButton(self.mainPageAllSongsCategorySortQPushButton)
+        setattr(self.mainPageAllSongsCategorySortQPushButton, "wasChecked", False)
+        self.mainPageAllSongsSortButtonsQButtonGroup.addButton(self.mainPageAllSongsAddedSortQPushButton)
+        setattr(self.mainPageAllSongsAddedSortQPushButton, "wasChecked", False)
+        self.mainPageAllSongsSortButtonsQButtonGroup.addButton(self.mainPageAllSongsLengthSortQPushButton)
+        setattr(self.mainPageAllSongsLengthSortQPushButton, "wasChecked", False)
+
         #########################################################################
         # Main navigation buttons group
         #########################################################################
@@ -7891,6 +7955,11 @@ class Ui_MainWindow:
         self.mainPageAlbumsPageScroll.setOrientation(QtCore.Qt.Vertical)
         self.mainPageAlbumsPageScroll.setFixedWidth(12)
         self.mainPageAlbumsPageScroll.setMaximum(self.scrollArea_13.verticalScrollBar().maximum())
+
+        self.mainPageAllSongsPageScroll = QtWidgets.QScrollBar(self.mainPageAllSongs)
+        self.mainPageAllSongsPageScroll.setOrientation(QtCore.Qt.Vertical)
+        self.mainPageAllSongsPageScroll.setFixedWidth(12)
+        self.mainPageAllSongsPageScroll.setMaximum(self.scrollArea_14.verticalScrollBar().maximum())
 
         self.fixedNavbar = NavbarFrame(self.centralPageAppPage)
         self.fixedNavbar.move(200, 0)

@@ -124,6 +124,8 @@ class Controller:
             self.author_page_sort_buttons_qbuttongroup_slot)
         self.ui.mainPageCategorySortButtonsQButtonGroup.buttonClicked.connect(
             self.category_page_sort_buttons_qbuttongroup_slot)
+        self.ui.mainPageAllSongsSortButtonsQButtonGroup.buttonClicked.connect(
+            self.all_songs_page_sort_buttons_qbuttongroup_slot)
 
         ##########################################################################
         # Backend slots
@@ -214,6 +216,60 @@ class Controller:
         self.ui.scrollArea_13.verticalScrollBar().rangeChanged.connect(
             self.albums_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_13.resized.connect(self.albums_page_scroll_area_resize_slot)
+
+        self.ui.mainPageAllSongsPageScroll.valueChanged.connect(self.all_songs_page_scroll_value_changed_slot)
+        self.ui.scrollArea_14.verticalScrollBar().valueChanged.connect(self.all_songs_page_scroll_area_scrollbar_value_changed_slot)
+        self.ui.scrollArea_14.verticalScrollBar().rangeChanged.connect(self.all_songs_page_scroll_area_scrollbar_range_changed_slot)
+        self.ui.scrollArea_14.resized.connect(self.all_songs_page_scroll_area_resize_slot)
+
+    def all_songs_page_scroll_area_resize_slot(self):
+        """Resize and move custom scrollbar on all songs' page.
+
+         Calls all_songs_page_scroll_area_scrollbar_range_changed_slot() to toggle custom's scrollbar visibility if needed.
+         """
+        self.ui.mainPageAllSongsPageScroll.move(self.ui.scrollArea_14.rect().right() - 13, 0)
+        self.ui.mainPageAllSongsPageScroll.setFixedSize(self.ui.mainPageAllSongsPageScroll.width(),
+                                                      self.ui.scrollArea_14.height())
+        self.all_songs_page_scroll_area_scrollbar_range_changed_slot()
+
+    def all_songs_page_scroll_area_scrollbar_range_changed_slot(self):
+        """Change visibility of albums' page custom scrollbar when needed, set its maximum and pageStep to suit
+         scrollArea's scrollbar.
+        """
+        if self.ui.scrollArea_14.verticalScrollBar().maximum() > 0:
+            self.ui.mainPageAllSongsPageScroll.setVisible(True)
+            self.ui.mainPageAllSongsPageScroll.setPageStep(self.ui.scrollArea_14.verticalScrollBar().pageStep())
+            self.ui.mainPageAllSongsPageScroll.setMaximum(self.ui.scrollArea_14.verticalScrollBar().maximum())
+        else:
+            self.ui.mainPageAllSongsPageScroll.setVisible(False)
+
+    def all_songs_page_scroll_area_scrollbar_value_changed_slot(self):
+        """Change albums' page custom scrollbar's value to match albums' page scrollArea's scrollbar's value.
+
+        Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+        """
+        global scrollbar_recently_used
+        if not scrollbar_recently_used:
+            scrollbar_recently_used = True
+            self.ui.mainPageAllSongsPageScroll.setValue(self.ui.scrollArea_14.verticalScrollBar().value())
+            scrollbar_recently_used = False
+
+    def all_songs_page_scroll_value_changed_slot(self):
+        """Change albums' page scrollArea's scrollbar's value to match albums' page custom scrollbar's value.
+
+        Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+        """
+        global scrollbar_recently_used
+        if not scrollbar_recently_used:
+            scrollbar_recently_used = True
+            self.ui.scrollArea_14.verticalScrollBar().setValue(self.ui.mainPageAllSongsPageScroll.value())
+            scrollbar_recently_used = False
+
+
+
+
+
+
 
     def albums_page_scroll_area_resize_slot(self):
         """Resize and move custom scrollbar on albums' page.
@@ -594,6 +650,101 @@ class Controller:
         self.category_artist_sort_button_slot()
         self.category_added_sort_button_slot()
         self.category_length_sort_button_slot()
+
+    def all_songs_page_sort_buttons_qbuttongroup_slot(self):
+        self.all_songs_title_sort_button_slot()
+        self.all_songs_artist_sort_button_slot()
+        self.all_songs_category_sort_button_slot()
+        self.all_songs_added_sort_button_slot()
+        self.all_songs_length_sort_button_slot()
+
+    def all_songs_title_sort_button_slot(self):
+        """Toggle likedSong's page artist sort button's indicator and sort the songs"""
+        if self.ui.mainPageAllSongsTitleSortQPushButton.isChecked():
+            if self.ui.mainPageAllSongsTitleSortQPushButton.wasChecked:
+                self.ui.mainPageAllSongsTitleSortQPushButton.wasChecked = False
+                self.ui.label_275.setVisible(False)
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(False)
+                self.ui.mainPageAllSongsTitleSortQPushButton.toggle()
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(True)
+            else:
+                self.ui.mainPageAllSongsTitleSortQPushButton.wasChecked = True
+                self.ui.label_275.setVisible(True)
+                self.sort_songs_by_title()
+        else:
+            self.ui.mainPageAllSongsTitleSortQPushButton.wasChecked = False
+            self.ui.label_275.setVisible(False)
+
+    def all_songs_artist_sort_button_slot(self):
+        """Toggle likedSong's page artist sort button's indicator and sort the songs"""
+        if self.ui.mainPageAllSongsArtistSortQPushButton.isChecked():
+            if self.ui.mainPageAllSongsArtistSortQPushButton.wasChecked:
+                self.ui.mainPageAllSongsArtistSortQPushButton.wasChecked = False
+                self.ui.label_276.setVisible(False)
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(False)
+                self.ui.mainPageAllSongsArtistSortQPushButton.toggle()
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(True)
+            else:
+                self.ui.mainPageAllSongsArtistSortQPushButton.wasChecked = True
+                self.ui.label_276.setVisible(True)
+                self.sort_songs_by_artist()
+        else:
+            self.ui.mainPageAllSongsArtistSortQPushButton.wasChecked = False
+            self.ui.label_276.setVisible(False)
+
+    def all_songs_category_sort_button_slot(self):
+        """Toggle likedSong's page artist sort button's indicator and sort the songs"""
+        if self.ui.mainPageAllSongsCategorySortQPushButton.isChecked():
+            if self.ui.mainPageAllSongsCategorySortQPushButton.wasChecked:
+                self.ui.mainPageAllSongsCategorySortQPushButton.wasChecked = False
+                self.ui.label_277.setVisible(False)
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(False)
+                self.ui.mainPageAllSongsCategorySortQPushButton.toggle()
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(True)
+            else:
+                self.ui.mainPageAllSongsCategorySortQPushButton.wasChecked = True
+                self.ui.label_277.setVisible(True)
+                self.sort_songs_by_category()
+        else:
+            self.ui.mainPageAllSongsCategorySortQPushButton.wasChecked = False
+            self.ui.label_277.setVisible(False)
+
+    def all_songs_added_sort_button_slot(self):
+        """Toggle likedSong's page artist sort button's indicator and sort the songs"""
+        if self.ui.mainPageAllSongsAddedSortQPushButton.isChecked():
+            if self.ui.mainPageAllSongsAddedSortQPushButton.wasChecked:
+                self.ui.mainPageAllSongsAddedSortQPushButton.wasChecked = False
+                self.ui.label_278.setVisible(False)
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(False)
+                self.ui.mainPageAllSongsAddedSortQPushButton.toggle()
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(True)
+            else:
+                self.ui.mainPageAllSongsAddedSortQPushButton.wasChecked = True
+                self.ui.label_278.setVisible(True)
+                self.sort_songs_by_added()
+        else:
+            self.ui.mainPageAllSongsAddedSortQPushButton.wasChecked = False
+            self.ui.label_278.setVisible(False)
+
+    def all_songs_length_sort_button_slot(self):
+        """Toggle likedSong's page artist sort button's indicator and sort the songs"""
+        if self.ui.mainPageAllSongsLengthSortQPushButton.isChecked():
+            if self.ui.mainPageAllSongsLengthSortQPushButton.wasChecked:
+                self.ui.mainPageAllSongsLengthSortQPushButton.wasChecked = False
+                self.ui.label_279.setVisible(False)
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(False)
+                self.ui.mainPageAllSongsLengthSortQPushButton.toggle()
+                self.ui.mainPageAllSongsSortButtonsQButtonGroup.setExclusive(True)
+            else:
+                self.ui.mainPageAllSongsLengthSortQPushButton.wasChecked = True
+                self.ui.label_279.setVisible(True)
+                self.sort_songs_by_length()
+        else:
+            self.ui.mainPageAllSongsLengthSortQPushButton.wasChecked = False
+            self.ui.label_279.setVisible(False)
+
+
+
 
     def category_length_sort_button_slot(self):
         """Toggle likedSong's page artist sort button's indicator and sort the songs"""
