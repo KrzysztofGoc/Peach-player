@@ -11,7 +11,7 @@ class SongEntry(QtWidgets.QFrame):
 
     def __init__(self, *, song_id=None, song_title="None", artist_name=None, category_name="",
                  date_added="24 Dec 2020", song_length="5 : 30",
-                 path=None, is_liked=False, is_playing=False, parent=None):
+                 path=None, is_liked=False, parent=None, frame_structure=None):
         super().__init__(parent=parent)
         self.song_id = song_id
         self.song_title = song_title
@@ -21,7 +21,7 @@ class SongEntry(QtWidgets.QFrame):
         self.song_length = song_length
         self.path = path
         self.is_liked = is_liked
-        self.is_playing = is_playing
+        self.frame_structure = frame_structure
         self.setup_layout()
 
     def setup_layout(self):
@@ -130,13 +130,13 @@ class SongEntry(QtWidgets.QFrame):
                        QtGui.QIcon.On)
         self.pushButton_13.setIcon(icon)
         self.pushButton_13.setCheckable(True)
-        self.pushButton_13.setChecked(self.is_playing)
+        self.pushButton_13.setChecked(False)
         self.pushButton_13.setObjectName("pushButton_13")
         self.gridLayout_28.addWidget(self.pushButton_13, 0, 0, 1, 1)
         self.gridLayout_15.addWidget(self.frame_174, 0, 0, 1, 1)
         self.horizontalLayout_36.addWidget(self.frame_78)
 
-        if self.song_title:
+        if self.frame_structure["song_title"]:
             self.label_19 = QtWidgets.QLabel(self)
             sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
             sizePolicy.setHorizontalStretch(0)
@@ -148,7 +148,7 @@ class SongEntry(QtWidgets.QFrame):
             self.horizontalLayout_36.addWidget(self.label_19)
             self.label_19.setText(self.song_title)
 
-        if self.artist_name:
+        if self.frame_structure["artist_name"]:
             self.frame_34 = QtWidgets.QFrame(self)
             sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
             sizePolicy.setHorizontalStretch(0)
@@ -175,7 +175,7 @@ class SongEntry(QtWidgets.QFrame):
             self.horizontalLayout_36.addWidget(self.frame_34)
             self.mainPageLikedSongsArtistButton.setText(self.artist_name)
 
-        if self.category_name:
+        if self.frame_structure["category_name"]:
             self.frame_35 = QtWidgets.QFrame(self)
             sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
             sizePolicy.setHorizontalStretch(0)
@@ -202,7 +202,7 @@ class SongEntry(QtWidgets.QFrame):
             self.horizontalLayout_36.addWidget(self.frame_35)
             self.mainPageLikedSongsCategoryButton.setText(self.category_name)
 
-        if self.date_added:
+        if self.frame_structure["date_added"]:
             self.label_20 = QtWidgets.QLabel(self)
             sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
             sizePolicy.setHorizontalStretch(0)
@@ -214,7 +214,7 @@ class SongEntry(QtWidgets.QFrame):
             self.horizontalLayout_36.addWidget(self.label_20)
             self.label_20.setText(self.date_added)
 
-        if self.song_length:
+        if self.frame_structure["song_length"]:
             self.label_21 = QtWidgets.QLabel(self)
             sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
             sizePolicy.setHorizontalStretch(0)
