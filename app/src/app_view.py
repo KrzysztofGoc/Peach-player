@@ -620,7 +620,6 @@ class Ui_MainWindow:
         self.mainPageNowPlaying.setStyleSheet("QWidget#mainPageNowPlaying{\n"
                                               "    background-color: rgb(18, 18, 18);\n"
                                               "}")
-        
         self.mainPageNowPlaying.setObjectName("mainPageNowPlaying")
         self.mainPageNowPlayingBackgroundLabel = QtWidgets.QLabel(self.mainPageNowPlaying)
         self.blurEffect = QtWidgets.QGraphicsBlurEffect()
@@ -639,7 +638,6 @@ class Ui_MainWindow:
         self.mainPageNowPlayingBackgroundLabel.setText("")
         self.mainPageNowPlayingBackgroundLabel.setPixmap(QtGui.QPixmap(":/icons/temporary/icons/playlistCoverExample1.png"))
         self.mainPageNowPlayingBackgroundLabel.setObjectName("mainPageNowPlayingBackgroundLabel")
-        
         self.frame_20 = QtWidgets.QFrame(self.mainPageNowPlaying)
         self.frame_20.setGeometry(QtCore.QRect(0, 0, 600, 530))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
@@ -6405,12 +6403,12 @@ class Ui_MainWindow:
                                                 "    border-radius: 8px;\n"
                                                 "    background-color: rgb(24, 24, 24);\n"
                                                 "}\n"
-                                                "#lineEdit{\n"
+                                                "#centralPageLoginPageLoginQLineEdit{\n"
                                                 "    padding-left: 13px;\n"
                                                 "    background-color: rgb(64, 64, 64);\n"
                                                 "    font: 57 10pt \"Heebo Medium\";\n"
                                                 "}\n"
-                                                "#lineEdit_2{\n"
+                                                "#centralPageLoginPagePasswordQLineEdit{\n"
                                                 "    padding-left: 13px;\n"
                                                 "    background-color: rgb(64, 64, 64);\n"
                                                 "    font: 57 10pt \"Heebo Medium\";\n"
@@ -6421,26 +6419,26 @@ class Ui_MainWindow:
                                                 "#frame_329{\n"
                                                 "    background-color: rgb(64, 64, 64);\n"
                                                 "}\n"
-                                                "#pushButton_2{\n"
+                                                "#centralPageLoginPageTogglePasswordQPushButton{\n"
                                                 "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_off_gray_48dp.png);\n"
                                                 "}\n"
-                                                "#pushButton_2:hover:!checked{\n"
+                                                "#centralPageLoginPageTogglePasswordQPushButton:hover:!checked{\n"
                                                 "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_off_white_48dp.png);\n"
                                                 "}\n"
-                                                "#pushButton_2:checked{\n"
+                                                "#centralPageLoginPageTogglePasswordQPushButton:checked{\n"
                                                 "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_gray_48dp.png);\n"
                                                 "}\n"
-                                                "#pushButton_2:hover:checked{\n"
+                                                "#centralPageLoginPageTogglePasswordQPushButton:hover:checked{\n"
                                                 "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_white_48dp.png);\n"
                                                 "}\n"
-                                                "#pushButton_3{\n"
+                                                "#centralPageLoginPageLogInButton{\n"
                                                 "    background-color: rgb(245, 155, 125);\n"
                                                 "    color: black;\n"
                                                 "    border-radius: 24px;\n"
                                                 "    text-align: center;\n"
                                                 "    font: 57 10.5pt \"Heebo Medium\";\n"
                                                 "}\n"
-                                                "#pushButton_5{\n"
+                                                "#centralPageLoginPageContinueAsGuestQPushButton{\n"
                                                 "    border: 1px solid rgb(245, 155, 125);\n"
                                                 "    color: white;\n"
                                                 "    border-radius: 24px;\n"
@@ -6462,11 +6460,11 @@ class Ui_MainWindow:
                                                 "    font: 57 11pt \"Heebo Medium\";\n"
                                                 "    color: rgb(179, 179, 179);\n"
                                                 "}\n"
-                                                "#pushButton_53{\n"
+                                                "#centralPageRegisterPageButton{\n"
                                                 "    color: white;\n"
                                                 "    font: 57 11pt \"Heebo Medium\";\n"
                                                 "}\n"
-                                                "#pushButton_53:hover{\n"
+                                                "#centralPageRegisterPageButton:hover{\n"
                                                 "    text-decoration: underline;\n"
                                                 "}\n"
                                                 "#label_212{\n"
@@ -6663,14 +6661,14 @@ class Ui_MainWindow:
         self.horizontalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_21.setSpacing(0)
         self.horizontalLayout_21.setObjectName("horizontalLayout_21")
-        self.lineEdit = QtWidgets.QLineEdit(self.frame_321)
+        self.centralPageLoginPageLoginQLineEdit = QtWidgets.QLineEdit(self.frame_321)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
-        self.lineEdit.setSizePolicy(sizePolicy)
-        self.lineEdit.setMinimumSize(QtCore.QSize(292, 40))
-        self.lineEdit.setMaximumSize(QtCore.QSize(292, 40))
+        sizePolicy.setHeightForWidth(self.centralPageLoginPageLoginQLineEdit.sizePolicy().hasHeightForWidth())
+        self.centralPageLoginPageLoginQLineEdit.setSizePolicy(sizePolicy)
+        self.centralPageLoginPageLoginQLineEdit.setMinimumSize(QtCore.QSize(292, 40))
+        self.centralPageLoginPageLoginQLineEdit.setMaximumSize(QtCore.QSize(292, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -6735,12 +6733,12 @@ class Ui_MainWindow:
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.lineEdit.setPalette(palette)
-        self.lineEdit.setStyleSheet("")
-        self.lineEdit.setInputMask("")
-        self.lineEdit.setPlaceholderText("Email or username")
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout_21.addWidget(self.lineEdit)
+        self.centralPageLoginPageLoginQLineEdit.setPalette(palette)
+        self.centralPageLoginPageLoginQLineEdit.setStyleSheet("")
+        self.centralPageLoginPageLoginQLineEdit.setInputMask("")
+        self.centralPageLoginPageLoginQLineEdit.setPlaceholderText("Email or username")
+        self.centralPageLoginPageLoginQLineEdit.setObjectName("centralPageLoginPageLoginQLineEdit")
+        self.horizontalLayout_21.addWidget(self.centralPageLoginPageLoginQLineEdit)
         self.frame_323 = QtWidgets.QFrame(self.frame_321)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -6785,14 +6783,14 @@ class Ui_MainWindow:
         self.horizontalLayout_19.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_19.setSpacing(0)
         self.horizontalLayout_19.setObjectName("horizontalLayout_19")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.frame_322)
+        self.centralPageLoginPagePasswordQLineEdit = QtWidgets.QLineEdit(self.frame_322)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_2.sizePolicy().hasHeightForWidth())
-        self.lineEdit_2.setSizePolicy(sizePolicy)
-        self.lineEdit_2.setMinimumSize(QtCore.QSize(292, 40))
-        self.lineEdit_2.setMaximumSize(QtCore.QSize(292, 40))
+        sizePolicy.setHeightForWidth(self.centralPageLoginPagePasswordQLineEdit.sizePolicy().hasHeightForWidth())
+        self.centralPageLoginPagePasswordQLineEdit.setSizePolicy(sizePolicy)
+        self.centralPageLoginPagePasswordQLineEdit.setMinimumSize(QtCore.QSize(292, 40))
+        self.centralPageLoginPagePasswordQLineEdit.setMaximumSize(QtCore.QSize(292, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -6857,14 +6855,15 @@ class Ui_MainWindow:
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.lineEdit_2.setPalette(palette)
-        self.lineEdit_2.setStyleSheet("")
-        self.lineEdit_2.setInputMask("")
-        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.lineEdit_2.setPlaceholderText("Password")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.horizontalLayout_19.addWidget(self.lineEdit_2)
+        self.centralPageLoginPagePasswordQLineEdit.setPalette(palette)
+        self.centralPageLoginPagePasswordQLineEdit.setStyleSheet("")
+        self.centralPageLoginPagePasswordQLineEdit.setInputMask("")
+        self.centralPageLoginPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.centralPageLoginPagePasswordQLineEdit.setPlaceholderText("Password")
+        self.centralPageLoginPagePasswordQLineEdit.setObjectName("centralPageLoginPagePasswordQLineEdit")
+        self.horizontalLayout_19.addWidget(self.centralPageLoginPagePasswordQLineEdit)
         self.frame_329 = QtWidgets.QFrame(self.frame_322)
+        self.frame_329.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -6879,20 +6878,20 @@ class Ui_MainWindow:
         self.gridLayout_65.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_65.setSpacing(0)
         self.gridLayout_65.setObjectName("gridLayout_65")
-        self.pushButton_2 = QtWidgets.QPushButton(self.frame_329)
+        self.centralPageLoginPageTogglePasswordQPushButton = QtWidgets.QPushButton(self.frame_329)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy)
-        self.pushButton_2.setMinimumSize(QtCore.QSize(24, 24))
-        self.pushButton_2.setMaximumSize(QtCore.QSize(24, 24))
-        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_2.setText("")
-        self.pushButton_2.setIconSize(QtCore.QSize(24, 24))
-        self.pushButton_2.setCheckable(True)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout_65.addWidget(self.pushButton_2, 0, 0, 1, 1)
+        sizePolicy.setHeightForWidth(self.centralPageLoginPageTogglePasswordQPushButton.sizePolicy().hasHeightForWidth())
+        self.centralPageLoginPageTogglePasswordQPushButton.setSizePolicy(sizePolicy)
+        self.centralPageLoginPageTogglePasswordQPushButton.setMinimumSize(QtCore.QSize(24, 24))
+        self.centralPageLoginPageTogglePasswordQPushButton.setMaximumSize(QtCore.QSize(24, 24))
+        self.centralPageLoginPageTogglePasswordQPushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageLoginPageTogglePasswordQPushButton.setText("")
+        self.centralPageLoginPageTogglePasswordQPushButton.setIconSize(QtCore.QSize(24, 24))
+        self.centralPageLoginPageTogglePasswordQPushButton.setCheckable(True)
+        self.centralPageLoginPageTogglePasswordQPushButton.setObjectName("centralPageLoginPageTogglePasswordQPushButton")
+        self.gridLayout_65.addWidget(self.centralPageLoginPageTogglePasswordQPushButton, 0, 0, 1, 1)
         self.horizontalLayout_19.addWidget(self.frame_329)
         self.verticalLayout_232.addWidget(self.frame_322)
         self.horizontalLayout_22.addWidget(self.frame_319)
@@ -6910,17 +6909,17 @@ class Ui_MainWindow:
         self.horizontalLayout_41.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_41.setSpacing(0)
         self.horizontalLayout_41.setObjectName("horizontalLayout_41")
-        self.pushButton_3 = QtWidgets.QPushButton(self.frame_330)
+        self.centralPageLoginPageLogInButton = QtWidgets.QPushButton(self.frame_330)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
-        self.pushButton_3.setSizePolicy(sizePolicy)
-        self.pushButton_3.setMinimumSize(QtCore.QSize(336, 48))
-        self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_3.setText("LOG  IN")
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout_41.addWidget(self.pushButton_3)
+        sizePolicy.setHeightForWidth(self.centralPageLoginPageLogInButton.sizePolicy().hasHeightForWidth())
+        self.centralPageLoginPageLogInButton.setSizePolicy(sizePolicy)
+        self.centralPageLoginPageLogInButton.setMinimumSize(QtCore.QSize(336, 48))
+        self.centralPageLoginPageLogInButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageLoginPageLogInButton.setText("LOG  IN")
+        self.centralPageLoginPageLogInButton.setObjectName("centralPageLoginPageLogInButton")
+        self.horizontalLayout_41.addWidget(self.centralPageLoginPageLogInButton)
         self.verticalLayout_48.addWidget(self.frame_330)
         self.frame_348 = QtWidgets.QFrame(self.frame_295)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -7002,17 +7001,17 @@ class Ui_MainWindow:
         self.horizontalLayout_68.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_68.setSpacing(0)
         self.horizontalLayout_68.setObjectName("horizontalLayout_68")
-        self.pushButton_5 = QtWidgets.QPushButton(self.frame_353)
+        self.centralPageLoginPageContinueAsGuestQPushButton = QtWidgets.QPushButton(self.frame_353)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        self.pushButton_5.setSizePolicy(sizePolicy)
-        self.pushButton_5.setMinimumSize(QtCore.QSize(336, 48))
-        self.pushButton_5.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_5.setText("Continue as guest")
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.horizontalLayout_68.addWidget(self.pushButton_5)
+        sizePolicy.setHeightForWidth(self.centralPageLoginPageContinueAsGuestQPushButton.sizePolicy().hasHeightForWidth())
+        self.centralPageLoginPageContinueAsGuestQPushButton.setSizePolicy(sizePolicy)
+        self.centralPageLoginPageContinueAsGuestQPushButton.setMinimumSize(QtCore.QSize(336, 48))
+        self.centralPageLoginPageContinueAsGuestQPushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageLoginPageContinueAsGuestQPushButton.setText("Continue as guest")
+        self.centralPageLoginPageContinueAsGuestQPushButton.setObjectName("centralPageLoginPageContinueAsGuestQPushButton")
+        self.horizontalLayout_68.addWidget(self.centralPageLoginPageContinueAsGuestQPushButton)
         self.verticalLayout_48.addWidget(self.frame_353)
         self.frame_350 = QtWidgets.QFrame(self.frame_295)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -7049,16 +7048,16 @@ class Ui_MainWindow:
         self.label_212.setText("Don\'t have an account?")
         self.label_212.setObjectName("label_212")
         self.horizontalLayout_67.addWidget(self.label_212)
-        self.pushButton_53 = QtWidgets.QPushButton(self.frame_351)
+        self.centralPageRegisterPageButton = QtWidgets.QPushButton(self.frame_351)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_53.sizePolicy().hasHeightForWidth())
-        self.pushButton_53.setSizePolicy(sizePolicy)
-        self.pushButton_53.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_53.setText("Register for free")
-        self.pushButton_53.setObjectName("pushButton_53")
-        self.horizontalLayout_67.addWidget(self.pushButton_53)
+        sizePolicy.setHeightForWidth(self.centralPageRegisterPageButton.sizePolicy().hasHeightForWidth())
+        self.centralPageRegisterPageButton.setSizePolicy(sizePolicy)
+        self.centralPageRegisterPageButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageRegisterPageButton.setText("Register for free")
+        self.centralPageRegisterPageButton.setObjectName("centralPageRegisterPageButton")
+        self.horizontalLayout_67.addWidget(self.centralPageRegisterPageButton)
         self.horizontalLayout_66.addWidget(self.frame_351)
         self.verticalLayout_48.addWidget(self.frame_350)
         self.gridLayout_63.addWidget(self.frame_295, 0, 1, 1, 1)
@@ -7079,17 +7078,17 @@ class Ui_MainWindow:
                                                    "#frame_332{\n"
                                                    "    background-color: rgb(24, 24, 24);\n"
                                                    "}\n"
-                                                   "#lineEdit_3{\n"
+                                                   "#centralPageRegisterPageEmailQLineEdit{\n"
                                                    "    padding-left: 13px;\n"
                                                    "    background-color: rgb(64, 64, 64);\n"
                                                    "    font: 57 10pt \"Heebo Medium\";\n"
                                                    "}\n"
-                                                   "#lineEdit_4{\n"
+                                                   "#centralPageRegisterPagePasswordQLineEdit{\n"
                                                    "    padding-left: 13px;\n"
                                                    "    background-color: rgb(64, 64, 64);\n"
                                                    "    font: 57 10pt \"Heebo Medium\";\n"
                                                    "}\n"
-                                                   "#lineEdit_5{\n"
+                                                   "#centralPageRegisterPageNicknameQLineEdit{\n"
                                                    "    padding-left: 13px;\n"
                                                    "    background-color: rgb(64, 64, 64);\n"
                                                    "    font: 57 10pt \"Heebo Medium\";\n"
@@ -7103,19 +7102,19 @@ class Ui_MainWindow:
                                                    "#frame_344{\n"
                                                    "    background-color: rgb(64, 64, 64);\n"
                                                    "}\n"
-                                                   "#pushButton_4{\n"
+                                                   "#centralPageRegisterPageTogglePasswordQPushButton{\n"
                                                    "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_off_gray_48dp.png);\n"
                                                    "}\n"
-                                                   "#pushButton_4:hover:!checked{\n"
+                                                   "#centralPageRegisterPageTogglePasswordQPushButton:hover:!checked{\n"
                                                    "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_off_white_48dp.png);\n"
                                                    "}\n"
-                                                   "#pushButton_4:checked{\n"
+                                                   "#centralPageRegisterPageTogglePasswordQPushButton:checked{\n"
                                                    "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_gray_48dp.png);\n"
                                                    "}\n"
-                                                   "#pushButton_4:hover:checked{\n"
+                                                   "#centralPageRegisterPageTogglePasswordQPushButton:hover:checked{\n"
                                                    "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_white_48dp.png);\n"
                                                    "}\n"
-                                                   "#pushButton_50{\n"
+                                                   "#centralPageRegisterPageSignInQPushButton{\n"
                                                    "    background-color: rgb(245, 155, 125);\n"
                                                    "    color: black;\n"
                                                    "    border-radius: 24px;\n"
@@ -7141,11 +7140,11 @@ class Ui_MainWindow:
                                                    "    color: rgb(179, 179, 179);\n"
                                                    "    font: 57 11pt \"Heebo Medium\";\n"
                                                    "}\n"
-                                                   "#pushButton_52{\n"
+                                                   "#centralPageLoginPageButton{\n"
                                                    "    color: white;\n"
                                                    "    font: 57 11pt \"Heebo Medium\";\n"
                                                    "}\n"
-                                                   "#pushButton_52:hover{\n"
+                                                   "#centralPageLoginPageButton:hover{\n"
                                                    "    text-decoration: underline;\n"
                                                    "}\n"
                                                    "QScrollBar:vertical {\n"
@@ -7341,14 +7340,14 @@ class Ui_MainWindow:
         self.horizontalLayout_59.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_59.setSpacing(0)
         self.horizontalLayout_59.setObjectName("horizontalLayout_59")
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.frame_338)
+        self.centralPageRegisterPageEmailQLineEdit = QtWidgets.QLineEdit(self.frame_338)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_3.sizePolicy().hasHeightForWidth())
-        self.lineEdit_3.setSizePolicy(sizePolicy)
-        self.lineEdit_3.setMinimumSize(QtCore.QSize(292, 40))
-        self.lineEdit_3.setMaximumSize(QtCore.QSize(292, 40))
+        sizePolicy.setHeightForWidth(self.centralPageRegisterPageEmailQLineEdit.sizePolicy().hasHeightForWidth())
+        self.centralPageRegisterPageEmailQLineEdit.setSizePolicy(sizePolicy)
+        self.centralPageRegisterPageEmailQLineEdit.setMinimumSize(QtCore.QSize(292, 40))
+        self.centralPageRegisterPageEmailQLineEdit.setMaximumSize(QtCore.QSize(292, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -7413,13 +7412,13 @@ class Ui_MainWindow:
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.lineEdit_3.setPalette(palette)
-        self.lineEdit_3.setStyleSheet("")
-        self.lineEdit_3.setInputMask("")
-        self.lineEdit_3.setFrame(True)
-        self.lineEdit_3.setPlaceholderText("Email")
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.horizontalLayout_59.addWidget(self.lineEdit_3)
+        self.centralPageRegisterPageEmailQLineEdit.setPalette(palette)
+        self.centralPageRegisterPageEmailQLineEdit.setStyleSheet("")
+        self.centralPageRegisterPageEmailQLineEdit.setInputMask("")
+        self.centralPageRegisterPageEmailQLineEdit.setFrame(True)
+        self.centralPageRegisterPageEmailQLineEdit.setPlaceholderText("Email")
+        self.centralPageRegisterPageEmailQLineEdit.setObjectName("centralPageRegisterPageEmailQLineEdit")
+        self.horizontalLayout_59.addWidget(self.centralPageRegisterPageEmailQLineEdit)
         self.frame_339 = QtWidgets.QFrame(self.frame_338)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -7464,14 +7463,14 @@ class Ui_MainWindow:
         self.horizontalLayout_60.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_60.setSpacing(0)
         self.horizontalLayout_60.setObjectName("horizontalLayout_60")
-        self.lineEdit_4 = QtWidgets.QLineEdit(self.frame_340)
+        self.centralPageRegisterPagePasswordQLineEdit = QtWidgets.QLineEdit(self.frame_340)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_4.sizePolicy().hasHeightForWidth())
-        self.lineEdit_4.setSizePolicy(sizePolicy)
-        self.lineEdit_4.setMinimumSize(QtCore.QSize(292, 40))
-        self.lineEdit_4.setMaximumSize(QtCore.QSize(292, 40))
+        sizePolicy.setHeightForWidth(self.centralPageRegisterPagePasswordQLineEdit.sizePolicy().hasHeightForWidth())
+        self.centralPageRegisterPagePasswordQLineEdit.setSizePolicy(sizePolicy)
+        self.centralPageRegisterPagePasswordQLineEdit.setMinimumSize(QtCore.QSize(292, 40))
+        self.centralPageRegisterPagePasswordQLineEdit.setMaximumSize(QtCore.QSize(292, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -7536,14 +7535,15 @@ class Ui_MainWindow:
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.lineEdit_4.setPalette(palette)
-        self.lineEdit_4.setStyleSheet("")
-        self.lineEdit_4.setInputMask("")
-        self.lineEdit_4.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.lineEdit_4.setPlaceholderText("Password")
-        self.lineEdit_4.setObjectName("lineEdit_4")
-        self.horizontalLayout_60.addWidget(self.lineEdit_4)
+        self.centralPageRegisterPagePasswordQLineEdit.setPalette(palette)
+        self.centralPageRegisterPagePasswordQLineEdit.setStyleSheet("")
+        self.centralPageRegisterPagePasswordQLineEdit.setInputMask("")
+        self.centralPageRegisterPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.centralPageRegisterPagePasswordQLineEdit.setPlaceholderText("Password")
+        self.centralPageRegisterPagePasswordQLineEdit.setObjectName("centralPageRegisterPagePasswordQLineEdit")
+        self.horizontalLayout_60.addWidget(self.centralPageRegisterPagePasswordQLineEdit)
         self.frame_341 = QtWidgets.QFrame(self.frame_340)
+        self.frame_341.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -7558,20 +7558,20 @@ class Ui_MainWindow:
         self.gridLayout_72.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_72.setSpacing(0)
         self.gridLayout_72.setObjectName("gridLayout_72")
-        self.pushButton_4 = QtWidgets.QPushButton(self.frame_341)
+        self.centralPageRegisterPageTogglePasswordQPushButton = QtWidgets.QPushButton(self.frame_341)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
-        self.pushButton_4.setSizePolicy(sizePolicy)
-        self.pushButton_4.setMinimumSize(QtCore.QSize(24, 24))
-        self.pushButton_4.setMaximumSize(QtCore.QSize(24, 24))
-        self.pushButton_4.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_4.setText("")
-        self.pushButton_4.setIconSize(QtCore.QSize(24, 24))
-        self.pushButton_4.setCheckable(True)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.gridLayout_72.addWidget(self.pushButton_4, 0, 0, 1, 1)
+        sizePolicy.setHeightForWidth(self.centralPageRegisterPageTogglePasswordQPushButton.sizePolicy().hasHeightForWidth())
+        self.centralPageRegisterPageTogglePasswordQPushButton.setSizePolicy(sizePolicy)
+        self.centralPageRegisterPageTogglePasswordQPushButton.setMinimumSize(QtCore.QSize(24, 24))
+        self.centralPageRegisterPageTogglePasswordQPushButton.setMaximumSize(QtCore.QSize(24, 24))
+        self.centralPageRegisterPageTogglePasswordQPushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageRegisterPageTogglePasswordQPushButton.setText("")
+        self.centralPageRegisterPageTogglePasswordQPushButton.setIconSize(QtCore.QSize(24, 24))
+        self.centralPageRegisterPageTogglePasswordQPushButton.setCheckable(True)
+        self.centralPageRegisterPageTogglePasswordQPushButton.setObjectName("centralPageRegisterPageTogglePasswordQPushButton")
+        self.gridLayout_72.addWidget(self.centralPageRegisterPageTogglePasswordQPushButton, 0, 0, 1, 1)
         self.horizontalLayout_60.addWidget(self.frame_341)
         self.verticalLayout_233.addWidget(self.frame_340)
         self.frame_343 = QtWidgets.QFrame(self.frame_337)
@@ -7587,14 +7587,14 @@ class Ui_MainWindow:
         self.horizontalLayout_62.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_62.setSpacing(0)
         self.horizontalLayout_62.setObjectName("horizontalLayout_62")
-        self.lineEdit_5 = QtWidgets.QLineEdit(self.frame_343)
+        self.centralPageRegisterPageNicknameQLineEdit = QtWidgets.QLineEdit(self.frame_343)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_5.sizePolicy().hasHeightForWidth())
-        self.lineEdit_5.setSizePolicy(sizePolicy)
-        self.lineEdit_5.setMinimumSize(QtCore.QSize(292, 40))
-        self.lineEdit_5.setMaximumSize(QtCore.QSize(292, 40))
+        sizePolicy.setHeightForWidth(self.centralPageRegisterPageNicknameQLineEdit.sizePolicy().hasHeightForWidth())
+        self.centralPageRegisterPageNicknameQLineEdit.setSizePolicy(sizePolicy)
+        self.centralPageRegisterPageNicknameQLineEdit.setMinimumSize(QtCore.QSize(292, 40))
+        self.centralPageRegisterPageNicknameQLineEdit.setMaximumSize(QtCore.QSize(292, 40))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -7659,14 +7659,15 @@ class Ui_MainWindow:
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
-        self.lineEdit_5.setPalette(palette)
-        self.lineEdit_5.setStyleSheet("")
-        self.lineEdit_5.setInputMask("")
-        self.lineEdit_5.setEchoMode(QtWidgets.QLineEdit.Normal)
-        self.lineEdit_5.setPlaceholderText("Nickname")
-        self.lineEdit_5.setObjectName("lineEdit_5")
-        self.horizontalLayout_62.addWidget(self.lineEdit_5)
+        self.centralPageRegisterPageNicknameQLineEdit.setPalette(palette)
+        self.centralPageRegisterPageNicknameQLineEdit.setStyleSheet("")
+        self.centralPageRegisterPageNicknameQLineEdit.setInputMask("")
+        self.centralPageRegisterPageNicknameQLineEdit.setEchoMode(QtWidgets.QLineEdit.Normal)
+        self.centralPageRegisterPageNicknameQLineEdit.setPlaceholderText("Nickname")
+        self.centralPageRegisterPageNicknameQLineEdit.setObjectName("centralPageRegisterPageNicknameQLineEdit")
+        self.horizontalLayout_62.addWidget(self.centralPageRegisterPageNicknameQLineEdit)
         self.frame_344 = QtWidgets.QFrame(self.frame_343)
+        self.frame_344.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -7698,17 +7699,17 @@ class Ui_MainWindow:
         self.verticalLayout_233.addWidget(self.frame_343)
         self.horizontalLayout_58.addWidget(self.frame_337)
         self.verticalLayout_231.addWidget(self.frame_336)
-        self.pushButton_50 = QtWidgets.QPushButton(self.frame_332)
+        self.centralPageRegisterPageSignInQPushButton = QtWidgets.QPushButton(self.frame_332)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_50.sizePolicy().hasHeightForWidth())
-        self.pushButton_50.setSizePolicy(sizePolicy)
-        self.pushButton_50.setMinimumSize(QtCore.QSize(336, 48))
-        self.pushButton_50.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_50.setText("SIGN UP")
-        self.pushButton_50.setObjectName("pushButton_50")
-        self.verticalLayout_231.addWidget(self.pushButton_50)
+        sizePolicy.setHeightForWidth(self.centralPageRegisterPageSignInQPushButton.sizePolicy().hasHeightForWidth())
+        self.centralPageRegisterPageSignInQPushButton.setSizePolicy(sizePolicy)
+        self.centralPageRegisterPageSignInQPushButton.setMinimumSize(QtCore.QSize(336, 48))
+        self.centralPageRegisterPageSignInQPushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageRegisterPageSignInQPushButton.setText("SIGN UP")
+        self.centralPageRegisterPageSignInQPushButton.setObjectName("centralPageRegisterPageSignInQPushButton")
+        self.verticalLayout_231.addWidget(self.centralPageRegisterPageSignInQPushButton)
         self.frame_345 = QtWidgets.QFrame(self.frame_332)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -7811,16 +7812,16 @@ class Ui_MainWindow:
         self.label_210.setText("Already have an account?")
         self.label_210.setObjectName("label_210")
         self.horizontalLayout_61.addWidget(self.label_210)
-        self.pushButton_52 = QtWidgets.QPushButton(self.frame_347)
+        self.centralPageLoginPageButton = QtWidgets.QPushButton(self.frame_347)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_52.sizePolicy().hasHeightForWidth())
-        self.pushButton_52.setSizePolicy(sizePolicy)
-        self.pushButton_52.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_52.setText("Log in")
-        self.pushButton_52.setObjectName("pushButton_52")
-        self.horizontalLayout_61.addWidget(self.pushButton_52)
+        sizePolicy.setHeightForWidth(self.centralPageLoginPageButton.sizePolicy().hasHeightForWidth())
+        self.centralPageLoginPageButton.setSizePolicy(sizePolicy)
+        self.centralPageLoginPageButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.centralPageLoginPageButton.setText("Log in")
+        self.centralPageLoginPageButton.setObjectName("centralPageLoginPageButton")
+        self.horizontalLayout_61.addWidget(self.centralPageLoginPageButton)
         self.horizontalLayout_64.addWidget(self.frame_347)
         self.verticalLayout_231.addWidget(self.frame_342)
         self.gridLayout_70.addWidget(self.frame_332, 0, 1, 1, 1)

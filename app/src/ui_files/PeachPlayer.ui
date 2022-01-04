@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>982</width>
-    <height>770</height>
+    <width>825</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -79,7 +79,7 @@
        <string notr="true">border: none;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="centralPageAppPage">
        <property name="styleSheet">
@@ -1216,7 +1216,7 @@ QScrollBar::sub-line:vertical{
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>11</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="mainPageNowPlaying">
              <property name="sizePolicy">
@@ -28741,7 +28741,7 @@ QLineEdit:focus{
                       <x>0</x>
                       <y>0</y>
                       <width>1674</width>
-                      <height>681</height>
+                      <height>614</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -33161,7 +33161,7 @@ QScrollBar::sub-line:vertical{
                      <x>0</x>
                      <y>0</y>
                      <width>198</width>
-                     <height>262</height>
+                     <height>192</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -33590,13 +33590,13 @@ QScrollBar::sub-line:vertical{
 	border-radius: 8px;
 	background-color: rgb(24, 24, 24);
 }
-#lineEdit{
+#centralPageLoginPageLoginQLineEdit{
 	padding-left: 13px;
 	color: white;
 	background-color: rgb(64, 64, 64);
 	font: 57 10pt &quot;Heebo Medium&quot;;
 }
-#lineEdit_2{
+#centralPageLoginPagePasswordQLineEdit{
 	padding-left: 13px;
 	color: white;
 	background-color: rgb(64, 64, 64);
@@ -33608,16 +33608,16 @@ QScrollBar::sub-line:vertical{
 #frame_329{
 	background-color: rgb(64, 64, 64);
 }
-#pushButton_2{
+#centralPageLoginPageShowHidePasswordQPushButton{
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_off_gray_48dp.png);
 }
-#pushButton_2:hover:!checked{
+#centralPageLoginPageShowHidePasswordQPushButton:hover:!checked{
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_off_white_48dp.png);
 }
-#pushButton_2:checked{
+#centralPageLoginPageShowHidePasswordQPushButton:checked{
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_gray_48dp.png);
 }
-#pushButton_2:hover:checked{
+#centralPageLoginPageShowHidePasswordQPushButton:hover:checked{
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_visibility_white_48dp.png);
 }
 #pushButton_3{
@@ -33649,11 +33649,11 @@ QScrollBar::sub-line:vertical{
 	font: 57 11pt &quot;Heebo Medium&quot;;
 	color: rgb(179, 179, 179);
 }
-#pushButton_53{
+#centralPageRegisterPageButton{
 	color: white;
 	font: 57 11pt &quot;Heebo Medium&quot;;
 }
-#pushButton_53:hover{
+#centralPageRegisterPageButton:hover{
 	text-decoration: underline;
 }
 #label_212{
@@ -33742,8 +33742,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>982</width>
-                <height>770</height>
+                <width>813</width>
+                <height>713</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_63">
@@ -34075,7 +34075,7 @@ QScrollBar::sub-line:vertical{
                             <number>0</number>
                            </property>
                            <item>
-                            <widget class="QLineEdit" name="lineEdit">
+                            <widget class="QLineEdit" name="centralPageLoginPageLoginQLineEdit">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -34417,7 +34417,7 @@ QScrollBar::sub-line:vertical{
                             <number>0</number>
                            </property>
                            <item>
-                            <widget class="QLineEdit" name="lineEdit_2">
+                            <widget class="QLineEdit" name="centralPageLoginPagePasswordQLineEdit">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -34692,7 +34692,7 @@ QScrollBar::sub-line:vertical{
                                <number>0</number>
                               </property>
                               <item row="0" column="0">
-                               <widget class="QPushButton" name="pushButton_2">
+                               <widget class="QPushButton" name="centralPageLoginPageShowHidePasswordQPushButton">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                   <horstretch>0</horstretch>
@@ -35070,7 +35070,7 @@ QScrollBar::sub-line:vertical{
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="pushButton_53">
+                         <widget class="QPushButton" name="centralPageRegisterPageButton">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -35271,8 +35271,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>982</width>
-                <height>770</height>
+                <width>825</width>
+                <height>700</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_70">
@@ -36871,7 +36871,7 @@ QScrollBar::sub-line:vertical{
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="pushButton_52">
+                         <widget class="QPushButton" name="centralPageLoginPageButton">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>

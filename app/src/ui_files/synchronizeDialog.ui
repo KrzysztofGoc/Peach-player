@@ -108,7 +108,7 @@ color:  white;</string>
 	color: white;
 	font: 87 17pt &quot;Heebo Black&quot;;
 }
-#synchronizeSongsDialogSynchronizeButton{
+#synchronizeDialogSynchronizeButton{
 	border-radius: 16px;
 	background-color: white;
 	color: black;
@@ -642,14 +642,6 @@ QScrollBar::sub-line:vertical{
 #scrollAreaWidgetContents_2, #scrollAreaWidgetContents_4{
 	background-color: transparent;
 }
-
-
-
-
-
-
-
-
 #scrollArea_4 QPushButton{
 	padding-left: 20px;
 	text-align: left;
@@ -662,16 +654,12 @@ QScrollBar::sub-line:vertical{
 	font: 57 10pt &quot;Heebo Medium&quot;;
 	color: rgb(209, 103, 90);
 }
-
-
 #scrollArea_4 QPushButton:hover:!checked{
 	color: rgb(255, 103, 90);
 }
 #scrollArea_3 QPushButton:hover:!checked{
 	color: rgb(255, 103, 90);
 }
-
-
 #scrollArea_4 QPushButton:checked{
 	padding-left: 0px;
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_upload_lightgreen_48dp.png);
@@ -749,14 +737,14 @@ QScrollBar::sub-line:vertical{
                    <item>
                     <widget class="QLabel" name="label_4">
                      <property name="text">
-                      <string>Download</string>
+                      <string notr="true">Download</string>
                      </property>
                     </widget>
                    </item>
                    <item>
                     <widget class="QLabel" name="label_5">
                      <property name="text">
-                      <string>Upload</string>
+                      <string notr="true">Upload</string>
                      </property>
                     </widget>
                    </item>
@@ -828,7 +816,7 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_4">
+                     <widget class="QWidget" name="synchronizeDialogDownloadSongsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -840,7 +828,7 @@ QScrollBar::sub-line:vertical{
                       <property name="layoutDirection">
                        <enum>Qt::LeftToRight</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogDownloadSongsQVBoxLayout_2">
+                      <layout class="QVBoxLayout" name="synchronizeDialogDownloadSongsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -996,7 +984,7 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                     <widget class="QWidget" name="synchronizeDialogUploadSongsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
@@ -1011,7 +999,7 @@ QScrollBar::sub-line:vertical{
                         <height>0</height>
                        </size>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogUploadSongsQVBoxLayout_2">
+                      <layout class="QVBoxLayout" name="synchronizeDialogUploadSongsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -1056,25 +1044,6 @@ QScrollBar::sub-line:vertical{
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="pushButton_13">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
-                         </property>
-                         <property name="checked">
-                          <bool>false</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
                         <spacer name="verticalSpacer_4">
                          <property name="orientation">
                           <enum>Qt::Vertical</enum>
@@ -1096,16 +1065,13 @@ QScrollBar::sub-line:vertical{
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="synchronizesDialogAlbumsPage">
+              <widget class="QWidget" name="synchronizeDialogAlbumsPage">
                <property name="styleSheet">
                 <string notr="true">#frame_12 QLabel{
 	padding-left: 5px;
 	color: white;
 	font: 87 11pt &quot;Heebo Black&quot;;	
 }
-
-
-
 #scrollArea_6, #scrollArea_5{
 	border-radius: 4px;
 	background-color: rgb(24, 24, 24);
@@ -1131,10 +1097,6 @@ QScrollBar::sub-line:vertical{
 #scrollArea_5 QPushButton:hover:!checked{
 	color: rgb(255, 103, 90);
 }
-
-
-
-
 #scrollArea_6 QPushButton:checked{
 	padding-left: 0px;
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_upload_lightgreen_48dp.png);
@@ -1212,14 +1174,14 @@ QScrollBar::sub-line:vertical{
                    <item>
                     <widget class="QLabel" name="label_6">
                      <property name="text">
-                      <string>Download</string>
+                      <string notr="true">Download</string>
                      </property>
                     </widget>
                    </item>
                    <item>
                     <widget class="QLabel" name="label_7">
                      <property name="text">
-                      <string>Upload</string>
+                      <string notr="true">Upload</string>
                      </property>
                     </widget>
                    </item>
@@ -1291,19 +1253,19 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_5">
+                     <widget class="QWidget" name="synchronizeDialogDownloadAlbumsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>221</width>
-                        <height>156</height>
+                        <width>233</width>
+                        <height>287</height>
                        </rect>
                       </property>
                       <property name="layoutDirection">
                        <enum>Qt::LeftToRight</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogDownloadSongsQVBoxLayout_3">
+                      <layout class="QVBoxLayout" name="synchronizeDialogDownloadAlbumsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -1347,69 +1309,6 @@ QScrollBar::sub-line:vertical{
                          </property>
                          <property name="checkable">
                           <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item alignment="Qt::AlignLeft">
-                        <widget class="QPushButton" name="pushButton_15">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
-                         </property>
-                         <property name="checked">
-                          <bool>false</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="pushButton_16">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="pushButton_18">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
-                         </property>
-                         <property name="checked">
-                          <bool>false</bool>
                          </property>
                         </widget>
                        </item>
@@ -1459,13 +1358,13 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_6">
+                     <widget class="QWidget" name="synchronizeDialogUploadAlbumsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>221</width>
-                        <height>98</height>
+                        <width>233</width>
+                        <height>287</height>
                        </rect>
                       </property>
                       <property name="minimumSize">
@@ -1474,7 +1373,7 @@ QScrollBar::sub-line:vertical{
                         <height>0</height>
                        </size>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogUploadSongsQVBoxLayout_3">
+                      <layout class="QVBoxLayout" name="synchronizeDialogUploadAlbumsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -1559,17 +1458,13 @@ QScrollBar::sub-line:vertical{
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="synchronizesDialogPlaylistsPage">
+              <widget class="QWidget" name="synchronizeDialogPlaylistsPage">
                <property name="styleSheet">
                 <string notr="true">#frame_14 QLabel{
 	padding-left: 5px;
 	color: white;
 	font: 87 11pt &quot;Heebo Black&quot;;	
 }
-
-
-
-
 #scrollArea_8, #scrollArea_7{
 	border-radius: 4px;
 	background-color: rgb(24, 24, 24);
@@ -1595,10 +1490,6 @@ QScrollBar::sub-line:vertical{
 #scrollArea_7 QPushButton:hover:!checked{
 	color: rgb(255, 103, 90);
 }
-
-
-
-
 #scrollArea_8 QPushButton:checked{
 	padding-left: 0px;
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_upload_lightgreen_48dp.png);
@@ -1676,14 +1567,14 @@ QScrollBar::sub-line:vertical{
                    <item>
                     <widget class="QLabel" name="label_8">
                      <property name="text">
-                      <string>Download</string>
+                      <string notr="true">Download</string>
                      </property>
                     </widget>
                    </item>
                    <item>
                     <widget class="QLabel" name="label_9">
                      <property name="text">
-                      <string>Upload</string>
+                      <string notr="true">Upload</string>
                      </property>
                     </widget>
                    </item>
@@ -1755,19 +1646,19 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_7">
+                     <widget class="QWidget" name="synchronizeDialogDownloadPlaylistsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>221</width>
-                        <height>156</height>
+                        <width>233</width>
+                        <height>287</height>
                        </rect>
                       </property>
                       <property name="layoutDirection">
                        <enum>Qt::LeftToRight</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogDownloadSongsQVBoxLayout_4">
+                      <layout class="QVBoxLayout" name="synchronizeDialogDownloadPlaylistsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -1802,47 +1693,6 @@ QScrollBar::sub-line:vertical{
                            <width>16777215</width>
                            <height>16777215</height>
                           </size>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item alignment="Qt::AlignLeft">
-                        <widget class="QPushButton" name="pushButton_22">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
-                         </property>
-                         <property name="checked">
-                          <bool>false</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="pushButton_23">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
                          </property>
                          <property name="layoutDirection">
                           <enum>Qt::LeftToRight</enum>
@@ -1923,13 +1773,13 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_8">
+                     <widget class="QWidget" name="synchronizeDialogUploadPlaylistsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>221</width>
-                        <height>98</height>
+                        <width>233</width>
+                        <height>287</height>
                        </rect>
                       </property>
                       <property name="minimumSize">
@@ -1938,7 +1788,7 @@ QScrollBar::sub-line:vertical{
                         <height>0</height>
                        </size>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogUploadSongsQVBoxLayout_4">
+                      <layout class="QVBoxLayout" name="synchronizeDialogUploadPlaylistsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -2023,15 +1873,13 @@ QScrollBar::sub-line:vertical{
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="synchronizesDialogAuthorsPage">
+              <widget class="QWidget" name="synchronizeDialogAuthorsPage">
                <property name="styleSheet">
                 <string notr="true">#frame_16 QLabel{
 	padding-left: 5px;
 	color: white;
 	font: 87 11pt &quot;Heebo Black&quot;;	
 }
-
-
 #scrollArea_9 QPushButton{
 	padding-left: 20px;
 	text-align: left;
@@ -2041,11 +1889,6 @@ QScrollBar::sub-line:vertical{
 #scrollArea_9 QPushButton:hover:!checked{
 	color: white;
 }
-
-
-
-
-
 #scrollArea_10, #scrollArea_9{
 	border-radius: 4px;
 	background-color: rgb(24, 24, 24);
@@ -2071,9 +1914,6 @@ QScrollBar::sub-line:vertical{
 #scrollArea_9 QPushButton:hover:!checked{
 	color: rgb(255, 103, 90);
 }
-
-
-
 #scrollArea_10 QPushButton:checked{
 	padding-left: 0px;
 	icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_upload_lightgreen_48dp.png);
@@ -2151,14 +1991,14 @@ QScrollBar::sub-line:vertical{
                    <item>
                     <widget class="QLabel" name="label_10">
                      <property name="text">
-                      <string>Download</string>
+                      <string notr="true">Download</string>
                      </property>
                     </widget>
                    </item>
                    <item>
                     <widget class="QLabel" name="label_11">
                      <property name="text">
-                      <string>Upload</string>
+                      <string notr="true">Upload</string>
                      </property>
                     </widget>
                    </item>
@@ -2230,19 +2070,19 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_9">
+                     <widget class="QWidget" name="synchronizeDialogDownloadAuthorsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>221</width>
-                        <height>156</height>
+                        <width>233</width>
+                        <height>287</height>
                        </rect>
                       </property>
                       <property name="layoutDirection">
                        <enum>Qt::LeftToRight</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogDownloadSongsQVBoxLayout_5">
+                      <layout class="QVBoxLayout" name="synchronizeDialogDownloadAuthorsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -2308,25 +2148,6 @@ QScrollBar::sub-line:vertical{
                          </property>
                          <property name="checked">
                           <bool>false</bool>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="pushButton_29">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string notr="true">PushButton</string>
-                         </property>
-                         <property name="checkable">
-                          <bool>true</bool>
                          </property>
                         </widget>
                        </item>
@@ -2398,13 +2219,13 @@ QScrollBar::sub-line:vertical{
                      <property name="widgetResizable">
                       <bool>true</bool>
                      </property>
-                     <widget class="QWidget" name="scrollAreaWidgetContents_10">
+                     <widget class="QWidget" name="synchronizeDialogUploadAuthorsQWidget">
                       <property name="geometry">
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>221</width>
-                        <height>98</height>
+                        <width>233</width>
+                        <height>287</height>
                        </rect>
                       </property>
                       <property name="minimumSize">
@@ -2413,7 +2234,7 @@ QScrollBar::sub-line:vertical{
                         <height>0</height>
                        </size>
                       </property>
-                      <layout class="QVBoxLayout" name="synchronizeSongsDialogUploadSongsQVBoxLayout_5">
+                      <layout class="QVBoxLayout" name="synchronizeDialogUploadAuthorsQVBoxLayout">
                        <property name="spacing">
                         <number>10</number>
                        </property>
@@ -2583,7 +2404,7 @@ QScrollBar::sub-line:vertical{
                 <number>0</number>
                </property>
                <item>
-                <widget class="QPushButton" name="synchronizeSongsDialogSynchronizeButton">
+                <widget class="QPushButton" name="synchronizeDialogSynchronizeButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>

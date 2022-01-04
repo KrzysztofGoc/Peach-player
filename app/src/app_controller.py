@@ -20,6 +20,7 @@ from classes.dialogs.categoryInputDialog import categoryInputDialog
 from classes.dialogs.playlistInputDialog import playlistInputDialog
 from classes.dialogs.authorInputDialog import authorInputDialog
 from classes.dialogs.albumInputDialog import albumInputDialog
+from classes.dialogs.synchronizeDialog import synchronizeDialog
 from app.src.classes.widgets.helper_widgets.clicked_signal_qframe import ClickedSignalQFrame
 
 scrollbar_recently_used = False
@@ -110,13 +111,20 @@ class Controller:
         self.ui.volumeSlider.valueChanged.connect(self.volume_slider_value_changed)
 
         ##########################################################################
-        # Authentication buttons' slots
+        # Authentication backend buttons' slots
         ##########################################################################
-        self.ui.pushButton_3.clicked.connect(self.log_in_with_credentials)
-        self.ui.pushButton_5.clicked.connect(self.continue_as_guest)
-        self.ui.pushButton_50.clicked.connect(self.register)
-        self.ui.pushButton_53.clicked.connect(self.load_register_page)
+        self.ui.centralPageLoginPageLogInButton.clicked.connect(self.log_in_with_credentials)
+        self.ui.centralPageLoginPageContinueAsGuestQPushButton.clicked.connect(self.continue_as_guest)
+        self.ui.centralPageRegisterPageSignInQPushButton.clicked.connect(self.register)
+        self.ui.centralPageRegisterPageButton.clicked.connect(self.load_register_page)
+        self.ui.centralPageLoginPageButton.clicked.connect(self.load_login_page)
         self.ui.fixedNavbar.navbarUsernameButton.clicked.connect(self.log_out)
+
+        ##########################################################################
+        # Authentication frontend buttons' slots
+        ##########################################################################
+        self.ui.centralPageLoginPageTogglePasswordQPushButton.clicked.connect(self.toggle_login_page_password_echo_mode)
+        self.ui.centralPageRegisterPageTogglePasswordQPushButton.clicked.connect(self.toggle_register_page_password_echo_mode)
 
         ##########################################################################
         # Song adder slots
@@ -227,9 +235,16 @@ class Controller:
         self.ui.scrollArea_13.resized.connect(self.albums_page_scroll_area_resize_slot)
 
         self.ui.mainPageAllSongsPageScroll.valueChanged.connect(self.all_songs_page_scroll_value_changed_slot)
-        self.ui.scrollArea_14.verticalScrollBar().valueChanged.connect(self.all_songs_page_scroll_area_scrollbar_value_changed_slot)
-        self.ui.scrollArea_14.verticalScrollBar().rangeChanged.connect(self.all_songs_page_scroll_area_scrollbar_range_changed_slot)
+        self.ui.scrollArea_14.verticalScrollBar().valueChanged.connect(
+            self.all_songs_page_scroll_area_scrollbar_value_changed_slot)
+        self.ui.scrollArea_14.verticalScrollBar().rangeChanged.connect(
+            self.all_songs_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_14.resized.connect(self.all_songs_page_scroll_area_resize_slot)
+
+        ##########################################################################
+        # Navbar's slots
+        ##########################################################################
+        self.ui.fixedNavbar.navbarSynchronizeButton.clicked.connect(self.synchronize_button_clicked_slot)
 
     def all_songs_page_scroll_area_resize_slot(self):
         """Resize and move custom scrollbar on all songs' page.
@@ -238,7 +253,7 @@ class Controller:
          """
         self.ui.mainPageAllSongsPageScroll.move(self.ui.scrollArea_14.rect().right() - 13, 0)
         self.ui.mainPageAllSongsPageScroll.setFixedSize(self.ui.mainPageAllSongsPageScroll.width(),
-                                                      self.ui.scrollArea_14.height())
+                                                        self.ui.scrollArea_14.height())
         self.all_songs_page_scroll_area_scrollbar_range_changed_slot()
 
     def all_songs_page_scroll_area_scrollbar_range_changed_slot(self):
@@ -273,12 +288,6 @@ class Controller:
             scrollbar_recently_used = True
             self.ui.scrollArea_14.verticalScrollBar().setValue(self.ui.mainPageAllSongsPageScroll.value())
             scrollbar_recently_used = False
-
-
-
-
-
-
 
     def albums_page_scroll_area_resize_slot(self):
         """Resize and move custom scrollbar on albums' page.
@@ -751,9 +760,6 @@ class Controller:
         else:
             self.ui.mainPageAllSongsLengthSortQPushButton.wasChecked = False
             self.ui.label_279.setVisible(False)
-
-
-
 
     def category_length_sort_button_slot(self):
         """Toggle likedSong's page artist sort button's indicator and sort the songs"""
@@ -1395,7 +1401,7 @@ class Controller:
 
     def handle_new_category_creation(self, category_dialog, category_miniature_dialog, app_layer_frame):
         """Handle new category creation. Collect input from category_dialog and miniature_file_dialog then create new
-            playlist.
+            category.
 
             Parameters:
                 app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it shown along it.
@@ -1597,11 +1603,13 @@ class Controller:
             elif song_frame.song_id != self.now_playing_song.song_id:
                 if self.playlist_state == PlaylistState.SORTED:
                     if song_frame in self.sorted_current_playlist_songs_frames:
-                        self.sorted_playlist_playing_song_index = self.sorted_current_playlist_songs_frames.index(song_frame) - 1
+                        self.sorted_playlist_playing_song_index = self.sorted_current_playlist_songs_frames.index(
+                            song_frame) - 1
                         self.player.stop()
                 elif self.playlist_state == PlaylistState.SHUFFLED:
                     if song_frame in self.shuffled_current_playlist_songs_frames:
-                        self.shuffled_playlist_playing_song_index = self.shuffled_current_playlist_songs_frames.index(song_frame) - 1
+                        self.shuffled_playlist_playing_song_index = self.shuffled_current_playlist_songs_frames.index(
+                            song_frame) - 1
                         self.player.stop()
                 else:
                     url = QUrl.fromLocalFile(song_frame.path)
@@ -1667,7 +1675,7 @@ class Controller:
                 self.now_playing_song.pushButton_13.setChecked(True)
                 self.ui.mainPageSongQueueNowPlayingSongQVBoxLayout.addWidget(self.now_playing_song)
                 index = self.sorted_current_playlist_songs_frames.index(self.now_playing_song)
-                for song in self.sorted_current_playlist_songs_frames[index+1:]:
+                for song in self.sorted_current_playlist_songs_frames[index + 1:]:
                     song_frame = SongEntry(
                         song_id=song.song_id,
                         song_title=song.song_title,
@@ -1734,7 +1742,8 @@ class Controller:
                 self.ui.songTimeSlider.setSliderPosition(0)
             else:
                 if widget_index == 9:
-                    self.timer.singleShot(0, partial(self.add_sorted_frames_to_queue, self.sorted_playlist_playing_song_index))
+                    self.timer.singleShot(0, partial(self.add_sorted_frames_to_queue,
+                                                     self.sorted_playlist_playing_song_index))
                 self.sorted_playlist_playing_song_index -= 2
                 self.player.stop()
         if self.playlist_state == PlaylistState.SHUFFLED:
@@ -1744,7 +1753,8 @@ class Controller:
                 self.ui.songTimeSlider.setSliderPosition(0)
             else:
                 if widget_index == 9:
-                    self.timer.singleShot(0, partial(self.add_shuffled_frames_to_queue, self.shuffled_playlist_playing_song_index))
+                    self.timer.singleShot(0, partial(self.add_shuffled_frames_to_queue,
+                                                     self.shuffled_playlist_playing_song_index))
                 self.shuffled_playlist_playing_song_index -= 2
                 self.player.stop()
 
@@ -1834,8 +1844,10 @@ class Controller:
                 if self.playlist_state == PlaylistState.SORTED and len(
                         self.sorted_current_playlist_songs_frames) > self.sorted_playlist_playing_song_index + 1 >= 0:
                     self.sorted_playlist_playing_song_index += 1
-                    new_media = QMediaContent(QUrl.fromLocalFile(self.sorted_current_playlist_songs_frames[self.sorted_playlist_playing_song_index].path))
-                    self.now_playing_song = self.sorted_current_playlist_songs_frames[self.sorted_playlist_playing_song_index]
+                    new_media = QMediaContent(QUrl.fromLocalFile(
+                        self.sorted_current_playlist_songs_frames[self.sorted_playlist_playing_song_index].path))
+                    self.now_playing_song = self.sorted_current_playlist_songs_frames[
+                        self.sorted_playlist_playing_song_index]
                     if widget_index == 9:
                         self.ui.mainPageSongQueueNowPlayingSongQVBoxLayout.addWidget(self.now_playing_song)
                     self.player.setVolume(self.ui.volumeSlider.value())
@@ -2120,7 +2132,7 @@ class Controller:
                                                                              app_layer_frame))
 
     def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame):
-        """Handle new playlist creation. Collect input from playlist_dialog and miniature_file_dialog then create new
+        """Handle new album creation. Collect input from album_dialog and miniature_file_dialog then create new
             album.
 
             Parameters:
@@ -2215,9 +2227,9 @@ class Controller:
         return False
 
     def register(self):
-        email = self.ui.lineEdit_3.text()
-        password = self.ui.lineEdit_4.text()
-        username = self.ui.lineEdit_5.text()
+        email = self.ui.centralPageRegisterPageEmailQLineEdit.text()
+        password = self.ui.centralPageRegisterPagePasswordQLineEdit.text()
+        username = self.ui.centralPageRegisterPageNicknameQLineEdit.text()
         data = {'email': email, "username": username, "password": password}
         response = requests.post('http://127.0.0.1:5000/register', data=data).json()
         if response["error"] == "1":
@@ -2229,9 +2241,12 @@ class Controller:
     def load_register_page(self):
         self.ui.centralStackedWidget.setCurrentIndex(2)
 
+    def load_login_page(self):
+        self.ui.centralStackedWidget.setCurrentIndex(1)
+
     def log_in_with_credentials(self):
-        email = self.ui.lineEdit.text()
-        password = self.ui.lineEdit_2.text()
+        email = self.ui.centralPageLoginPageLoginQLineEdit.text()
+        password = self.ui.centralPageLoginPagePasswordQLineEdit.text()
         data = {'email': email, 'password': password}
         response = requests.post('http://127.0.0.1:5000/login', data=data).json()
         if response["error"] == "1":
@@ -2367,3 +2382,95 @@ class Controller:
               f"---------------------------------------------------------------------------------------")
         # handle adding new song to database here
         print("Created new song in database.")
+
+    def synchronize_button_clicked_slot(self):
+        """Create new synchronizeDialog and run its show() method, create app_layer_frame to darken the background then
+         run handle_synchronization() to upload and download data.
+
+        """
+
+        # Blacked out semi-transparent frame over whole app, closes dialog when clicked
+        app_layer_frame = ClickedSignalQFrame(self.ui.centralwidget)
+        synchronize_dialog = synchronizeDialog(parent=self.ui.window)
+
+        # Dialog's exit button clicked slot
+        synchronize_dialog.synchronizeDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection,
+                                                                               app_layer_frame, synchronize_dialog))
+
+        # App layer frame's clicked slot
+        app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, synchronize_dialog))
+
+        # Show app layer_frame and dialog on the screen
+        app_layer_frame.show()
+        synchronize_dialog.show()
+
+        # Dialog's add button clicked slot
+        synchronize_dialog.synchronizeDialogSynchronizeButton.clicked.connect(
+            partial(self.handle_synchronization, synchronize_dialog, app_layer_frame))
+
+    def handle_synchronization(self, synchronize_dialog, app_layer_frame):
+        """Handle data synchronization with server. Collect input from synchronize_dialog then download/upload data.
+        Use get_selected_synchronization_data to search for data to synchronize.
+
+        Parameters:
+            app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that is shown along it.
+            synchronize_dialog (synchronizeDialog): synchronizeDialog used to collect info about data to download/upload.
+        """
+        print(f"Handling data synchronization...\n"
+              f"---------------------------------------------------------------------------------------\n"
+              f"Songs to download:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogDownloadSongsQWidget.children())}\n"
+              f"Songs to upload:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogUploadSongsQWidget.children())}\n"
+              f"Albums to download:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogDownloadAlbumsQWidget.children())}\n"
+              f"Albums to upload:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogUploadAlbumsQWidget.children())}\n"
+              f"Playlists to download:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogDownloadPlaylistsQWidget.children())}\n"
+              f"Playlists to upload:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogUploadPlaylistsQWidget.children())}\n"
+              f"Authors to download:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogUploadAuthorsQWidget.children())}\n"
+              f"Authors to upload:\n"
+              f"{self.get_selected_synchronization_data(synchronize_dialog.synchronizeDialogDownloadAuthorsQWidget.children())}\n"
+              f"---------------------------------------------------------------------------------------")
+        # handle data synchronization here
+        print("Synchronized data.")
+
+        # close dialog
+        self.handle_dialog_acceptation(app_layer_frame, synchronize_dialog)
+
+    @staticmethod
+    def get_selected_synchronization_data(data_set):
+        """Search the data_set for checked buttons. Get the data selected for synchronization.
+
+        Parameters:
+            data_set(list): list of data to select items to synchronize from
+
+        Returns:
+            list: Data to synchronize selected from data_set
+        """
+        # Create empty list to store data that should be synchronized
+        data_to_synchronize = []
+        # Search the data_set for checked QPushButtons and append them to data_to_synchronize
+        for data in data_set:
+            if isinstance(data, QtWidgets.QPushButton):
+                if data.isChecked():
+                    data_to_synchronize.append(data)
+
+        return data_to_synchronize
+
+    def toggle_login_page_password_echo_mode(self):
+        """Toggle centralPageLoginPage password's echo mode"""
+        if self.ui.centralPageLoginPagePasswordQLineEdit.echoMode() == QtWidgets.QLineEdit.Password:
+            self.ui.centralPageLoginPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Normal)
+        else:
+            self.ui.centralPageLoginPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+
+    def toggle_register_page_password_echo_mode(self):
+        """Toggle centralPageRegisterPage password's echo mode"""
+        if self.ui.centralPageRegisterPagePasswordQLineEdit.echoMode() == QtWidgets.QLineEdit.Password:
+            self.ui.centralPageRegisterPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Normal)
+        else:
+            self.ui.centralPageRegisterPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
