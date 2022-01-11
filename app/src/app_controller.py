@@ -124,7 +124,8 @@ class Controller:
         # Authentication frontend buttons' slots
         ##########################################################################
         self.ui.centralPageLoginPageTogglePasswordQPushButton.clicked.connect(self.toggle_login_page_password_echo_mode)
-        self.ui.centralPageRegisterPageTogglePasswordQPushButton.clicked.connect(self.toggle_register_page_password_echo_mode)
+        self.ui.centralPageRegisterPageTogglePasswordQPushButton.clicked.connect(
+            self.toggle_register_page_password_echo_mode)
 
         ##########################################################################
         # Song adder slots
@@ -152,8 +153,8 @@ class Controller:
         self.player.mediaStatusChanged.connect(self.handle_media_status_changed)
         self.ui.playerPausePlayButton.clicked.connect(self.pause_play_button)
         self.ui.bottomPlayerMuteButton.clicked.connect(self.set_muted)
-        self.ui.playlistPlayPauseButton_2.clicked.connect(self.start_playlist)
-        self.ui.playlistPlayPauseButton_3.clicked.connect(self.start_playlist)
+        self.ui.likedSongsPlayPauseButton.clicked.connect(self.start_playlist)
+        self.ui.albumPlayPauseButton.clicked.connect(self.start_playlist)
         self.ui.playerPreviousButton.clicked.connect(self.play_previous_playlist_song)
         self.ui.playerNextButton.clicked.connect(self.play_next_playlist_song)
         self.ui.playerShuffleButton.clicked.connect(self.shuffle_now_playing_playlist)
@@ -608,7 +609,13 @@ class Controller:
             self.ui.mainPageLikedSongsScroll.setValue(self.ui.scrollArea_4.verticalScrollBar().value())
             scrollbar_recently_used = False
 
+    # TODO Comment this code
     def liked_songs_scroll_value_changed_slot(self):
+        self.ui.fixedNavbar.adjust_navbar_saturation(self.ui.frame_22.mapTo(self.ui.scrollArea_4, QtCore.QPoint(0, -60)).y(),
+                                                     80)
+        self.ui.fixedNavbar.adjust_elements_visibility(self.ui.likedSongsPlayPauseButton.mapTo(self.ui.scrollArea_4,
+                                                                                               QtCore.QPoint(0, -32)).y())
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
