@@ -286,7 +286,7 @@ class authorInputDialog(QtWidgets.QDialog):
         self.frame_8.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_8.setObjectName("frame_8")
+        self.frame_8.setObjectName("PlaylistSortButtonsQFrame")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_8)
         self.horizontalLayout_2.setContentsMargins(0, 16, 1, 0)
         self.horizontalLayout_2.setSpacing(0)

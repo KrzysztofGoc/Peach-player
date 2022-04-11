@@ -1,7 +1,8 @@
 from PySide2 import QtWidgets, QtCore, QtGui
 from app.src import resources_peach_player
 
-
+# TODO Comment this class
+# TODO Make resizing CategoryEntry Frames withing the FlowLayout
 class CategoryEntry(QtWidgets.QFrame):
     clicked = QtCore.Signal()
 
@@ -28,7 +29,6 @@ class CategoryEntry(QtWidgets.QFrame):
         sizePolicy.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
         self.setSizePolicy(sizePolicy)
         self.setMinimumSize(QtCore.QSize(185, 265))
-        self.setMaximumSize(QtCore.QSize(185, 265))
         self.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.setStyleSheet("")
         self.setFrameShape(QtWidgets.QFrame.StyledPanel)

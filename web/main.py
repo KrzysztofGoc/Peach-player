@@ -156,8 +156,7 @@ def add_song():
     if user:
         updated_songs_id = []
         for i in songs:
-            # TODO
-            # change filtering by title to something else
+            # TODO change filtering by title to something else
             if i["title"] not in titles:
                 updated_songs_id.append(i["id"])
                 new_song = UserSongs(

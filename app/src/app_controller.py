@@ -5,6 +5,7 @@ from PySide2.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 
 from PySide2.QtMultimedia import QMediaPlayer, QMediaContent
 from app.src.classes import navbar_frame
+from app.src.classes.widgets.sort_buttons_qframe import SortButtonsQFrame
 from app_model import *
 import requests
 import math
@@ -32,6 +33,7 @@ class PlaylistState(Enum):
     SHUFFLED = 2
 
 
+# TODO Split attributes into logical groups
 class Controller:
     def __init__(self, ui):
         self.ui = ui
@@ -165,77 +167,77 @@ class Controller:
         ##########################################################################
         # Scrollbars' slots
         ##########################################################################
-        self.ui.mainPageCategoriesScroll.valueChanged.connect(self.categories_scroll_value_changed_slot)
+        self.ui.mainPageCategoriesScroll.actionTriggered.connect(self.categories_scroll_value_changed_slot)
         self.ui.scrollArea_9.verticalScrollBar().valueChanged.connect(
             self.categories_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_9.verticalScrollBar().rangeChanged.connect(
             self.categories_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_9.resized.connect(self.categories_scroll_area_resize_slot)
 
-        self.ui.mainPageLikedSongsScroll.valueChanged.connect(self.liked_songs_scroll_value_changed_slot)
+        self.ui.mainPageLikedSongsScroll.actionTriggered.connect(self.liked_songs_scroll_value_changed_slot)
         self.ui.scrollArea_4.verticalScrollBar().valueChanged.connect(
             self.liked_songs_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_4.verticalScrollBar().rangeChanged.connect(
             self.liked_songs_scroll_area_scrollbar_range_changed)
         self.ui.scrollArea_4.resized.connect(self.liked_songs_scroll_area_resize_slot)
 
-        self.ui.mainPageLastPlayedScroll.valueChanged.connect(self.last_played_scroll_value_changed_slot)
+        self.ui.mainPageLastPlayedScroll.actionTriggered.connect(self.last_played_scroll_value_changed_slot)
         self.ui.scrollArea_10.verticalScrollBar().valueChanged.connect(
             self.last_played_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_10.verticalScrollBar().rangeChanged.connect(
             self.last_played_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_10.resized.connect(self.last_played_scroll_area_resize_slot)
 
-        self.ui.mainPagePlaylistScroll.valueChanged.connect(self.playlist_scroll_value_changed_slot)
+        self.ui.mainPagePlaylistScroll.actionTriggered.connect(self.playlist_scroll_value_changed_slot)
         self.ui.scrollArea_3.verticalScrollBar().valueChanged.connect(
             self.playlist_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_3.verticalScrollBar().rangeChanged.connect(
             self.playlist_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_3.resized.connect(self.playlist_scroll_area_resize_slot)
 
-        self.ui.mainPageAuthorPageScroll.valueChanged.connect(self.author_page_scroll_value_changed_slot)
+        self.ui.mainPageAuthorPageScroll.actionTriggered.connect(self.author_page_scroll_value_changed_slot)
         self.ui.scrollArea_8.verticalScrollBar().valueChanged.connect(
             self.author_page_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_8.verticalScrollBar().rangeChanged.connect(
             self.author_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_8.resized.connect(self.author_page_scroll_area_resize_slot)
 
-        self.ui.mainPageAuthorsScroll.valueChanged.connect(self.authors_scroll_value_changed_slot)
+        self.ui.mainPageAuthorsScroll.actionTriggered.connect(self.authors_scroll_value_changed_slot)
         self.ui.scrollArea_7.verticalScrollBar().valueChanged.connect(
             self.authors_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_7.verticalScrollBar().rangeChanged.connect(
             self.authors_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_7.resized.connect(self.authors_scroll_area_resize_slot)
 
-        self.ui.mainPageCategoryPageScroll.valueChanged.connect(self.category_page_scroll_value_changed_slot)
+        self.ui.mainPageCategoryPageScroll.actionTriggered.connect(self.category_page_scroll_value_changed_slot)
         self.ui.scrollArea_11.verticalScrollBar().valueChanged.connect(
             self.category_page_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_11.verticalScrollBar().rangeChanged.connect(
             self.category_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_11.resized.connect(self.category_page_scroll_area_resize_slot)
 
-        self.ui.mainPageAlbumPageScroll.valueChanged.connect(self.album_page_scroll_value_changed_slot)
+        self.ui.mainPageAlbumPageScroll.actionTriggered.connect(self.album_page_scroll_value_changed_slot)
         self.ui.scrollArea_5.verticalScrollBar().valueChanged.connect(
             self.album_page_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_5.verticalScrollBar().rangeChanged.connect(
             self.album_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_5.resized.connect(self.album_page_scroll_area_resize_slot)
 
-        self.ui.mainPageSongQueuePageScroll.valueChanged.connect(self.song_queue_page_scroll_value_changed_slot)
+        self.ui.mainPageSongQueuePageScroll.actionTriggered.connect(self.song_queue_page_scroll_value_changed_slot)
         self.ui.scrollArea_12.verticalScrollBar().valueChanged.connect(
             self.song_queue_page_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_12.verticalScrollBar().rangeChanged.connect(
             self.song_queue_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_12.resized.connect(self.song_queue_page_scroll_area_resize_slot)
 
-        self.ui.mainPageAlbumsPageScroll.valueChanged.connect(self.albums_page_scroll_value_changed_slot)
+        self.ui.mainPageAlbumsPageScroll.actionTriggered.connect(self.albums_page_scroll_value_changed_slot)
         self.ui.scrollArea_13.verticalScrollBar().valueChanged.connect(
             self.albums_page_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_13.verticalScrollBar().rangeChanged.connect(
             self.albums_page_scroll_area_scrollbar_range_changed_slot)
         self.ui.scrollArea_13.resized.connect(self.albums_page_scroll_area_resize_slot)
 
-        self.ui.mainPageAllSongsPageScroll.valueChanged.connect(self.all_songs_page_scroll_value_changed_slot)
+        self.ui.mainPageAllSongsPageScroll.actionTriggered.connect(self.all_songs_page_scroll_value_changed_slot)
         self.ui.scrollArea_14.verticalScrollBar().valueChanged.connect(
             self.all_songs_page_scroll_area_scrollbar_value_changed_slot)
         self.ui.scrollArea_14.verticalScrollBar().rangeChanged.connect(
@@ -277,13 +279,27 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageAllSongsPageScroll.setValue(self.ui.scrollArea_14.verticalScrollBar().value())
+            self.ui.mainPageAllSongsPageScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def all_songs_page_scroll_value_changed_slot(self):
-        """Change albums' page scrollArea's scrollbar's value to match albums' page custom scrollbar's value.
+        """Change all songs' page scrollArea's scrollbar's value to match all songs' page custom scrollbar's value.
 
-        Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation, navbarPlayButton/navbarPageName visibility and stickySortButtonsFrame
+           sort buttons visibility.
         """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.label_258.mapTo(self.ui.scrollArea_14, QtCore.QPoint(0, -60)).y(), 215)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.label_251.mapTo(self.ui.scrollArea_14, QtCore.QPoint(0, -34)).y())
+
+        self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+            self.ui.allSongsSortButtonsQFrame.mapTo(self.ui.scrollArea_14, QtCore.QPoint(0, -60)).y())
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -320,13 +336,22 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageAlbumsPageScroll.setValue(self.ui.scrollArea_13.verticalScrollBar().value())
+            self.ui.mainPageAlbumsPageScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def albums_page_scroll_value_changed_slot(self):
         """Change albums' page scrollArea's scrollbar's value to match albums' page custom scrollbar's value.
 
-        Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
-        """
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation."""
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.label_146.mapTo(self.ui.scrollArea_13, QtCore.QPoint(0, -34)).y(), 56)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.label_146.mapTo(self.ui.scrollArea_13, QtCore.QPoint(0, -34)).y(), play_button=False)
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -363,13 +388,23 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageSongQueuePageScroll.setValue(self.ui.scrollArea_12.verticalScrollBar().value())
+            self.ui.mainPageSongQueuePageScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def song_queue_page_scroll_value_changed_slot(self):
         """Change songQueue's page scrollArea's scrollbar's value to match songQueue's page custom scrollbar's value.
 
-        Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation.
         """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.label_201.mapTo(self.ui.scrollArea_12, QtCore.QPoint(0, -34)).y(), 65)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.label_201.mapTo(self.ui.scrollArea_12, QtCore.QPoint(0, -34)).y(), play_button=False)
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -406,13 +441,26 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageAlbumPageScroll.setValue(self.ui.scrollArea_5.verticalScrollBar().value())
+            self.ui.mainPageAlbumPageScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def album_page_scroll_value_changed_slot(self):
         """Change album's page scrollArea's scrollbar's value to match album's page custom scrollbar's value.
 
-        Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation, navbarPlayButton/navbarPageName visibility and stickySortButtonsFrame
+           sort buttons visibility.
         """
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.frame_261.mapTo(self.ui.scrollArea_5, QtCore.QPoint(0, -60)).y(), 80)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.albumPlayPauseButton.mapTo(self.ui.scrollArea_5, QtCore.QPoint(0, -32)).y())
+
+        self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+            self.ui.AlbumSortButtonsQFrame.mapTo(self.ui.scrollArea_5, QtCore.QPoint(0, -60)).y())
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -449,6 +497,7 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageCategoryPageScroll.setValue(self.ui.scrollArea_11.verticalScrollBar().value())
+            self.ui.mainPageCategoryPageScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def category_page_scroll_value_changed_slot(self):
@@ -456,6 +505,24 @@ class Controller:
 
         Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
         """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.mainPageCategoryPageStackedWidget.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -60)).y(), 80)
+
+        if self.ui.mainPageCategoryPageStackedWidget.currentIndex() == 0:
+            self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+                self.ui.CategorySortButtonsQFrame.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -60)).y())
+
+            self.ui.fixedNavbar.adjust_elements_visibility(
+                self.ui.categoryPagePlayPauseQPushButton.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -32)).y())
+        elif self.ui.mainPageCategoryPageStackedWidget.currentIndex() == 1:
+            self.ui.fixedNavbar.adjust_elements_visibility(
+                self.ui.mainPageCategoryPageAlbumsCategoryNameLabel.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -34)).y(), play_button=False)
+        elif self.ui.mainPageCategoryPageStackedWidget.currentIndex() == 2:
+            self.ui.fixedNavbar.adjust_elements_visibility(
+                self.ui.mainPageCategoryPagePlaylistsCategoryNameLabel.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -34)).y(), play_button=False)
+
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -492,6 +559,7 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageAuthorPageScroll.setValue(self.ui.scrollArea_8.verticalScrollBar().value())
+            self.ui.mainPageAuthorPageScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def author_page_scroll_value_changed_slot(self):
@@ -499,6 +567,23 @@ class Controller:
 
         Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
         """
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.frame_352.mapTo(self.ui.scrollArea_8, QtCore.QPoint(0, -60)).y(), 80)
+
+        if self.ui.mainPageAuthorPageStackedWidget.currentIndex() == 0:
+            self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+                self.ui.AuthorSortButtonsQFrame.mapTo(self.ui.scrollArea_8, QtCore.QPoint(0, -60)).y())
+
+            self.ui.fixedNavbar.adjust_elements_visibility(
+                self.ui.authorPagePlayPauseQPushButton.mapTo(self.ui.scrollArea_8, QtCore.QPoint(0, -32)).y())
+        elif self.ui.mainPageAuthorPageStackedWidget.currentIndex() == 1:
+            self.ui.fixedNavbar.adjust_elements_visibility(
+                self.ui.mainPageAuthorPageAlbumsAuthorNameLabel.mapTo(self.ui.scrollArea_8,
+                                                                      QtCore.QPoint(0, -34)).y(), play_button=False)
+        elif self.ui.mainPageAuthorPageStackedWidget.currentIndex() == 2:
+            self.ui.fixedNavbar.adjust_elements_visibility(
+                self.ui.mainPageAuthorPagePlaylistsAuthorNameLabel.mapTo(self.ui.scrollArea_8,
+                                                                         QtCore.QPoint(0, -34)).y(), play_button=False)
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -524,9 +609,27 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPagePlaylistScroll.setValue(self.ui.scrollArea_3.verticalScrollBar().value())
+            self.ui.mainPagePlaylistScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def playlist_scroll_value_changed_slot(self):
+        """Change playlist's page scrollArea's scrollbar's value to match playlist's page custom scrollbar's value.
+
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation, navbarPlayButton/navbarPageName visibility and stickySortButtonsFrame
+           sort buttons visibility.
+        """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.frame_17.mapTo(self.ui.scrollArea_3, QtCore.QPoint(0, -60)).y(), 80)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.playlistPlayPauseButton.mapTo(self.ui.scrollArea_3, QtCore.QPoint(0, -32)).y())
+
+        self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+            self.ui.PlaylistSortButtonsQFrame.mapTo(self.ui.scrollArea_3, QtCore.QPoint(0, -60)).y())
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -551,9 +654,23 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageAuthorsScroll.setValue(self.ui.scrollArea_7.verticalScrollBar().value())
+            self.ui.mainPageAuthorsScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def authors_scroll_value_changed_slot(self):
+        """Change authors' page scrollArea's scrollbar's value to match authors' page custom scrollbar's value.
+
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation and navbarPlayButton/navbarPageName visibility.
+        """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.label_114.mapTo(self.ui.scrollArea_7, QtCore.QPoint(0, -34)).y(), 22)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.label_114.mapTo(self.ui.scrollArea_7, QtCore.QPoint(0, -34)).y(), play_button=False)
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -579,9 +696,27 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageLastPlayedScroll.setValue(self.ui.scrollArea_10.verticalScrollBar().value())
+            self.ui.mainPageLastPlayedScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def last_played_scroll_value_changed_slot(self):
+        """Change last played's page scrollArea's scrollbar's value to match last played's page custom scrollbar's value.
+
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation, navbarPlayButton/navbarPageName visibility and stickySortButtonsFrame
+           sort buttons visibility.
+        """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.mainPageLastPlayedHeaderQLabel.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -33)).y(), 70)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.mainPageLastPlayedHeaderQLabel.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -33)).y(), play_button=False)
+
+        self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+            self.ui.LastPlayedSortButtonsQFrame.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -60)).y())
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -607,19 +742,31 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageLikedSongsScroll.setValue(self.ui.scrollArea_4.verticalScrollBar().value())
+            self.ui.mainPageLikedSongsScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
-    # TODO Comment this code
     def liked_songs_scroll_value_changed_slot(self):
-        self.ui.fixedNavbar.adjust_navbar_saturation(self.ui.frame_22.mapTo(self.ui.scrollArea_4, QtCore.QPoint(0, -60)).y(),
-                                                     80)
-        self.ui.fixedNavbar.adjust_elements_visibility(self.ui.likedSongsPlayPauseButton.mapTo(self.ui.scrollArea_4,
-                                                                                               QtCore.QPoint(0, -32)).y())
+        """Change liked songs' page scrollArea's scrollbar's value to match liked songs' page custom scrollbar's value.
 
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation, navbarPlayButton/navbarPageName visibility and stickySortButtonsFrame
+           sort buttons visibility."""
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.frame_22.mapTo(self.ui.scrollArea_4, QtCore.QPoint(0, -60)).y(), 80)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.likedSongsPlayPauseButton.mapTo(self.ui.scrollArea_4, QtCore.QPoint(0, -32)).y())
+
+        self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
+            self.ui.LikedSongsSortButtonsQFrame.mapTo(self.ui.scrollArea_4, QtCore.QPoint(0, -60)).y())
+
+        # Uses global variable scrollbar_recently_used to prevent from going into a loop
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.scrollArea_4.verticalScrollBar().setValue(self.ui.mainPageLikedSongsScroll.value())
+
             scrollbar_recently_used = False
 
     def categories_scroll_area_resize_slot(self):
@@ -641,9 +788,24 @@ class Controller:
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
             self.ui.mainPageCategoriesScroll.setValue(self.ui.scrollArea_9.verticalScrollBar().value())
+            self.ui.mainPageCategoriesScroll.triggerAction(QtWidgets.QAbstractSlider.SliderMove)
             scrollbar_recently_used = False
 
     def categories_scroll_value_changed_slot(self):
+        """Change all songs' page scrollArea's scrollbar's value to match all songs' page custom scrollbar's value.
+
+           Uses global scrollbar_recently_used to prevent custom and scrollArea's scrollbars going into loop.
+
+           Adjust fixedNavbar's saturation and navbarPlayButton/navbarPageName.
+        """
+
+        self.ui.fixedNavbar.adjust_navbar_saturation(
+            self.ui.label_115.mapTo(self.ui.scrollArea_9, QtCore.QPoint(0, -34)).y(), 45)
+
+        self.ui.fixedNavbar.adjust_elements_visibility(
+            self.ui.label_115.mapTo(self.ui.scrollArea_9, QtCore.QPoint(0, -34)).y())
+
+
         global scrollbar_recently_used
         if not scrollbar_recently_used:
             scrollbar_recently_used = True
@@ -1122,40 +1284,25 @@ class Controller:
         """Prepare mainPage's nowPlaying page."""
         pass
 
-    """
-    def queue_button_slot(self):
-        Prepare authors page and change mainPageStackedWidget to authors's index
-        self.setup_main_page_queue()
-        self.ui.set_main_page_stacked_widget_index(9)
-    """
-
     def albums_button_slot(self):
         """Prepare albums page and change mainPageStackedWidget to album's index"""
         self.setup_main_page_albums()
-        self.ui.set_main_page_stacked_widget_index(10)
+        self.set_main_page_stacked_widget_index(10)
         all_albums = Albums.query.all()
-        row = column = 0
         for album in all_albums:
-            if column % 8 == 0:
-                row += 1
-                column = 0
             album_frame = AlbumEntry(self.ui.frame_265, album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
-            self.ui.mainPageAlbumsAlbumsGridQGridLayout.addWidget(album_frame, row, column, 1, 1)
-            column += 1
-        if column % 8 == 0:
-            row += 1
-            column = 0
+            self.ui.mainPageAlbumsAlbumsGridQFlowLayout.addWidget(album_frame)
         album_adder = AdderEntry(adder_type=2, parent=self.ui.frame_265)
         album_adder.clicked.connect(self.album_adder_clicked_slot)
-        self.ui.mainPageAlbumsAlbumsGridQGridLayout.addWidget(album_adder, row, column, 1, 1)
+        self.ui.mainPageAlbumsAlbumsGridQFlowLayout.addWidget(album_adder)
 
     def load_album_page(self, album):
         if len(self.current_loaded_songs_frames) != 0:
             for i in self.current_loaded_songs_frames:
                 i.setParent(None)
             self.current_loaded_songs_frames = []
-        self.ui.set_main_page_stacked_widget_index(8)
+        self.set_main_page_stacked_widget_index(8)
         self.ui.mainPageAlbumNameOfAlbumLabel.setText(album.album_name)
         songs = AlbumSongs.query.filter_by(album_id=album.id).all()
         for i in songs:
@@ -1171,7 +1318,8 @@ class Controller:
                 path=song.path,
                 is_liked=is_liked,
                 frame_structure={"song_title": True, "artist_name": True, "category_name": False, "date_added": False,
-                                 "song_length": True}
+                                 "song_length": True},
+                visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552)]
             )
             if self.now_playing_song and song.id == self.now_playing_song.song_id:
                 if self.now_playing_song in self.sorted_current_playlist_songs_frames:
@@ -1185,7 +1333,7 @@ class Controller:
             else:
                 song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
                 song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song_frame))
-                song_frame.mainPageLikedSongsArtistButton.clicked.connect(partial(self.load_author_page, song.author))
+                song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
 
                 self.ui.mainPageAlbumSongsListQVBoxLayout.addWidget(song_frame)
 
@@ -1207,28 +1355,22 @@ class Controller:
     def authors_button_slot(self):
         """Prepare authors page and change mainPageStackedWidget to authors's index"""
         self.setup_main_page_authors()
-        self.ui.set_main_page_stacked_widget_index(4)
+        self.set_main_page_stacked_widget_index(4)
         all_authors = Authors.query.all()
-        row = column = 0
         for author in all_authors:
-            if column % 8 == 0:
-                row += 1
-                column = 0
             author_frame = AuthorEntry(self.ui.mainPageAuthorsGrid, author_name=author.author_name)
             author_frame.clicked.connect(partial(self.load_author_page, author))
-            self.ui.mainPageAuthorsAuthorsGridQGridLayout.addWidget(author_frame, row, column, 1, 1)
-            column += 1
-        if column % 8 == 0:
-            row += 1
-            column = 0
+            self.ui.mainPageAuthorsAuthorsGridQFlowLayout.addWidget(author_frame)
         author_adder = AdderEntry(adder_type=3, parent=self.ui.mainPageAuthorsGrid)
         author_adder.clicked.connect(self.author_adder_clicked_slot)
-        self.ui.mainPageAuthorsAuthorsGridQGridLayout.addWidget(author_adder, row, column, 1, 1)
+        self.ui.mainPageAuthorsAuthorsGridQFlowLayout.addWidget(author_adder)
 
+    # TODO Make author's songs and playlists Frames disappear when changing mainPageAuthorPageStacked widget to author's
+    # TODO albums page similarly on other pages to prevent size issues
     def load_author_page(self, author):
-        self.ui.set_main_page_stacked_widget_index(6)
+        self.set_main_page_stacked_widget_index(6)
         self.ui.mainPageAuthorPageAlbumsAuthorNameLabel.setText(author.author_name + " albums")
-        self.ui.mainPageAuthorPageAlbumsAuthorNameLabel_2.setText(author.author_name + " playlists")
+        self.ui.mainPageAuthorPagePlaylistsAuthorNameLabel.setText(author.author_name + " playlists")
         self.ui.mainPageAutorNameLabel.setText(author.author_name)
         self.load_selected_author_songs(author)
         self.load_selected_author_albums(author)
@@ -1248,12 +1390,19 @@ class Controller:
                 song_id=song.id,
                 song_title=song.title,
                 category_name=song.category.category_name,
+                date_added="Placeholder date",
+                song_length="Placeholder length",
+                path=song.path,
                 is_liked=is_liked,
+                frame_structure={"song_title": True, "artist_name": False, "category_name": True, "date_added": True,
+                                 "song_length": True},
+                visibility_changing_data_elements=[("songEntrySongCategoryQFrame", 552),
+                                                   ("songEntrySongDateAddedQLabel", 726)]
             )
             self.ui.mainPageAuthorPageSongsListQVBoxLayout.addWidget(song_frame)
             song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
             song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
-            song_frame.mainPageLikedSongsCategoryButton.clicked.connect(partial(self.load_selected_category_page,
+            song_frame.songEntrySongCategoryQPushButton.clicked.connect(partial(self.load_selected_category_page,
                                                                                 song.category.category_name))
             self.loaded_selected_author_songs.append(song_frame)
 
@@ -1263,16 +1412,11 @@ class Controller:
                 i.setParent(None)
             self.loaded_selected_author_albums = []
         albums = Albums.query.filter_by(author_id=author.id).all()
-        row = column = 0
         for album in albums:
-            if column % 8 == 0:
-                row += 1
-                column = 0
             album_frame = AlbumEntry(album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
-            self.ui.mainPageAuthorPageAlbumsGridQGridLayout.addWidget(album_frame, row, column, 1, 1)
+            self.ui.mainPageAuthorPageAlbumsGridQFlowLayout.addWidget(album_frame)
             self.loaded_selected_author_albums.append(album_frame)
-            column += 1
 
     def load_selected_author_playlists(self, author):
         if len(self.loaded_selected_author_playlists) != 0:
@@ -1284,31 +1428,25 @@ class Controller:
         for i in author_playlists:
             author_playlists_ids.append(i.playlist_id)
         playlists = Playlist.query.filter(Playlist.id.in_(author_playlists_ids)).all()
-        row = column = 0
         if playlists:
             for playlist in playlists:
-                if column % 8 == 0:
-                    row += 1
-                    column = 0
                 playlist_frame = PlaylistEntry(self.ui.frame_62, playlist_name=playlist.playlist_name)
                 playlist_frame.clicked.connect(partial(self.load_playlist_page, playlist))
-                self.ui.mainPageAuthorPagePlaylistsGridQGridLayout.addWidget(playlist_frame, row, column, 1, 1)
+                self.ui.mainPageAuthorPagePlaylistsGridQFlowLayout.addWidget(playlist_frame)
                 self.loaded_selected_author_playlists.append(playlist_frame)
-                column += 1
 
     def last_played_button_slot(self):
         """Prepare lastPlayed page and change mainPageStackedWidget to lastPlayed's index"""
-        self.setup_main_page_authors()
-        self.ui.set_main_page_stacked_widget_index(3)
+        self.set_main_page_stacked_widget_index(3)
 
     def liked_songs_button_slot(self):
         """Prepare likedSongs page and change mainPageStackedWidget to likedSongs' index"""
+        self.set_main_page_stacked_widget_index(2)
         if len(self.current_loaded_songs_frames) != 0:
             for i in self.current_loaded_songs_frames:
                 i.setParent(None)
             self.current_loaded_songs_frames = []
         self.setup_main_page_liked_songs()
-        self.ui.set_main_page_stacked_widget_index(2)
         liked_songs = Songs.query.filter_by(liked_by=self.user_data["hashed_name"]).all()
         if liked_songs:
             for song in liked_songs:
@@ -1317,10 +1455,15 @@ class Controller:
                     song_title=song.title,
                     artist_name=song.author.author_name,
                     category_name=song.category.category_name,
+                    date_added="Placeholder date",
+                    song_length="Placeholder length",
                     path=song.path,
                     is_liked=True,
                     frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
-                                     "song_length": True}
+                                     "song_length": True},
+                    visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                       ("songEntrySongDateAddedQLabel", 726),
+                                                       ("songEntrySongCategoryQFrame", 950)]
                 )
 
                 if self.now_playing_song and song.id == self.now_playing_song.song_id:
@@ -1329,12 +1472,11 @@ class Controller:
                 else:
                     liked_song_frame.pushButton_30.clicked.connect(partial(self.like_song, liked_song_frame))
                     liked_song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, liked_song_frame))
-                    liked_song_frame.mainPageLikedSongsArtistButton.clicked.connect(
+                    liked_song_frame.songEntrySongAuthorQPushButton.clicked.connect(
                         partial(self.load_author_page, song.author))
-                    liked_song_frame.mainPageLikedSongsCategoryButton.clicked.connect(
+                    liked_song_frame.songEntrySongCategoryQPushButton.clicked.connect(
                         partial(self.load_selected_category_page, song.category.category_name))
                     self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(liked_song_frame)
-
                     if len(self.sorted_current_playlist_songs_frames) > 0:
                         for i in self.sorted_current_playlist_songs_frames:
                             if i.song_id == liked_song_frame.song_id:
@@ -1347,35 +1489,26 @@ class Controller:
                                     index = self.shuffled_current_playlist_songs_frames.index(i)
                                     self.shuffled_current_playlist_songs_frames[index].setParent(None)
                                     self.shuffled_current_playlist_songs_frames[index] = liked_song_frame
-
                     self.current_loaded_songs_frames.append(liked_song_frame)
 
     def categories_button_slot(self):
         """Prepare categories page and change mainPageStackedWidget to categories' index"""
         self.setup_main_page_categories()
-        self.ui.set_main_page_stacked_widget_index(1)
+        self.set_main_page_stacked_widget_index(1)
 
         music_categories = []
         self.category_frames = []
-        row = column = 0
         music_categories_query = MusicCategories.query.all()
         for i in music_categories_query:
             music_categories.append(i.category_name)
         for category in music_categories:
-            if column % 8 == 0:
-                row += 1
-                column = 0
             category_frame = CategoryEntry(self.ui.frame_54, category=category)
             category_frame.clicked.connect(partial(self.load_selected_category_page, category))
-            self.ui.mainPageCategoriesCategoriesEntriesQGridLayout.addWidget(
-                category_frame,
-                row, column, 1, 1
-            )
+            self.ui.mainPageCategoriesCategoriesEntriesQFlowLayout.addWidget(category_frame)
             self.category_frames.append(category_frame)
-            column += 1
         category_adder = AdderEntry(adder_type=1)
         category_adder.clicked.connect(self.category_adder_clicked_slot)
-        self.ui.mainPageCategoriesCategoriesEntriesQGridLayout.addWidget(category_adder, row, column, 1, 1)
+        self.ui.mainPageCategoriesCategoriesEntriesQFlowLayout.addWidget(category_adder)
 
     def category_adder_clicked_slot(self):
         """Create new categoryInputDialog and run its show() method, run handle_new_category_creation() to validate
@@ -1439,7 +1572,7 @@ class Controller:
     def now_playing_button_slot(self):
         """Prepare nowPlaying page and change mainPageStackedWidget to nowPlaying's index"""
         self.setup_main_page_now_playing()
-        self.ui.set_main_page_stacked_widget_index(0)
+        self.set_main_page_stacked_widget_index(0)
 
     def mini_player_button_slot(self):
         """Close normal size player's window and open minimized version"""
@@ -1458,11 +1591,14 @@ class Controller:
     def main_page_stacked_widget_resize_slot(self):
         self.ui.fixedNavbar.setFixedWidth(self.ui.centralPageAppPage.rect().width() - 200)
 
+
+    # TODO Make category's songs and playlists Frames disappear when changing mainPageCagegoryPageStacked widget to category's
+    # TODO albums page similarly on other pages to prevent size issues
     def load_selected_category_page(self, category):
-        self.ui.mainPageStackedWidget.setCurrentIndex(7)
+        self.set_main_page_stacked_widget_index(7)
         self.ui.mainPageCategoryNameLabel.setText(category)
-        self.ui.mainPageAuthorPageAlbumsAuthorNameLabel_3.setText(category + " albums")
-        self.ui.mainPageAuthorPageAlbumsAuthorNameLabel_4.setText(category + " playlists")
+        self.ui.mainPageCategoryPageAlbumsCategoryNameLabel.setText(category + " albums")
+        self.ui.mainPageCategoryPagePlaylistsCategoryNameLabel.setText(category + " playlists")
         music_category = MusicCategories.query.filter_by(category_name=category).first()
         self.load_selected_category_songs(music_category)
         self.load_selected_category_albums(music_category)
@@ -1482,12 +1618,19 @@ class Controller:
                 song_id=song.id,
                 song_title=song.title,
                 artist_name=song.author.author_name,
+                date_added="Placeholder date",
+                song_length="Placeholder length",
+                path=song.path,
                 is_liked=is_liked,
+                frame_structure={"song_title": True, "artist_name": True, "category_name": False, "date_added": True,
+                                 "song_length": True},
+                visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                   ("songEntrySongDateAddedQLabel", 726)]
             )
             self.ui.mainPageCategoryPageSongsListQVBoxLayout.addWidget(song_frame)
             song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
             song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
-            song_frame.mainPageLikedSongsArtistButton.clicked.connect(partial(self.load_author_page, song.author))
+            song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
             self.loaded_songs.append(song_frame)
 
     def load_selected_category_albums(self, music_category):
@@ -1496,16 +1639,11 @@ class Controller:
                 i.setParent(None)
             self.loaded_albums = []
         albums = Albums.query.filter_by(category=music_category).all()
-        row = column = 0
         for album in albums:
-            if column % 8 == 0:
-                row += 1
-                column = 0
             album_frame = AlbumEntry(album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
-            self.ui.mainPageCategoryAlbumsGridQGridLayout.addWidget(album_frame, row, column, 1, 1)
+            self.ui.mainPageCategoryAlbumsGridQFlowLayout.addWidget(album_frame)
             self.loaded_albums.append(album_frame)
-            column += 1
 
     def load_selected_category_playlists(self, music_category):
         if len(self.loaded_playlists) != 0:
@@ -1552,7 +1690,7 @@ class Controller:
             self.ui.mainPageUtilityButtonsQButtonGroup.addButton(playlist_frame)
 
     def load_playlist_page(self, playlist):
-        self.ui.set_main_page_stacked_widget_index(5)
+        self.set_main_page_stacked_widget_index(5)
         self.ui.mainPagePlaylistNameOfPlaylistLabel.setText(playlist.playlist_name)
         self.load_playlist_page_songs(playlist)
 
@@ -1575,13 +1713,21 @@ class Controller:
                 song_title=song.title,
                 artist_name=song.author.author_name,
                 category_name=song.category.category_name,
+                date_added="Placeholder date",
+                song_length="Placeholder length",
+                path=song.path,
                 is_liked=is_liked,
+                frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
+                                 "song_length": True},
+                visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                   ("songEntrySongCategoryQFrame", 726),
+                                                   ("songEntrySongDateAddedQLabel", 950)]
             )
             self.loaded_playlist_page_songs.append(song_frame)
             song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
             # song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
-            song_frame.mainPageLikedSongsArtistButton.clicked.connect(partial(self.load_author_page, song.author))
-            song_frame.mainPageLikedSongsCategoryButton.clicked.connect(partial(self.load_selected_category_page,
+            song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
+            song_frame.songEntrySongCategoryQPushButton.clicked.connect(partial(self.load_selected_category_page,
                                                                                 song.category.category_name))
             self.ui.mainPagePlaylistSongListQVBoxLayout.addWidget(song_frame)
 
@@ -1662,7 +1808,7 @@ class Controller:
             self.shuffle_now_playing_playlist()
 
     def queue_button_slot(self):
-        """Prepare authors page and change mainPageStackedWidget to authors's index"""
+        """Prepare authors page and change mainPageStackedWidget to authors' index"""
         if self.now_playing_song:
             if self.playlist_state == PlaylistState.SORTED:
                 song_frame = SongEntry(
@@ -1673,8 +1819,10 @@ class Controller:
                     path=self.now_playing_song.path,
                     is_liked=True,
                     frame_structure={"song_title": True, "artist_name": True, "category_name": True,
-                                     "date_added": True,
-                                     "song_length": True}
+                                     "date_added": True, "song_length": True},
+                    visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                       ("songEntrySongCategoryQFrame", 726),
+                                                       ("songEntrySongDateAddedQLabel", 950)]
                 )
                 self.sorted_current_playlist_songs_frames[
                     self.sorted_current_playlist_songs_frames.index(self.now_playing_song)] = song_frame
@@ -1691,8 +1839,10 @@ class Controller:
                         path=song.path,
                         is_liked=True,
                         frame_structure={"song_title": True, "artist_name": True, "category_name": True,
-                                         "date_added": True,
-                                         "song_length": True}
+                                         "date_added": True, "song_length": True},
+                        visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                           ("songEntrySongCategoryQFrame", 726),
+                                                           ("songEntrySongDateAddedQLabel", 950)]
                     )
                     self.sorted_current_playlist_songs_frames[
                         self.sorted_current_playlist_songs_frames.index(song)].setParent(None)
@@ -1708,8 +1858,10 @@ class Controller:
                     path=self.now_playing_song.path,
                     is_liked=True,
                     frame_structure={"song_title": True, "artist_name": True, "category_name": True,
-                                     "date_added": True,
-                                     "song_length": True}
+                                     "date_added": True, "song_length": True},
+                    visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                       ("songEntrySongCategoryQFrame", 726),
+                                                       ("songEntrySongDateAddedQLabel", 950)]
                 )
                 self.shuffled_current_playlist_songs_frames[
                     self.shuffled_current_playlist_songs_frames.index(self.now_playing_song)] = song_frame
@@ -1726,8 +1878,10 @@ class Controller:
                         path=song.path,
                         is_liked=True,
                         frame_structure={"song_title": True, "artist_name": True, "category_name": True,
-                                         "date_added": True,
-                                         "song_length": True}
+                                         "date_added": True, "song_length": True},
+                        visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                           ("songEntrySongCategoryQFrame", 726),
+                                                           ("songEntrySongDateAddedQLabel", 950)]
                     )
                     self.shuffled_current_playlist_songs_frames[
                         self.shuffled_current_playlist_songs_frames.index(song)].setParent(None)
@@ -1735,7 +1889,7 @@ class Controller:
                         self.shuffled_current_playlist_songs_frames.index(song)] = song_frame
                     self.ui.mainPageSongQueueSongListQVBoxLayout.addWidget(song_frame)
         self.setup_main_page_queue()
-        self.ui.set_main_page_stacked_widget_index(9)
+        self.set_main_page_stacked_widget_index(9)
 
     def play_previous_playlist_song(self):
         widget_index = self.ui.mainPageStackedWidget.currentIndex()
@@ -2081,22 +2235,22 @@ class Controller:
 """
 
     def change_widget_category_songs(self):
-        self.ui.mainPageCategoryPageStackedWidget.setCurrentIndex(0)
+        self.set_category_page_stacked_widget_index(0)
 
     def change_widget_category_albums(self):
-        self.ui.mainPageCategoryPageStackedWidget.setCurrentIndex(1)
+        self.set_category_page_stacked_widget_index(1)
 
     def change_widget_category_playlists(self):
-        self.ui.mainPageCategoryPageStackedWidget.setCurrentIndex(2)
+        self.set_category_page_stacked_widget_index(2)
 
     def change_widget_author_songs(self):
-        self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(0)
+        self.set_author_page_stacked_widget_index(0)
 
     def change_widget_author_albums(self):
-        self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(1)
+        self.set_author_page_stacked_widget_index(1)
 
     def change_widget_author_playlists(self):
-        self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(2)
+        self.set_author_page_stacked_widget_index(2)
 
     def handle_dialog_rejection(self, app_layer_frame, dialog):
         """Call dialog's reject() method and app_layer_frame's deleteLater() to remove both from the screen.
@@ -2348,7 +2502,7 @@ class Controller:
         self.handle_dialog_acceptation(app_layer_frame, playlist_dialog)
 
     def all_songs_button_slot(self):
-        self.ui.set_main_page_stacked_widget_index(11)
+        self.set_main_page_stacked_widget_index(11)
 
     @staticmethod
     def handle_new_file_dialog():
@@ -2481,3 +2635,63 @@ class Controller:
             self.ui.centralPageRegisterPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Normal)
         else:
             self.ui.centralPageRegisterPagePasswordQLineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+
+    def set_main_page_stacked_widget_index(self, index):
+        """Set mainPageStackedWidget's index, adjust stickySortButtonsFrame visibility
+
+           Parameters:
+               index(int): index to set mainPageStackedWidget's index to
+
+        """
+        # change index immediately to make all elements on page have isVisible set to true to prevent issues such as
+        # trying to set visibility of element that is not present on the screen
+        self.ui.mainPageStackedWidget.setCurrentIndex(index)
+
+        # set all custom and native scrollbars to value 0 when changing page to prevent issues with navbar saturation
+        self.reset_all_custom_and_native_scrollbars()
+
+        # adjust all sortButtonFrames elements visibility when changing page
+        self.ui.adjust_all_sort_button_frames_visibility()
+        # author page, calls set_author_page_stacked_widget_index to always set mainPageAuthorPageStackedWidget's index
+        # to 0 in order to not have to track which Widget is visible and adjusting stickySortButtonFrame visibility
+        if index == 6:
+            self.ui.mainPageAuthorSongsButton.setChecked(True)
+            self.set_author_page_stacked_widget_index(0)
+        # category, calls set_author_page_stacked_widget_index to always set mainPageCategoryPageStackedWidget's index
+        # to 0 in order to not have to track which Widget is visible and adjusting stickySortButtonFrame visibility
+        elif index == 7:
+            self.ui.mainPageCategorySongsButton.setChecked(True)
+            self.set_category_page_stacked_widget_index(0)
+        # adjust fixedNavbar's sticky sort button frame height and visibility accordingly to each page
+        self.ui.fixedNavbar.adjust_sticky_sort_button_frame(index)
+
+
+    def set_author_page_stacked_widget_index(self, index):
+        """Set mainPageAuthorsPageStackedWidget's index, adjust stickySortButtonsFrame visibility
+
+                   Parameters:
+                       index(int): index to set mainPageAuthorsPageStackedWidget's index to
+
+                """
+        self.ui.fixedNavbar.adjust_authors_page_sticky_sort_button_frame(index)
+        self.ui.mainPageAuthorPageStackedWidget.setCurrentIndex(index)
+        self.reset_all_custom_and_native_scrollbars()
+
+    def set_category_page_stacked_widget_index(self, index):
+        """Set mainPageCategoryPageStackedWidget's index, adjust stickySortButtonsFrame visibility
+
+                   Parameters:
+                       index(int): index to set mainPageCategoryPageStackedWidget's index to
+
+                """
+        self.ui.fixedNavbar.adjust_category_page_sticky_sort_button_frame(index)
+        self.ui.mainPageCategoryPageStackedWidget.setCurrentIndex(index)
+        self.reset_all_custom_and_native_scrollbars()
+
+    def reset_all_custom_and_native_scrollbars(self):
+        """Reset all custom and native vertical scrollbars to value 0."""
+        for scrollbar in self.ui.custom_scrollbars_list:
+            scrollbar.triggerAction(QtWidgets.QAbstractSlider.SliderToMinimum)
+            scrollbar.setValue(0)
+        for native_scrollbar in self.ui.native_vertical_scrollbar_list:
+            native_scrollbar.setValue(0)

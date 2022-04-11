@@ -1,7 +1,9 @@
 from PySide2 import QtWidgets, QtCore, QtGui
 from app.src import resources_peach_player
+from app.src.classes.widgets.sort_buttons_qframe import SortButtonsQFrame
 
 
+# TODO Comment this class
 class NavbarFrame(QtWidgets.QFrame):
     resized = QtCore.Signal()
 
@@ -11,6 +13,7 @@ class NavbarFrame(QtWidgets.QFrame):
         self.resized.connect(self.navbar_frame_resize_slot)
 
     def navbar_frame_resize_slot(self):
+        self.layer_frame.setFixedSize(self.width(), self.height())
         if self.rect().width() <= 1020:
             self.navbarUsernameButton.setVisible(False)
             self.navbarUsernameSmallButton.setVisible(True)
@@ -29,19 +32,25 @@ class NavbarFrame(QtWidgets.QFrame):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
         self.frame.setSizePolicy(sizePolicy)
-        self.frame.setMinimumSize(QtCore.QSize(0, 60))
-        self.frame.setMaximumSize(QtCore.QSize(16777215, 60))
+        self.frame.setMinimumSize(QtCore.QSize(0, 101))
+        self.frame.setMaximumSize(QtCore.QSize(16777215, 101))
         self.frame.setStyleSheet("border: none;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.frame_2 = QtWidgets.QFrame(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy)
         self.frame_2.setMinimumSize(QtCore.QSize(0, 60))
         self.frame_2.setMaximumSize(QtCore.QSize(16777215, 60))
+
         self.frame_2.setStyleSheet("#navbarUsernameButton{\n"
                                    "    background-color: rgb(24, 24, 24);\n"
                                    "    color: white;\n"
@@ -57,7 +66,7 @@ class NavbarFrame(QtWidgets.QFrame):
                                    "#navbarPlayButton:checked{\n"
                                    "    icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_pause_white_48dp.png);\n"
                                    "}\n"
-                                   "#navbarPlaylistName{\n"
+                                   "#navbarPageName{\n"
                                    "    font: 87 17pt Heebo Black;\n"
                                    "    color: white;\n"
                                    "}\n"
@@ -163,18 +172,18 @@ class NavbarFrame(QtWidgets.QFrame):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.navbarPlaylistName = QtWidgets.QLabel(self.frame_5)
+        self.navbarPageName = QtWidgets.QLabel(self.frame_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.navbarPlaylistName.sizePolicy().hasHeightForWidth())
-        self.navbarPlaylistName.setSizePolicy(sizePolicy)
-        self.navbarPlaylistName.setText("Integer dignissim")
-        self.navbarPlaylistName.setObjectName("navbarPlaylistName")
-        self.horizontalLayout_2.addWidget(self.navbarPlaylistName)
+        sizePolicy.setHeightForWidth(self.navbarPageName.sizePolicy().hasHeightForWidth())
+        self.navbarPageName.setSizePolicy(sizePolicy)
+        self.navbarPageName.setText("Integer dignissim")
+        self.navbarPageName.setObjectName("navbarPageName")
+        self.horizontalLayout_2.addWidget(self.navbarPageName)
         self.horizontalLayout_3.addWidget(self.frame_5)
         self.horizontalLayout_4.addWidget(self.frame_3)
-        spacerItem = QtWidgets.QSpacerItem(323, 55, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(274, 57, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.frame_6 = QtWidgets.QFrame(self.frame_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -199,6 +208,7 @@ class NavbarFrame(QtWidgets.QFrame):
         self.navbarSynchronizeButton.setSizePolicy(sizePolicy)
         self.navbarSynchronizeButton.setMinimumSize(QtCore.QSize(32, 32))
         self.navbarSynchronizeButton.setMaximumSize(QtCore.QSize(32, 32))
+        self.navbarSynchronizeButton.setToolTip("Synchronize songs")
         self.navbarSynchronizeButton.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_sync_alt_gray_48dp.png"),
@@ -215,6 +225,7 @@ class NavbarFrame(QtWidgets.QFrame):
         self.navbarUsernameSmallButton.setSizePolicy(sizePolicy)
         self.navbarUsernameSmallButton.setMinimumSize(QtCore.QSize(32, 32))
         self.navbarUsernameSmallButton.setMaximumSize(QtCore.QSize(32, 32))
+        self.navbarUsernameSmallButton.setToolTip("")
         self.navbarUsernameSmallButton.setText("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/icons/48x48/outlined/icons/48x48/outlined/outline_logout_gray_48dp.png"),
@@ -256,7 +267,7 @@ class NavbarFrame(QtWidgets.QFrame):
         self.frame_8.setSizePolicy(sizePolicy)
         self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_8.setObjectName("frame_8")
+        self.frame_8.setObjectName("PlaylistSortButtonsQFrame")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_8)
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_6.setSpacing(0)
@@ -314,31 +325,293 @@ class NavbarFrame(QtWidgets.QFrame):
         self.verticalLayout_2.addItem(spacerItem1)
         self.horizontalLayout_5.addWidget(self.frame_7)
         self.horizontalLayout_4.addWidget(self.frame_6)
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout_4.addWidget(self.frame_2)
         self.navbarPlayButton.setVisible(False)
-        self.navbarPlaylistName.setVisible(False)
+        self.navbarPageName.setVisible(False)
 
-    def adjust_elements_visibility(self, distance):
-        """Make navbarPlaylistName and navbarPlayButton visible when certain scroll threshold is reached."""
+        self.frame_13 = QtWidgets.QFrame(self.frame)
+        self.frame_13.setVisible(False)
+        self.frame_13.setStyleSheet("#frame_13{\n"
+                                    f"    background-color: rgb(24, 24, 24);\n"
+                                    f"    border-bottom: 1px solid rgba(179, 179, 179, 0.25);\n"
+                                    "}\n")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_13.sizePolicy().hasHeightForWidth())
+        self.frame_13.setSizePolicy(sizePolicy)
+        self.frame_13.setMinimumSize(QtCore.QSize(0, 41))
+        self.frame_13.setMaximumSize(QtCore.QSize(16777215, 41))
+        self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_13.setObjectName("frame_13")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame_13)
+        self.verticalLayout.setContentsMargins(32, 0, 32, 0)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.likedSongsStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                                  frame_structure={
+                                                                      "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                      "sortButtonsQFrameAuthorButtonQFrame": True,
+                                                                      "sortButtonsQFrameCategoryButtonQFrame": True,
+                                                                      "sortButtonsQFrameDateAddedButtonQFrame": True,
+                                                                      "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                                  visibility_changing_sort_buttons_elements=[
+                                                                      ("sortButtonsQFrameAuthorButtonQFrame", 552),
+                                                                      ("sortButtonsQFrameCategoryButtonQFrame", 726),
+                                                                      ("sortButtonsQFrameDateAddedButtonQFrame", 950)]
+                                                                  )
+        self.likedSongsStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "SortButtonsQFrame QPushButton:hover{\n"
+                                                            "    color: white;\n"
+                                                            "}\n"
+                                                            "SortButtonsQFrame QPushButton{\n"
+                                                            "    font: 57 10pt \"Heebo Medium\";\n"
+                                                            "}\n")
+        self.verticalLayout.addWidget(self.likedSongsStickySortButtonsFrame)
+
+        self.lastPlayedStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                                  frame_structure={
+                                                                      "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                      "sortButtonsQFrameAuthorButtonQFrame": True,
+                                                                      "sortButtonsQFrameCategoryButtonQFrame": True,
+                                                                      "sortButtonsQFrameDateAddedButtonQFrame": False,
+                                                                      "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                                  visibility_changing_sort_buttons_elements=[
+                                                                      ("sortButtonsQFrameAuthorButtonQFrame", 552),
+                                                                      ("sortButtonsQFrameCategoryButtonQFrame", 726), ]
+                                                                  )
+        self.lastPlayedStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                            "    padding-left: 25px;\n"
+                                                            "}\n"
+                                                            "SortButtonsQFrame QPushButton:hover{\n"
+                                                            "    color: white;\n"
+                                                            "}\n"
+                                                            "SortButtonsQFrame QPushButton{\n"
+                                                            "    font: 57 10pt \"Heebo Medium\";\n"
+                                                            "}\n")
+        self.verticalLayout.addWidget(self.lastPlayedStickySortButtonsFrame)
+
+        self.playlistStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                                frame_structure={
+                                                                    "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                    "sortButtonsQFrameAuthorButtonQFrame": True,
+                                                                    "sortButtonsQFrameCategoryButtonQFrame": True,
+                                                                    "sortButtonsQFrameDateAddedButtonQFrame": True,
+                                                                    "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                                visibility_changing_sort_buttons_elements=[
+                                                                    ("sortButtonsQFrameAuthorButtonQFrame", 552),
+                                                                    ("sortButtonsQFrameCategoryButtonQFrame", 726),
+                                                                    (
+                                                                        "sortButtonsQFrameDateAddedButtonQFrame", 950)]
+                                                                )
+        self.playlistStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "SortButtonsQFrame QPushButton:hover{\n"
+                                                          "    color: white;\n"
+                                                          "}\n"
+                                                          "SortButtonsQFrame QPushButton{\n"
+                                                          "    font: 57 10pt \"Heebo Medium\";\n"
+                                                          "}\n")
+        self.verticalLayout.addWidget(self.playlistStickySortButtonsFrame)
+
+        self.authorStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                              frame_structure={
+                                                                  "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                  "sortButtonsQFrameAuthorButtonQFrame": False,
+                                                                  "sortButtonsQFrameCategoryButtonQFrame": True,
+                                                                  "sortButtonsQFrameDateAddedButtonQFrame": True,
+                                                                  "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                              visibility_changing_sort_buttons_elements=[
+                                                                  ("sortButtonsQFrameCategoryButtonQFrame", 552),
+                                                                  ("sortButtonsQFrameDateAddedButtonQFrame", 726)]
+                                                              )
+        self.authorStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                        "    padding-left: 25px;\n"
+                                                        "}\n"
+                                                        "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                        "    padding-left: 25px;\n"
+                                                        "}\n"
+                                                        "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                        "    padding-left: 25px;\n"
+                                                        "}\n"
+                                                        "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                        "    padding-left: 25px;\n"
+                                                        "}\n"
+                                                        "SortButtonsQFrame QPushButton:hover{\n"
+                                                        "    color: white;\n"
+                                                        "}\n"
+                                                        "SortButtonsQFrame QPushButton{\n"
+                                                        "    font: 57 10pt \"Heebo Medium\";\n"
+                                                        "}\n")
+        self.verticalLayout.addWidget(self.authorStickySortButtonsFrame)
+
+        self.categoryStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                                frame_structure={
+                                                                    "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                    "sortButtonsQFrameAuthorButtonQFrame": True,
+                                                                    "sortButtonsQFrameCategoryButtonQFrame": False,
+                                                                    "sortButtonsQFrameDateAddedButtonQFrame": True,
+                                                                    "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                                visibility_changing_sort_buttons_elements=[
+                                                                    ("sortButtonsQFrameAuthorButtonQFrame", 552),
+                                                                    ("sortButtonsQFrameDateAddedButtonQFrame", 726)]
+                                                                )
+        self.categoryStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "SortButtonsQFrame QPushButton:hover{\n"
+                                                          "    color: white;\n"
+                                                          "}\n"
+                                                          "SortButtonsQFrame QPushButton{\n"
+                                                          "    font: 57 10pt \"Heebo Medium\";\n"
+                                                          "}\n")
+        self.verticalLayout.addWidget(self.categoryStickySortButtonsFrame)
+
+        self.albumStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                             frame_structure={
+                                                                 "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                 "sortButtonsQFrameAuthorButtonQFrame": True,
+                                                                 "sortButtonsQFrameCategoryButtonQFrame": False,
+                                                                 "sortButtonsQFrameDateAddedButtonQFrame": False,
+                                                                 "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                             visibility_changing_sort_buttons_elements=[
+                                                                 ("sortButtonsQFrameAuthorButtonQFrame", 552)]
+                                                             )
+        self.albumStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                       "    padding-left: 25px;\n"
+                                                       "}\n"
+                                                       "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                       "    padding-left: 25px;\n"
+                                                       "}\n"
+                                                       "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                       "    padding-left: 25px;\n"
+                                                       "}\n"
+                                                       "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                       "    padding-left: 25px;\n"
+                                                       "}\n"
+                                                       "SortButtonsQFrame QPushButton:hover{\n"
+                                                       "    color: white;\n"
+                                                       "}\n"
+                                                       "SortButtonsQFrame QPushButton{\n"
+                                                       "    font: 57 10pt \"Heebo Medium\";\n"
+                                                       "}\n")
+        self.verticalLayout.addWidget(self.albumStickySortButtonsFrame)
+
+        self.allSongsStickySortButtonsFrame = SortButtonsQFrame(parent=self.frame_13,
+                                                                frame_structure={
+                                                                    "sortButtonsQFrameTitleButtonQFrame": True,
+                                                                    "sortButtonsQFrameAuthorButtonQFrame": True,
+                                                                    "sortButtonsQFrameCategoryButtonQFrame": True,
+                                                                    "sortButtonsQFrameDateAddedButtonQFrame": True,
+                                                                    "sortButtonsQFrameSongLengthButtonQFrame": True},
+                                                                visibility_changing_sort_buttons_elements=[
+                                                                    ("sortButtonsQFrameAuthorButtonQFrame", 552),
+                                                                    ("sortButtonsQFrameCategoryButtonQFrame", 726),
+                                                                    ("sortButtonsQFrameDateAddedButtonQFrame", 950)]
+                                                                )
+        self.allSongsStickySortButtonsFrame.setStyleSheet("#sortButtonsQFrameAuthorButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameCategoryButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameDateAddedButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "#sortButtonsQFrameSongLengthButtonQFrame{\n"
+                                                          "    padding-left: 25px;\n"
+                                                          "}\n"
+                                                          "SortButtonsQFrame QPushButton:hover{\n"
+                                                          "    color: white;\n"
+                                                          "}\n"
+                                                          "SortButtonsQFrame QPushButton{\n"
+                                                          "    font: 57 10pt \"Heebo Medium\";\n"
+                                                          "}\n")
+        self.verticalLayout.addWidget(self.allSongsStickySortButtonsFrame)
+        self.verticalLayout_4.addWidget(self.frame_13)
+        spacerItem3 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_4.addItem(spacerItem3)
+
+        # list with all StickySortButtonsFrames inside frame_13's verticalLayout
+        self.stickySortButtonsFrames = [self.likedSongsStickySortButtonsFrame, self.lastPlayedStickySortButtonsFrame,
+                                        self.playlistStickySortButtonsFrame, self.authorStickySortButtonsFrame,
+                                        self.categoryStickySortButtonsFrame, self.albumStickySortButtonsFrame,
+                                        self.allSongsStickySortButtonsFrame]
+
+        self.set_sticky_sort_button_frames_invisible()
+
+    def set_sticky_sort_button_frames_invisible(self):
+        """Set all frames inside frame_13's verticalLayout to invisible."""
+        for frame in self.stickySortButtonsFrames:
+            frame.setVisible(False)
+
+    def adjust_elements_visibility(self, distance, play_button=True, page_name=True):
+        """Make navbarPageName and navbarPlayButton visible when certain scroll threshold is reached.
+
+        Parameters:
+            distance(int): distance between navbar and certain point on the page
+            play_button(bool): determines if navbarPlayButton should be made visible when certain point on the page is reached
+            page_name(bool): determines if navbarPageName should be made visible when certain point on the page is reached
+        """
         if distance > 0:
             self.navbarPlayButton.setVisible(False)
-            self.navbarPlaylistName.setVisible(False)
+            self.navbarPageName.setVisible(False)
         else:
-            self.navbarPlayButton.setVisible(True)
-            self.navbarPlaylistName.setVisible(True)
-
+            if play_button:
+                self.navbarPlayButton.setVisible(True)
+            if page_name:
+                self.navbarPageName.setVisible(True)
 
     def calculate_navbar_saturation(self, distance, offset):
         """Calculate the saturation of the Navbar depending on distance from certain point respective for each page.
 
         Parameters:
-            distance(int): distance between navbar and certain point on the page.
+            distance(int): distance between navbar and certain point on the page
             offset(int): distance at which navbar should start to gain saturation
         """
-        return (offset - distance) / offset
+        return (offset - distance) / offset * 255
 
-    # TODO Fix Navbar not saturating properly when scrollbar gets clicked at bottom - MAYBE use QOneShot
-    # TODO Make the sort buttons frame stick at certain point
+    # TODO Fix Navbar not saturating properly when scrollbar gets clicked at bottom - use QOneShot
     def adjust_navbar_saturation(self, distance, offset):
         """Adjust the Navbar's saturation depending on distance from certain point respective for each page.
 
@@ -346,11 +619,15 @@ class NavbarFrame(QtWidgets.QFrame):
             distance(int): distance between navbar and certain point on the page.
             offset(int): distance at which navbar should start to gain saturation
         """
-        self.layer_frame.setFixedSize(self.width(), self.height())
         if offset >= distance >= 0:
             saturation = self.calculate_navbar_saturation(distance, offset)
-            self.layer_frame.setStyleSheet(f"background-color: rgba(18, 18, 18, {saturation * 0.45})")
-            self.set_navbar_saturation(saturation*255)
+            # workaround for issue when saturation is in range 1-1.5 the color turns black
+            if 1.5 > saturation > 0:
+                self.set_navbar_saturation(1.5)
+                self.layer_frame.setStyleSheet(f"background-color: rgba(18, 18, 18, {1.5})")
+            else:
+                self.set_navbar_saturation(saturation)
+                self.layer_frame.setStyleSheet(f"background-color: rgba(18, 18, 18, {saturation*0.45})")
         elif distance > offset:
             self.layer_frame.setStyleSheet("background-color: rgba(18, 18, 18, 0)")
             self.set_navbar_saturation(0)
@@ -382,7 +659,7 @@ class NavbarFrame(QtWidgets.QFrame):
                                    "#navbarPlayButton:checked{\n"
                                    "    icon: url(:/icons/48x48/filled/icons/48x48/filled/filled_pause_white_48dp.png);\n"
                                    "}\n"
-                                   "#navbarPlaylistName{\n"
+                                   "#navbarPageName{\n"
                                    "    font: 87 17pt Heebo Black;\n"
                                    "    color: white;\n"
                                    "}\n"
@@ -423,3 +700,112 @@ class NavbarFrame(QtWidgets.QFrame):
                                    "#navbarSynchronizeButton:hover{\n"
                                    "    icon: url(:/icons/48x48/outlined/icons/48x48/outlined/outline_sync_alt_white_48dp.png);\n"
                                    "}\n")
+
+    def adjust_sticky_sort_button_frame_visibility(self, distance):
+        """Adjust the Navbar's sticky SortButtonFrame depending on distance from certain point respective for each page.
+
+               Parameters:
+                   distance(int): distance between navbar and certain point on the page.
+               """
+        if distance <= 0:
+            self.frame_13.setVisible(True)
+            self.setFixedHeight(101)
+            # Call adjust_sort_buttons_qframe_sort_buttons_frames_visibility to prevent sort button frames having
+            # wrong visibility when making frame_13 visible and before resizing window
+            for frame in self.stickySortButtonsFrames:
+                frame.adjust_sort_buttons_qframe_sort_buttons_frames_visibility()
+        else:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+
+    def adjust_sticky_sort_button_frame(self, index):
+        """Select and make visible sortButtonFrame proper for mainPageStackedWidget's currently visible QWidget"""
+        # now playing
+        if index == 0:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+        # categories
+        elif index == 1:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+        # liked songs
+        elif index == 2:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.likedSongsStickySortButtonsFrame.setVisible(True)
+        # last played
+        elif index == 3:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.lastPlayedStickySortButtonsFrame.setVisible(True)
+        # authors
+        elif index == 4:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+        # playlist
+        elif index == 5:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.playlistStickySortButtonsFrame.setVisible(True)
+        # author
+        elif index == 6:
+            # handled by adjust_authors_page_sticky_sort_button_frame
+            pass
+        # category
+        elif index == 7:
+            # handled by adjust_category_page_sticky_sort_button_frame
+            pass
+        # album
+        elif index == 8:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.albumStickySortButtonsFrame.setVisible(True)
+        # song queue
+        elif index == 9:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+        # albums
+        elif index == 10:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+        # all songs
+        elif index == 11:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.allSongsStickySortButtonsFrame.setVisible(True)
+
+    def adjust_authors_page_sticky_sort_button_frame(self, index):
+        """Select and make visible sortButtonFrame proper for mainPageAuthorPageStackedWidget's currently visible
+         QWidget
+         """
+        # songs
+        if index == 0:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.authorStickySortButtonsFrame.setVisible(True)
+        # albums, playlists
+        else:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+
+    def adjust_category_page_sticky_sort_button_frame(self, index):
+        """Select and make visible sortButtonFrame proper for mainPageCategoryPageStackedWidget's currently visible
+         QWidget
+         """
+        # songs
+        if index == 0:
+            # set other sticky sort button visibility to false
+            self.set_sticky_sort_button_frames_invisible()
+            self.setFixedHeight(101)
+            self.categoryStickySortButtonsFrame.setVisible(True)
+        # albums, playlists
+        else:
+            self.frame_13.setVisible(False)
+            self.setFixedHeight(60)
+
