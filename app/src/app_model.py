@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
@@ -6,10 +7,15 @@ from PySide2.QtCore import QThread
 from PySide2.QtWidgets import QApplication
 import time
 
+# TODO Redo this as pure SQLAlchemy
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///localdb.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'localdb.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+db = SQLAlchemy()
+db.init_app(app)
 
 SONG_FOLDER = "C:/Users/mrocz/PycharmProjects/Peach-player/app/src/songs"
 
@@ -32,6 +38,7 @@ class Songs(db.Model):
     liked_by = Column(String)
     is_playing = Column(Boolean)
     user_hashed_name = Column(String(200))
+
     album = relationship("Albums", back_populates="song")
     author = relationship("Authors", back_populates="song")
     category = relationship("MusicCategories", back_populates="song")
@@ -87,6 +94,7 @@ class PlaylistSongs(db.Model):
 class Authors(db.Model):
     id = Column(Integer, primary_key=True)
     author_name = Column(String)
+
     album = relationship("Albums")
     song = relationship("Songs")
     playlists = relationship("AuthorPlaylists")
@@ -104,6 +112,3 @@ class LastPlayedSongs(db.Model):
     id = Column(Integer, primary_key=True)
     song_id = Column(Integer, ForeignKey("songs.id"))
     song = relationship("Songs", back_populates="last_played")
-
-
-db.create_all()

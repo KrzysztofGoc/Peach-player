@@ -24,6 +24,8 @@ from classes.dialogs.albumInputDialog import albumInputDialog
 from classes.dialogs.synchronizeDialog import synchronizeDialog
 from app.src.classes.widgets.helper_widgets.clicked_signal_qframe import ClickedSignalQFrame
 
+from app_model import app as localDatabaseApp
+
 scrollbar_recently_used = False
 
 
@@ -517,11 +519,13 @@ class Controller:
                 self.ui.categoryPagePlayPauseQPushButton.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -32)).y())
         elif self.ui.mainPageCategoryPageStackedWidget.currentIndex() == 1:
             self.ui.fixedNavbar.adjust_elements_visibility(
-                self.ui.mainPageCategoryPageAlbumsCategoryNameLabel.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -34)).y(), play_button=False)
+                self.ui.mainPageCategoryPageAlbumsCategoryNameLabel.mapTo(self.ui.scrollArea_11,
+                                                                          QtCore.QPoint(0, -34)).y(), play_button=False)
         elif self.ui.mainPageCategoryPageStackedWidget.currentIndex() == 2:
             self.ui.fixedNavbar.adjust_elements_visibility(
-                self.ui.mainPageCategoryPagePlaylistsCategoryNameLabel.mapTo(self.ui.scrollArea_11, QtCore.QPoint(0, -34)).y(), play_button=False)
-
+                self.ui.mainPageCategoryPagePlaylistsCategoryNameLabel.mapTo(self.ui.scrollArea_11,
+                                                                             QtCore.QPoint(0, -34)).y(),
+                play_button=False)
 
         global scrollbar_recently_used
         if not scrollbar_recently_used:
@@ -712,7 +716,8 @@ class Controller:
             self.ui.mainPageLastPlayedHeaderQLabel.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -33)).y(), 70)
 
         self.ui.fixedNavbar.adjust_elements_visibility(
-            self.ui.mainPageLastPlayedHeaderQLabel.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -33)).y(), play_button=False)
+            self.ui.mainPageLastPlayedHeaderQLabel.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -33)).y(),
+            play_button=False)
 
         self.ui.fixedNavbar.adjust_sticky_sort_button_frame_visibility(
             self.ui.LastPlayedSortButtonsQFrame.mapTo(self.ui.scrollArea_10, QtCore.QPoint(0, -60)).y())
@@ -804,7 +809,6 @@ class Controller:
 
         self.ui.fixedNavbar.adjust_elements_visibility(
             self.ui.label_115.mapTo(self.ui.scrollArea_9, QtCore.QPoint(0, -34)).y())
-
 
         global scrollbar_recently_used
         if not scrollbar_recently_used:
@@ -1288,7 +1292,8 @@ class Controller:
         """Prepare albums page and change mainPageStackedWidget to album's index"""
         self.setup_main_page_albums()
         self.set_main_page_stacked_widget_index(10)
-        all_albums = Albums.query.all()
+        with localDatabaseApp.app_context():
+            all_albums = Albums.query.all()
         for album in all_albums:
             album_frame = AlbumEntry(self.ui.frame_265, album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
@@ -1304,9 +1309,11 @@ class Controller:
             self.current_loaded_songs_frames = []
         self.set_main_page_stacked_widget_index(8)
         self.ui.mainPageAlbumNameOfAlbumLabel.setText(album.album_name)
-        songs = AlbumSongs.query.filter_by(album_id=album.id).all()
+        with localDatabaseApp.app_context():
+            songs = AlbumSongs.query.filter_by(album_id=album.id).all()
         for i in songs:
-            song = Songs.query.filter_by(id=i.song_id).first()
+            with localDatabaseApp.app_context():
+                song = Songs.query.filter_by(id=i.song_id).first()
             is_liked = False
             if song.liked_by == self.user_data["hashed_name"]:
                 is_liked = True
@@ -1352,11 +1359,13 @@ class Controller:
 
                 self.current_loaded_songs_frames.append(song_frame)
 
+    # TODO Clear the page before its loaded to not duplicate the author frames
     def authors_button_slot(self):
         """Prepare authors page and change mainPageStackedWidget to authors's index"""
         self.setup_main_page_authors()
         self.set_main_page_stacked_widget_index(4)
-        all_authors = Authors.query.all()
+        with localDatabaseApp.app_context():
+            all_authors = Authors.query.all()
         for author in all_authors:
             author_frame = AuthorEntry(self.ui.mainPageAuthorsGrid, author_name=author.author_name)
             author_frame.clicked.connect(partial(self.load_author_page, author))
@@ -1381,7 +1390,8 @@ class Controller:
             for i in self.loaded_selected_author_songs:
                 i.setParent(None)
             self.loaded_selected_author_songs = []
-        songs = Songs.query.filter_by(author_id=author.id).all()
+        with localDatabaseApp.app_context():
+            songs = Songs.query.filter_by(author_id=author.id).all()
         for song in songs:
             is_liked = False
             if song.liked_by == self.user_data["hashed_name"]:
@@ -1411,7 +1421,8 @@ class Controller:
             for i in self.loaded_selected_author_albums:
                 i.setParent(None)
             self.loaded_selected_author_albums = []
-        albums = Albums.query.filter_by(author_id=author.id).all()
+        with localDatabaseApp.app_context():
+            albums = Albums.query.filter_by(author_id=author.id).all()
         for album in albums:
             album_frame = AlbumEntry(album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
@@ -1423,11 +1434,13 @@ class Controller:
             for i in self.loaded_selected_author_playlists:
                 i.setParent(None)
             self.loaded_selected_author_playlists = []
-        author_playlists = AuthorPlaylists.query.filter_by(author_id=author.id).all()
+        with localDatabaseApp.app_context():
+            author_playlists = AuthorPlaylists.query.filter_by(author_id=author.id).all()
         author_playlists_ids = []
         for i in author_playlists:
             author_playlists_ids.append(i.playlist_id)
-        playlists = Playlist.query.filter(Playlist.id.in_(author_playlists_ids)).all()
+        with localDatabaseApp.app_context():
+            playlists = Playlist.query.filter(Playlist.id.in_(author_playlists_ids)).all()
         if playlists:
             for playlist in playlists:
                 playlist_frame = PlaylistEntry(self.ui.frame_62, playlist_name=playlist.playlist_name)
@@ -1447,7 +1460,9 @@ class Controller:
                 i.setParent(None)
             self.current_loaded_songs_frames = []
         self.setup_main_page_liked_songs()
-        liked_songs = Songs.query.filter_by(liked_by=self.user_data["hashed_name"]).all()
+        with localDatabaseApp.app_context():
+            # TODO Handle error on quest user not subscriptable
+            liked_songs = Songs.query.filter_by(liked_by=self.user_data["hashed_name"]).all()
         if liked_songs:
             for song in liked_songs:
                 liked_song_frame = SongEntry(
@@ -1498,7 +1513,8 @@ class Controller:
 
         music_categories = []
         self.category_frames = []
-        music_categories_query = MusicCategories.query.all()
+        with localDatabaseApp.app_context():
+            music_categories_query = MusicCategories.query.all()
         for i in music_categories_query:
             music_categories.append(i.category_name)
         for category in music_categories:
@@ -1591,7 +1607,6 @@ class Controller:
     def main_page_stacked_widget_resize_slot(self):
         self.ui.fixedNavbar.setFixedWidth(self.ui.centralPageAppPage.rect().width() - 200)
 
-
     # TODO Make category's songs and playlists Frames disappear when changing mainPageCagegoryPageStacked widget to category's
     # TODO albums page similarly on other pages to prevent size issues
     def load_selected_category_page(self, category):
@@ -1599,7 +1614,8 @@ class Controller:
         self.ui.mainPageCategoryNameLabel.setText(category)
         self.ui.mainPageCategoryPageAlbumsCategoryNameLabel.setText(category + " albums")
         self.ui.mainPageCategoryPagePlaylistsCategoryNameLabel.setText(category + " playlists")
-        music_category = MusicCategories.query.filter_by(category_name=category).first()
+        with localDatabaseApp.app_context():
+            music_category = MusicCategories.query.filter_by(category_name=category).first()
         self.load_selected_category_songs(music_category)
         self.load_selected_category_albums(music_category)
         self.load_selected_category_playlists(music_category)
@@ -1609,7 +1625,8 @@ class Controller:
             for i in self.loaded_songs:
                 i.setParent(None)
             self.loaded_songs = []
-        songs = Songs.query.filter_by(category=music_category)
+        with localDatabaseApp.app_context():
+            songs = Songs.query.filter_by(category=music_category)
         for song in songs:
             is_liked = False
             if song.liked_by == self.user_data["hashed_name"]:
@@ -1638,7 +1655,8 @@ class Controller:
             for i in self.loaded_albums:
                 i.setParent(None)
             self.loaded_albums = []
-        albums = Albums.query.filter_by(category=music_category).all()
+        with localDatabaseApp.app_context():
+            albums = Albums.query.filter_by(category=music_category).all()
         for album in albums:
             album_frame = AlbumEntry(album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
@@ -1650,7 +1668,8 @@ class Controller:
             for i in self.loaded_playlists:
                 i.setParent(None)
             self.loaded_playlists = []
-        playlists = Playlist.query.filter_by(category=music_category).all()
+        with localDatabaseApp.app_context():
+            playlists = Playlist.query.filter_by(category=music_category).all()
         row = column = 0
         for playlist in playlists:
             if column % 8 == 0:
@@ -1663,7 +1682,8 @@ class Controller:
             column += 1
 
     def load_playlist_frames(self):
-        playlists = Playlist.query.all()
+        with localDatabaseApp.app_context():
+            playlists = Playlist.query.all()
         for playlist in playlists:
             playlist_frame = QtWidgets.QPushButton(self.ui.leftMenuBottomPlaylistsFrame)
             size_policy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
@@ -1695,7 +1715,8 @@ class Controller:
         self.load_playlist_page_songs(playlist)
 
     def load_playlist_page_songs(self, playlist):
-        playlist_songs = PlaylistSongs.query.filter_by(playlist_id=playlist.id).all()
+        with localDatabaseApp.app_context():
+            playlist_songs = PlaylistSongs.query.filter_by(playlist_id=playlist.id).all()
         playlist_songs_ids = []
         for i in playlist_songs:
             playlist_songs_ids.append(i.song_id)
@@ -1703,7 +1724,8 @@ class Controller:
             for i in self.loaded_playlist_page_songs:
                 i.setParent(None)
             self.loaded_playlist_page_songs = []
-        songs = Songs.query.filter(Songs.id.in_(playlist_songs_ids)).all()
+        with localDatabaseApp.app_context():
+            songs = Songs.query.filter(Songs.id.in_(playlist_songs_ids)).all()
         for song in songs:
             is_liked = False
             if song.liked_by == self.user_data["hashed_name"]:
@@ -1732,7 +1754,8 @@ class Controller:
             self.ui.mainPagePlaylistSongListQVBoxLayout.addWidget(song_frame)
 
     def like_song(self, song_frame):
-        song_to_like = Songs.query.filter_by(id=song_frame.song_id).first()
+        with localDatabaseApp.app_context():
+            song_to_like = Songs.query.filter_by(id=song_frame.song_id).first()
         if song_to_like.liked_by == self.user_data["hashed_name"]:
             song_to_like.liked_by = ""
             song_frame.is_liked = False
@@ -2134,7 +2157,8 @@ class Controller:
 
     """
     def play_pause_song(self, song_id):
-        song = Songs.query.filter_by(id=song_id).first()
+        with localDatabaseApp.app_context():
+            song = Songs.query.filter_by(id=song_id).first()
         if song.is_playing:
             song.is_playing = False
             if self.now_playing_song and song.id == self.now_playing_song.song_id:
@@ -2151,7 +2175,8 @@ class Controller:
                         self.songs_in_queue.remove(i)
         else:
             song.is_playing = True
-            last_played_songs = LastPlayedSongs.query.all()
+            with localDatabaseApp.app_context():
+                last_played_songs = LastPlayedSongs.query.all()
             last_played_songs_ids = []
             record_to_remove = None
             for i in last_played_songs:
@@ -2193,8 +2218,8 @@ class Controller:
     """
 
 
-
-            last_played_songs = LastPlayedSongs.query.all()
+            with localDatabaseApp.app_context():
+                last_played_songs = LastPlayedSongs.query.all()
             last_played_songs_ids = []
             record_to_remove = None
             for i in last_played_songs:
@@ -2377,15 +2402,26 @@ class Controller:
               f"Author_miniature_dialog files: {author_miniature_dialog.selectedFiles()}\n"
               f"Author name: {author_dialog.authorInputDialogAuthorNameQLineEdit.text()}\n"
               f"---------------------------------------------------------------------------------------")
-        # handle adding new author to database here
+
+        author_name = author_dialog.authorInputDialogAuthorNameQLineEdit.text()
+
+        # TODO Add miniature handling to author
+        # TODO Add inputs validation and errors
+        new_author = Authors(
+            author_name=author_name,
+        )
+        with localDatabaseApp.app_context():
+            db.session.add(new_author)
+            db.session.commit()
+
         print("Created new author in database.")
         self.handle_dialog_acceptation(app_layer_frame, author_dialog)
 
     def get_user_data(self):
-        user = User.query.first()
+        with localDatabaseApp.app_context():
+            user = User.query.first()
         if user:
             self.user_data = {"token": user.token.strip(), "hashed_name": user.hashed_name}
-        return False
 
     def register(self):
         email = self.ui.centralPageRegisterPageEmailQLineEdit.text()
@@ -2418,12 +2454,13 @@ class Controller:
                 token=token,
                 hashed_name=user_hashed_name
             )
-            db.session.add(user)
+            with localDatabaseApp.app_context():
+                db.session.add(user)
+                db.session.commit()
             print(response["message"])
             self.ui.centralStackedWidget.setCurrentIndex(0)
         else:
             print(response["message"])
-        db.session.commit()
 
     def log_in_with_token(self):
         if self.user_data:
@@ -2432,7 +2469,8 @@ class Controller:
                 self.ui.centralStackedWidget.setCurrentIndex(0)
                 print(response["message"])
             else:
-                User.query.delete()
+                with localDatabaseApp.app_context():
+                    User.query.delete()
                 print(response["message"])
         else:
             self.ui.centralStackedWidget.setCurrentIndex(1)
@@ -2444,7 +2482,8 @@ class Controller:
         if self.user_data:
             response = requests.post('http://127.0.0.1:5000/logout', data=self.user_data).json()
             print(response["message"])
-            User.query.delete()
+            with localDatabaseApp.app_context():
+                User.query.delete()
             db.session.commit()
             self.user_data = None
             self.ui.centralStackedWidget.setCurrentIndex(1)
@@ -2542,6 +2581,19 @@ class Controller:
               f"Song album: {self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.currentText()}\n"
               f"---------------------------------------------------------------------------------------")
         # handle adding new song to database here
+
+        songTitle = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongTitleQLineEdit.text()
+        songAuthor = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.currentText()
+        songCategory = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.currentText()
+        songAlbum = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.currentText()
+
+        newSong = Songs(
+            title=songTitle,
+            author_id=songAuthor,
+            category_id=songCategory,
+            album_id=songAlbum,
+        )
+
         print("Created new song in database.")
 
     def synchronize_button_clicked_slot(self):
@@ -2664,7 +2716,6 @@ class Controller:
             self.set_category_page_stacked_widget_index(0)
         # adjust fixedNavbar's sticky sort button frame height and visibility accordingly to each page
         self.ui.fixedNavbar.adjust_sticky_sort_button_frame(index)
-
 
     def set_author_page_stacked_widget_index(self, index):
         """Set mainPageAuthorsPageStackedWidget's index, adjust stickySortButtonsFrame visibility

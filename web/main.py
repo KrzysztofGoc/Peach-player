@@ -11,6 +11,7 @@ from base import Session, engine, Base
 from models import User, UserSongs, MusicCategories
 
 
+# TODO Add Flask-Migration to enable schema migration
 REGEX = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
 UPLOAD_FOLDER = 'C:/Users/mrocz/PycharmProjects/FLASKAPPTEST/uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'mp3'}
