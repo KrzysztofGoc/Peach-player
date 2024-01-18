@@ -2,7 +2,8 @@ from PySide2 import QtWidgets, QtCore
 
 
 class ClickedSignalQFrame(QtWidgets.QFrame):
-    """Base QFrame with clicked signal. Used to darken out background when dialog is shown."""
+    """QFrame that emits signal when clicked. Appears over the whole window as black, semi-transparent layer behind
+    dialogs."""
     clicked = QtCore.Signal()
 
     def __init__(self, parent=None):

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1095</width>
+    <height>908</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -21760,7 +21760,7 @@ QWidget#widget_9{
                       <x>0</x>
                       <y>0</y>
                       <width>924</width>
-                      <height>863</height>
+                      <height>702</height>
                      </rect>
                     </property>
                     <property name="sizePolicy">
@@ -23715,7 +23715,7 @@ SongEntry QPushButton:hover{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>846</height>
+                      <height>569</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -25879,7 +25879,7 @@ QWidget#scrollAreaWidgetContents_11{
                       <x>0</x>
                       <y>0</y>
                       <width>900</width>
-                      <height>800</height>
+                      <height>819</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -26072,7 +26072,7 @@ font: 87 17pt &quot;Heebo Black&quot;;</string>
                          <number>0</number>
                         </property>
                         <item>
-                         <widget class="QFrame" name="frame_265">
+                         <widget class="QFrame" name="mainPageAlbumsAlbumsGridFrame">
                           <property name="layoutDirection">
                            <enum>Qt::LeftToRight</enum>
                           </property>
@@ -27568,7 +27568,7 @@ QLineEdit:focus{
                       <x>0</x>
                       <y>0</y>
                       <width>1674</width>
-                      <height>846</height>
+                      <height>610</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -31988,7 +31988,7 @@ QScrollBar::sub-line:vertical{
                      <x>0</x>
                      <y>0</y>
                      <width>198</width>
-                     <height>173</height>
+                     <height>400</height>
                     </rect>
                    </property>
                    <property name="sizePolicy">
@@ -32569,8 +32569,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>788</width>
-                <height>713</height>
+                <width>496</width>
+                <height>697</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_63">
@@ -34099,7 +34099,7 @@ QScrollBar::sub-line:vertical{
                 <x>0</x>
                 <y>0</y>
                 <width>496</width>
-                <height>650</height>
+                <height>638</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_70">

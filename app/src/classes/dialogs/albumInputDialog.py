@@ -299,6 +299,8 @@ class albumInputDialog(QtWidgets.QDialog):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
         self.albumInputDialogAlbumNameQLineEdit.setPalette(palette)
         self.verticalLayout_15.addWidget(self.groupBox1_3)
+
+        # Album's category combo box
         self.groupBox1_2 = LabeledQComboBox(parent=self.frame_7, input_title="Category Name")
         self.albumInputDialogCategoryQComboBox = self.groupBox1_2.comboBox1
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -326,16 +328,13 @@ class albumInputDialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(7)
-        self.albumInputDialogCategoryQComboBox.setMaxVisibleItems(4)
-        self.albumInputDialogCategoryQComboBox.addItem("")
-        self.albumInputDialogCategoryQComboBox.setItemText(0, "No category")
-        self.albumInputDialogCategoryQComboBox.addItem("")
-        self.albumInputDialogCategoryQComboBox.setItemText(1, "Category1")
-        self.albumInputDialogCategoryQComboBox.addItem("")
-        self.albumInputDialogCategoryQComboBox.setItemText(2, "Category2")
-        self.albumInputDialogCategoryQComboBox.addItem("")
-        self.albumInputDialogCategoryQComboBox.setItemText(3, "Category3")
+
+        self.albumInputDialogCategoryQComboBox.setMaxVisibleItems(6)
+        self.albumInputDialogCategoryQComboBox.addItem("No category")
         self.verticalLayout_15.addWidget(self.groupBox1_2)
+
+
+        # Album's author combo box
         self.groupBox1 = LabeledQComboBox(parent=self.frame_7, input_title="Author Name")
         self.albumInputDialogAuthorQComboBox = self.groupBox1.comboBox1
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -357,16 +356,13 @@ class albumInputDialog(QtWidgets.QDialog):
         self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
+        self.albumInputDialogAuthorQComboBox.setMaxVisibleItems(6)
 
-        self.albumInputDialogAuthorQComboBox.setMaxVisibleItems(4)
-        self.albumInputDialogAuthorQComboBox.addItem("")
-        self.albumInputDialogAuthorQComboBox.setItemText(0, "No author")
-        self.albumInputDialogAuthorQComboBox.addItem("")
-        self.albumInputDialogAuthorQComboBox.setItemText(1, "Author1")
-        self.albumInputDialogAuthorQComboBox.addItem("")
-        self.albumInputDialogAuthorQComboBox.setItemText(2, "Author2")
+        self.albumInputDialogAuthorQComboBox.addItem("No author")
 
         self.verticalLayout_15.addWidget(self.groupBox1)
+
+
         self.horizontalLayout_3.addWidget(self.frame_7)
         self.verticalLayout_5.addWidget(self.frame_6)
         self.frame_8 = QtWidgets.QFrame(self.frame_2)

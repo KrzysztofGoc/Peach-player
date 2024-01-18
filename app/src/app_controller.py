@@ -24,7 +24,7 @@ from classes.dialogs.albumInputDialog import albumInputDialog
 from classes.dialogs.synchronizeDialog import synchronizeDialog
 from app.src.classes.widgets.helper_widgets.clicked_signal_qframe import ClickedSignalQFrame
 
-from app_model import app as localDatabaseApp
+from app_model import app as local_database_app
 
 scrollbar_recently_used = False
 
@@ -1292,13 +1292,13 @@ class Controller:
         """Prepare albums page and change mainPageStackedWidget to album's index"""
         self.setup_main_page_albums()
         self.set_main_page_stacked_widget_index(10)
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             all_albums = Albums.query.all()
         for album in all_albums:
-            album_frame = AlbumEntry(self.ui.frame_265, album_name=album.album_name)
+            album_frame = AlbumEntry(self.ui.mainPageAlbumsAlbumsGridFrame, album_name=album.album_name)
             album_frame.clicked.connect(partial(self.load_album_page, album))
             self.ui.mainPageAlbumsAlbumsGridQFlowLayout.addWidget(album_frame)
-        album_adder = AdderEntry(adder_type=2, parent=self.ui.frame_265)
+        album_adder = AdderEntry(adder_type=2, parent=self.ui.mainPageAlbumsAlbumsGridFrame)
         album_adder.clicked.connect(self.album_adder_clicked_slot)
         self.ui.mainPageAlbumsAlbumsGridQFlowLayout.addWidget(album_adder)
 
@@ -1309,10 +1309,10 @@ class Controller:
             self.current_loaded_songs_frames = []
         self.set_main_page_stacked_widget_index(8)
         self.ui.mainPageAlbumNameOfAlbumLabel.setText(album.album_name)
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             songs = AlbumSongs.query.filter_by(album_id=album.id).all()
         for i in songs:
-            with localDatabaseApp.app_context():
+            with local_database_app.app_context():
                 song = Songs.query.filter_by(id=i.song_id).first()
             is_liked = False
             if song.liked_by == self.user_data["hashed_name"]:
@@ -1364,7 +1364,7 @@ class Controller:
         """Prepare authors page and change mainPageStackedWidget to authors's index"""
         self.setup_main_page_authors()
         self.set_main_page_stacked_widget_index(4)
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             all_authors = Authors.query.all()
         for author in all_authors:
             author_frame = AuthorEntry(self.ui.mainPageAuthorsGrid, author_name=author.author_name)
@@ -1390,7 +1390,7 @@ class Controller:
             for i in self.loaded_selected_author_songs:
                 i.setParent(None)
             self.loaded_selected_author_songs = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             songs = Songs.query.filter_by(author_id=author.id).all()
         for song in songs:
             is_liked = False
@@ -1421,7 +1421,7 @@ class Controller:
             for i in self.loaded_selected_author_albums:
                 i.setParent(None)
             self.loaded_selected_author_albums = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             albums = Albums.query.filter_by(author_id=author.id).all()
         for album in albums:
             album_frame = AlbumEntry(album_name=album.album_name)
@@ -1434,12 +1434,12 @@ class Controller:
             for i in self.loaded_selected_author_playlists:
                 i.setParent(None)
             self.loaded_selected_author_playlists = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             author_playlists = AuthorPlaylists.query.filter_by(author_id=author.id).all()
         author_playlists_ids = []
         for i in author_playlists:
             author_playlists_ids.append(i.playlist_id)
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             playlists = Playlist.query.filter(Playlist.id.in_(author_playlists_ids)).all()
         if playlists:
             for playlist in playlists:
@@ -1460,7 +1460,7 @@ class Controller:
                 i.setParent(None)
             self.current_loaded_songs_frames = []
         self.setup_main_page_liked_songs()
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             # TODO Handle error on quest user not subscriptable
             liked_songs = Songs.query.filter_by(liked_by=self.user_data["hashed_name"]).all()
         if liked_songs:
@@ -1513,7 +1513,7 @@ class Controller:
 
         music_categories = []
         self.category_frames = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             music_categories_query = MusicCategories.query.all()
         for i in music_categories_query:
             music_categories.append(i.category_name)
@@ -1614,7 +1614,7 @@ class Controller:
         self.ui.mainPageCategoryNameLabel.setText(category)
         self.ui.mainPageCategoryPageAlbumsCategoryNameLabel.setText(category + " albums")
         self.ui.mainPageCategoryPagePlaylistsCategoryNameLabel.setText(category + " playlists")
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             music_category = MusicCategories.query.filter_by(category_name=category).first()
         self.load_selected_category_songs(music_category)
         self.load_selected_category_albums(music_category)
@@ -1625,7 +1625,7 @@ class Controller:
             for i in self.loaded_songs:
                 i.setParent(None)
             self.loaded_songs = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             songs = Songs.query.filter_by(category=music_category)
         for song in songs:
             is_liked = False
@@ -1655,7 +1655,7 @@ class Controller:
             for i in self.loaded_albums:
                 i.setParent(None)
             self.loaded_albums = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             albums = Albums.query.filter_by(category=music_category).all()
         for album in albums:
             album_frame = AlbumEntry(album_name=album.album_name)
@@ -1668,7 +1668,7 @@ class Controller:
             for i in self.loaded_playlists:
                 i.setParent(None)
             self.loaded_playlists = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             playlists = Playlist.query.filter_by(category=music_category).all()
         row = column = 0
         for playlist in playlists:
@@ -1682,7 +1682,7 @@ class Controller:
             column += 1
 
     def load_playlist_frames(self):
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             playlists = Playlist.query.all()
         for playlist in playlists:
             playlist_frame = QtWidgets.QPushButton(self.ui.leftMenuBottomPlaylistsFrame)
@@ -1715,7 +1715,7 @@ class Controller:
         self.load_playlist_page_songs(playlist)
 
     def load_playlist_page_songs(self, playlist):
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             playlist_songs = PlaylistSongs.query.filter_by(playlist_id=playlist.id).all()
         playlist_songs_ids = []
         for i in playlist_songs:
@@ -1724,7 +1724,7 @@ class Controller:
             for i in self.loaded_playlist_page_songs:
                 i.setParent(None)
             self.loaded_playlist_page_songs = []
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             songs = Songs.query.filter(Songs.id.in_(playlist_songs_ids)).all()
         for song in songs:
             is_liked = False
@@ -1754,7 +1754,7 @@ class Controller:
             self.ui.mainPagePlaylistSongListQVBoxLayout.addWidget(song_frame)
 
     def like_song(self, song_frame):
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             song_to_like = Songs.query.filter_by(id=song_frame.song_id).first()
         if song_to_like.liked_by == self.user_data["hashed_name"]:
             song_to_like.liked_by = ""
@@ -2157,7 +2157,7 @@ class Controller:
 
     """
     def play_pause_song(self, song_id):
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             song = Songs.query.filter_by(id=song_id).first()
         if song.is_playing:
             song.is_playing = False
@@ -2175,7 +2175,7 @@ class Controller:
                         self.songs_in_queue.remove(i)
         else:
             song.is_playing = True
-            with localDatabaseApp.app_context():
+            with local_database_app.app_context():
                 last_played_songs = LastPlayedSongs.query.all()
             last_played_songs_ids = []
             record_to_remove = None
@@ -2218,7 +2218,7 @@ class Controller:
     """
 
 
-            with localDatabaseApp.app_context():
+            with local_database_app.app_context():
                 last_played_songs = LastPlayedSongs.query.all()
             last_played_songs_ids = []
             record_to_remove = None
@@ -2287,53 +2287,73 @@ class Controller:
         dialog.reject()
         app_layer_frame.deleteLater()
 
+    # TODO Refactor this function
     def album_adder_clicked_slot(self):
         """Create new AlbumInputDialog and run its show() method, run handle_new_album_creation() to validate
          and create new album.
 
         """
 
-        # Blacked out semi-transparent frame over whole app, closes dialog when clicked
+        # Create a blacked-out semi-transparent frame over the entire app
+        # This frame is set up to close the dialog and itself when clicked
         app_layer_frame = ClickedSignalQFrame(self.ui.centralwidget)
+        # Create an instance of the albumInputDialog class
         album_input_dialog = albumInputDialog(parent=self.ui.window)
 
-        # Dialog's exit button clicked slot
-        album_input_dialog.albumInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection,
-                                                                              app_layer_frame, album_input_dialog))
+        # Query local database for all authors
+        with local_database_app.app_context():
+            all_authors = Authors.query.all()
+            all_categories = MusicCategories.query.all()
+        # Insert all authors into album's author selection QComboBox
+        for author in all_authors:
+            album_input_dialog.albumInputDialogAuthorQComboBox.addItem(f"{author.author_name}")
+        for category in all_categories:
+            album_input_dialog.albumInputDialogCategoryQComboBox.addItem(f"{category.category_name}")
 
+        # Connect buttons
+        # Create and handle dialog's miniature selection dialog
+        miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(album_input_dialog.albumInputDialogMiniatureQToolButton, album_input_dialog)
         # App layer frame's clicked slot
         app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, album_input_dialog))
+        # Dialog's exit button clicked slot
+        album_input_dialog.albumInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, album_input_dialog))
+        # Dialog's add button clicked slot
+        album_input_dialog.albumInputDialogAddButton.clicked.connect(partial(self.handle_new_album_creation, album_input_dialog, miniature_file_dialog, app_layer_frame, all_authors, all_categories))
 
         # Show app layer_frame and dialog on the screen
         app_layer_frame.show()
         album_input_dialog.show()
 
-        # Create and handle dialog's miniature selection dialog
-        miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(
-            album_input_dialog.albumInputDialogMiniatureQToolButton, album_input_dialog)
-
-        # Dialog's add button clicked slot
-        album_input_dialog.albumInputDialogAddButton.clicked.connect(partial(self.handle_new_album_creation,
-                                                                             album_input_dialog, miniature_file_dialog,
-                                                                             app_layer_frame))
-
-    def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame):
+    def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame, all_authors, all_categories):
         """Handle new album creation. Collect input from album_dialog and miniature_file_dialog then create new
             album.
 
             Parameters:
-                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it shown along it.
+                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it being shown behind it.
                 album_dialog (albumInputDialog): albumInputDialog used to collect data to create album from.
                 album_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new album.
+                all_authors (list): list of all authors contained in the database.
+                all_categories (list): list of all categories contained in the database.
         """
-        print(f"Handling album creation...\n"
-              f"---------------------------------------------------------------------------------------\n"
-              f"Album_miniature_dialog files: {album_miniature_dialog.selectedFiles()}\n"
-              f"Album name: {album_dialog.albumInputDialogAlbumNameQLineEdit.text()}\n"
-              f"Album category: {album_dialog.albumInputDialogCategoryQComboBox.currentText()}\n"
-              f"Album author: {album_dialog.albumInputDialogAuthorQComboBox.currentText()}\n"
-              f"---------------------------------------------------------------------------------------")
-        # handle adding new album to database here
+
+        # Obtain name of the new album
+        new_album_name = album_dialog.albumInputDialogAlbumNameQLineEdit.text()
+
+        # Select proper category for the new album
+        # Subtracting 1 because there is "No category" item at index 0
+        new_album_category = all_categories[album_dialog.albumInputDialogCategoryQComboBox.currentIndex() - 1]
+
+        # Select proper author for the new album
+        # Subtracting 1 because there is "No author" item at index 0
+        new_album_author = all_authors[album_dialog.albumInputDialogAuthorQComboBox.currentIndex() - 1]
+
+        # Create new album item with data provided by user
+        new_album = Albums(album_name=new_album_name, category_id=new_album_category.id, author_id=new_album_author.id)
+        
+        with local_database_app.app_context():
+            db.session.add(new_album)
+            db.session.commit()
+        
         print("Created new album in database.")
         self.handle_dialog_acceptation(app_layer_frame, album_dialog)
 
@@ -2403,14 +2423,14 @@ class Controller:
               f"Author name: {author_dialog.authorInputDialogAuthorNameQLineEdit.text()}\n"
               f"---------------------------------------------------------------------------------------")
 
-        author_name = author_dialog.authorInputDialogAuthorNameQLineEdit.text()
+        new_author_name = author_dialog.authorInputDialogAuthorNameQLineEdit.text()
 
         # TODO Add miniature handling to author
         # TODO Add inputs validation and errors
         new_author = Authors(
-            author_name=author_name,
+            author_name=new_author_name,
         )
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             db.session.add(new_author)
             db.session.commit()
 
@@ -2418,7 +2438,7 @@ class Controller:
         self.handle_dialog_acceptation(app_layer_frame, author_dialog)
 
     def get_user_data(self):
-        with localDatabaseApp.app_context():
+        with local_database_app.app_context():
             user = User.query.first()
         if user:
             self.user_data = {"token": user.token.strip(), "hashed_name": user.hashed_name}
@@ -2454,7 +2474,7 @@ class Controller:
                 token=token,
                 hashed_name=user_hashed_name
             )
-            with localDatabaseApp.app_context():
+            with local_database_app.app_context():
                 db.session.add(user)
                 db.session.commit()
             print(response["message"])
@@ -2469,7 +2489,7 @@ class Controller:
                 self.ui.centralStackedWidget.setCurrentIndex(0)
                 print(response["message"])
             else:
-                with localDatabaseApp.app_context():
+                with local_database_app.app_context():
                     User.query.delete()
                 print(response["message"])
         else:
@@ -2482,7 +2502,7 @@ class Controller:
         if self.user_data:
             response = requests.post('http://127.0.0.1:5000/logout', data=self.user_data).json()
             print(response["message"])
-            with localDatabaseApp.app_context():
+            with local_database_app.app_context():
                 User.query.delete()
             db.session.commit()
             self.user_data = None

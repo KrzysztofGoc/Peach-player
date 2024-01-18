@@ -60,6 +60,7 @@ class Albums(db.Model):
     album_name = Column(String(100))
     category_id = Column(Integer, ForeignKey("music_categories.id"))
     author_id = Column(Integer, ForeignKey("authors.id"))
+
     song = relationship("Songs")
     category = relationship("MusicCategories", back_populates="album")
     author = relationship("Authors", back_populates="album")
