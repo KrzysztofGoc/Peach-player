@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, func
 from sqlalchemy.orm import relationship
 from PySide2.QtCore import QThread
 from PySide2.QtWidgets import QApplication
@@ -25,6 +25,8 @@ class User(db.Model):
     token = Column(String(100))
     hashed_name = Column(String(200))
 
+    user_songs = relationship("Songs", back_populates="song_owner")
+
 
 class Songs(db.Model):
     id = Column(Integer, primary_key=True)
@@ -33,18 +35,20 @@ class Songs(db.Model):
     category_id = Column(Integer, ForeignKey("music_categories.id"))
     album_id = Column(Integer, ForeignKey("albums.id"))
     path = Column(String(300))
-    date_added = Column(String)
+    date_added = Column(DateTime, server_default=func.now())
     length = Column(Integer)
-    liked_by = Column(String)
+    is_liked = Column(Boolean)
     is_playing = Column(Boolean)
-    user_hashed_name = Column(String(200))
+    song_owner_id = Column(Integer, ForeignKey("user.id"))
 
     album = relationship("Albums", back_populates="song")
-    author = relationship("Authors", back_populates="song")
+    song_author = relationship("Authors", back_populates="author_songs")
     category = relationship("MusicCategories", back_populates="song")
     playlist = relationship("PlaylistSongs")
     album_songs = relationship("AlbumSongs")
     last_played = relationship("LastPlayedSongs")
+
+    song_owner = relationship("User", back_populates="user_songs")
 
 
 class MusicCategories(db.Model):
@@ -97,7 +101,7 @@ class Authors(db.Model):
     author_name = Column(String)
 
     album = relationship("Albums")
-    song = relationship("Songs")
+    author_songs = relationship("Songs")
     playlists = relationship("AuthorPlaylists")
 
 

@@ -1311,19 +1311,16 @@ class Controller:
         self.ui.mainPageAlbumNameOfAlbumLabel.setText(album.album_name)
         with local_database_app.app_context():
             songs = AlbumSongs.query.filter_by(album_id=album.id).all()
-        for i in songs:
+        for album_song in songs:
             with local_database_app.app_context():
-                song = Songs.query.filter_by(id=i.song_id).first()
-            is_liked = False
-            if song.liked_by == self.user_data["hashed_name"]:
-                is_liked = True
+                song = Songs.query.filter_by(id=album_song.song_id).first()
             song_frame = SongEntry(
                 song_id=song.id,
                 song_title=song.title,
                 artist_name=song.author.author_name,
                 category_name=song.category.category_name,
                 path=song.path,
-                is_liked=is_liked,
+                is_liked=song.is_liked,
                 frame_structure={"song_title": True, "artist_name": True, "category_name": False, "date_added": False,
                                  "song_length": True},
                 visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552)]
@@ -1392,29 +1389,24 @@ class Controller:
             self.loaded_selected_author_songs = []
         with local_database_app.app_context():
             songs = Songs.query.filter_by(author_id=author.id).all()
-        for song in songs:
-            is_liked = False
-            if song.liked_by == self.user_data["hashed_name"]:
-                is_liked = True
-            song_frame = SongEntry(
-                song_id=song.id,
-                song_title=song.title,
-                category_name=song.category.category_name,
-                date_added="Placeholder date",
-                song_length="Placeholder length",
-                path=song.path,
-                is_liked=is_liked,
-                frame_structure={"song_title": True, "artist_name": False, "category_name": True, "date_added": True,
-                                 "song_length": True},
-                visibility_changing_data_elements=[("songEntrySongCategoryQFrame", 552),
-                                                   ("songEntrySongDateAddedQLabel", 726)]
-            )
-            self.ui.mainPageAuthorPageSongsListQVBoxLayout.addWidget(song_frame)
-            song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
-            song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
-            song_frame.songEntrySongCategoryQPushButton.clicked.connect(partial(self.load_selected_category_page,
-                                                                                song.category.category_name))
-            self.loaded_selected_author_songs.append(song_frame)
+            for song in songs:
+                song_frame = SongEntry(
+                    song_id=song.id,
+                    song_title=song.title,
+                    category_name=song.category.category_name,
+                    path=song.path,
+                    is_liked=song.is_liked,
+                    frame_structure={"song_title": True, "artist_name": False, "category_name": True, "date_added": True,
+                                     "song_length": True},
+                    visibility_changing_data_elements=[("songEntrySongCategoryQFrame", 552),
+                                                       ("songEntrySongDateAddedQLabel", 726)]
+                )
+                self.ui.mainPageAuthorPageSongsListQVBoxLayout.addWidget(song_frame)
+                song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
+                song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song_frame))
+                song_frame.songEntrySongCategoryQPushButton.clicked.connect(partial(self.load_selected_category_page,
+                                                                                    song.category.category_name))
+                self.loaded_selected_author_songs.append(song_frame)
 
     def load_selected_author_albums(self, author):
         if len(self.loaded_selected_author_albums) != 0:
@@ -1461,50 +1453,47 @@ class Controller:
             self.current_loaded_songs_frames = []
         self.setup_main_page_liked_songs()
         with local_database_app.app_context():
-            # TODO Handle error on quest user not subscriptable
-            liked_songs = Songs.query.filter_by(liked_by=self.user_data["hashed_name"]).all()
-        if liked_songs:
-            for song in liked_songs:
-                liked_song_frame = SongEntry(
-                    song_id=song.id,
-                    song_title=song.title,
-                    artist_name=song.author.author_name,
-                    category_name=song.category.category_name,
-                    date_added="Placeholder date",
-                    song_length="Placeholder length",
-                    path=song.path,
-                    is_liked=True,
-                    frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
-                                     "song_length": True},
-                    visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
-                                                       ("songEntrySongDateAddedQLabel", 726),
-                                                       ("songEntrySongCategoryQFrame", 950)]
-                )
+            liked_songs = Songs.query.filter_by(song_owner_id=self.user_data["id"]).all()
+            if liked_songs:
+                for song in liked_songs:
+                    liked_song_frame = SongEntry(
+                        song_id=song.id,
+                        song_title=song.title,
+                        artist_name=song.song_author.author_name,
+                        category_name=song.category.category_name,
+                        path=song.path,
+                        is_liked=True,
+                        frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
+                                         "song_length": True},
+                        visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                           ("songEntrySongDateAddedQLabel", 726),
+                                                           ("songEntrySongCategoryQFrame", 950)]
+                    )
 
-                if self.now_playing_song and song.id == self.now_playing_song.song_id:
-                    self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(self.now_playing_song)
-                    self.current_loaded_songs_frames.append(self.now_playing_song)
-                else:
-                    liked_song_frame.pushButton_30.clicked.connect(partial(self.like_song, liked_song_frame))
-                    liked_song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, liked_song_frame))
-                    liked_song_frame.songEntrySongAuthorQPushButton.clicked.connect(
-                        partial(self.load_author_page, song.author))
-                    liked_song_frame.songEntrySongCategoryQPushButton.clicked.connect(
-                        partial(self.load_selected_category_page, song.category.category_name))
-                    self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(liked_song_frame)
-                    if len(self.sorted_current_playlist_songs_frames) > 0:
-                        for i in self.sorted_current_playlist_songs_frames:
-                            if i.song_id == liked_song_frame.song_id:
-                                index = self.sorted_current_playlist_songs_frames.index(i)
-                                self.sorted_current_playlist_songs_frames[index].setParent(None)
-                                self.sorted_current_playlist_songs_frames[index] = liked_song_frame
-                        if len(self.shuffled_current_playlist_songs_frames) > 0:
-                            for i in self.shuffled_current_playlist_songs_frames:
+                    if self.now_playing_song and song.id == self.now_playing_song.song_id:
+                        self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(self.now_playing_song)
+                        self.current_loaded_songs_frames.append(self.now_playing_song)
+                    else:
+                        liked_song_frame.pushButton_30.clicked.connect(partial(self.like_song, liked_song_frame))
+                        liked_song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, liked_song_frame))
+                        liked_song_frame.songEntrySongAuthorQPushButton.clicked.connect(
+                            partial(self.load_author_page, song.song_author))
+                        liked_song_frame.songEntrySongCategoryQPushButton.clicked.connect(
+                            partial(self.load_selected_category_page, song.category.category_name))
+                        self.ui.mainPageLikedSongsSongListQVBoxLayout.addWidget(liked_song_frame)
+                        if len(self.sorted_current_playlist_songs_frames) > 0:
+                            for i in self.sorted_current_playlist_songs_frames:
                                 if i.song_id == liked_song_frame.song_id:
-                                    index = self.shuffled_current_playlist_songs_frames.index(i)
-                                    self.shuffled_current_playlist_songs_frames[index].setParent(None)
-                                    self.shuffled_current_playlist_songs_frames[index] = liked_song_frame
-                    self.current_loaded_songs_frames.append(liked_song_frame)
+                                    index = self.sorted_current_playlist_songs_frames.index(i)
+                                    self.sorted_current_playlist_songs_frames[index].setParent(None)
+                                    self.sorted_current_playlist_songs_frames[index] = liked_song_frame
+                            if len(self.shuffled_current_playlist_songs_frames) > 0:
+                                for i in self.shuffled_current_playlist_songs_frames:
+                                    if i.song_id == liked_song_frame.song_id:
+                                        index = self.shuffled_current_playlist_songs_frames.index(i)
+                                        self.shuffled_current_playlist_songs_frames[index].setParent(None)
+                                        self.shuffled_current_playlist_songs_frames[index] = liked_song_frame
+                        self.current_loaded_songs_frames.append(liked_song_frame)
 
     def categories_button_slot(self):
         """Prepare categories page and change mainPageStackedWidget to categories' index"""
@@ -1627,28 +1616,23 @@ class Controller:
             self.loaded_songs = []
         with local_database_app.app_context():
             songs = Songs.query.filter_by(category=music_category)
-        for song in songs:
-            is_liked = False
-            if song.liked_by == self.user_data["hashed_name"]:
-                is_liked = True
-            song_frame = SongEntry(
-                song_id=song.id,
-                song_title=song.title,
-                artist_name=song.author.author_name,
-                date_added="Placeholder date",
-                song_length="Placeholder length",
-                path=song.path,
-                is_liked=is_liked,
-                frame_structure={"song_title": True, "artist_name": True, "category_name": False, "date_added": True,
-                                 "song_length": True},
-                visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
-                                                   ("songEntrySongDateAddedQLabel", 726)]
-            )
-            self.ui.mainPageCategoryPageSongsListQVBoxLayout.addWidget(song_frame)
-            song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
-            song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
-            song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
-            self.loaded_songs.append(song_frame)
+            for song in songs:
+                song_frame = SongEntry(
+                    song_id=song.id,
+                    song_title=song.title,
+                    artist_name=song.author.author_name,
+                    path=song.path,
+                    is_liked=song.is_liked,
+                    frame_structure={"song_title": True, "artist_name": True, "category_name": False, "date_added": True,
+                                     "song_length": True},
+                    visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                       ("songEntrySongDateAddedQLabel", 726)]
+                )
+                self.ui.mainPageCategoryPageSongsListQVBoxLayout.addWidget(song_frame)
+                song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
+                song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song_frame))
+                song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
+                self.loaded_songs.append(song_frame)
 
     def load_selected_category_albums(self, music_category):
         if len(self.loaded_albums) != 0:
@@ -1726,43 +1710,39 @@ class Controller:
             self.loaded_playlist_page_songs = []
         with local_database_app.app_context():
             songs = Songs.query.filter(Songs.id.in_(playlist_songs_ids)).all()
-        for song in songs:
-            is_liked = False
-            if song.liked_by == self.user_data["hashed_name"]:
-                is_liked = True
-            song_frame = SongEntry(
-                song_id=song.id,
-                song_title=song.title,
-                artist_name=song.author.author_name,
-                category_name=song.category.category_name,
-                date_added="Placeholder date",
-                song_length="Placeholder length",
-                path=song.path,
-                is_liked=is_liked,
-                frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
-                                 "song_length": True},
-                visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
-                                                   ("songEntrySongCategoryQFrame", 726),
-                                                   ("songEntrySongDateAddedQLabel", 950)]
-            )
-            self.loaded_playlist_page_songs.append(song_frame)
-            song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
-            # song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song.id))
-            song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
-            song_frame.songEntrySongCategoryQPushButton.clicked.connect(partial(self.load_selected_category_page,
-                                                                                song.category.category_name))
-            self.ui.mainPagePlaylistSongListQVBoxLayout.addWidget(song_frame)
+            for song in songs:
+                song_frame = SongEntry(
+                    song_id=song.id,
+                    song_title=song.title,
+                    artist_name=song.author.author_name,
+                    category_name=song.category.category_name,
+                    path=song.path,
+                    is_liked=song.is_liked,
+                    frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
+                                     "song_length": True},
+                    visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                       ("songEntrySongCategoryQFrame", 726),
+                                                       ("songEntrySongDateAddedQLabel", 950)]
+                )
+                self.loaded_playlist_page_songs.append(song_frame)
+                song_frame.pushButton_30.clicked.connect(partial(self.like_song, song_frame))
+                song_frame.pushButton_13.clicked.connect(partial(self.play_pause_song, song_frame))
+                song_frame.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.author))
+                song_frame.songEntrySongCategoryQPushButton.clicked.connect(partial(self.load_selected_category_page,
+                                                                                    song.category.category_name))
+                self.ui.mainPagePlaylistSongListQVBoxLayout.addWidget(song_frame)
 
-    def like_song(self, song_frame):
+    @staticmethod
+    def like_song(song_frame):
         with local_database_app.app_context():
             song_to_like = Songs.query.filter_by(id=song_frame.song_id).first()
-        if song_to_like.liked_by == self.user_data["hashed_name"]:
-            song_to_like.liked_by = ""
-            song_frame.is_liked = False
-        else:
-            song_to_like.liked_by = self.user_data["hashed_name"]
-            song_frame.is_liked = True
-        db.session.commit()
+            if song_to_like.is_liked:
+                song_to_like.is_liked = False
+                song_frame.is_liked = False
+            else:
+                song_to_like.is_liked = True
+                song_frame.is_liked = True
+            db.session.commit()
 
     def play_pause_song(self, song_frame):
         if self.now_playing_song:
@@ -1831,7 +1811,7 @@ class Controller:
             self.shuffle_now_playing_playlist()
 
     def queue_button_slot(self):
-        """Prepare authors page and change mainPageStackedWidget to authors' index"""
+        """Prepare song queue page and change mainPageStackedWidget to song queue index"""
         if self.now_playing_song:
             if self.playlist_state == PlaylistState.SORTED:
                 song_frame = SongEntry(
@@ -2287,7 +2267,6 @@ class Controller:
         dialog.reject()
         app_layer_frame.deleteLater()
 
-    # TODO Refactor this function
     def album_adder_clicked_slot(self):
         """Create new AlbumInputDialog and run its show() method, run handle_new_album_creation() to validate
          and create new album.
@@ -2300,11 +2279,11 @@ class Controller:
         # Create an instance of the albumInputDialog class
         album_input_dialog = albumInputDialog(parent=self.ui.window)
 
-        # Query local database for all authors
+        # Query local database for all authors and categories
         with local_database_app.app_context():
             all_authors = Authors.query.all()
             all_categories = MusicCategories.query.all()
-        # Insert all authors into album's author selection QComboBox
+        # Populate all authors and categories into respective selection QComboBoxes
         for author in all_authors:
             album_input_dialog.albumInputDialogAuthorQComboBox.addItem(f"{author.author_name}")
         for category in all_categories:
@@ -2324,6 +2303,7 @@ class Controller:
         app_layer_frame.show()
         album_input_dialog.show()
 
+    # TODO Add miniature handling when creating album
     def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame, all_authors, all_categories):
         """Handle new album creation. Collect input from album_dialog and miniature_file_dialog then create new
             album.
@@ -2441,7 +2421,7 @@ class Controller:
         with local_database_app.app_context():
             user = User.query.first()
         if user:
-            self.user_data = {"token": user.token.strip(), "hashed_name": user.hashed_name}
+            self.user_data = {"id": user.id, "token": user.token.strip(), "hashed_name": user.hashed_name}
 
     def register(self):
         email = self.ui.centralPageRegisterPageEmailQLineEdit.text()
@@ -2561,24 +2541,85 @@ class Controller:
         self.handle_dialog_acceptation(app_layer_frame, playlist_dialog)
 
     def all_songs_button_slot(self):
+        """Set main page stacked widget to all song's page index. Populate the combo boxes in the songAdder with values
+         retrieved from the database, and populate the allSongsList with songs sourced from the database."""
         self.set_main_page_stacked_widget_index(11)
 
+        # Query the database
+        with local_database_app.app_context():
+            all_authors = Authors.query.all()
+            all_categories = MusicCategories.query.all()
+            all_albums = Albums.query.all()
+            all_users_songs = Songs.query.filter_by(id=self.user_data["id"]).all()
+
+            # add default author, category and album
+            self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.addItem("No Author")
+            self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.addItem("No Category")
+            self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.addItem("No Album")
+
+            # Populate combo boxes with data from database
+            for author in all_authors:
+                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.addItem(f"{author.author_name}")
+            for category in all_categories:
+                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.addItem(f"{category.category_name}")
+            for album in all_albums:
+                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.addItem(f"{album.album_name}")
+
+            # Populate songs list with songs from database
+            if all_users_songs:
+                for song in all_users_songs:
+                    song_entry = SongEntry(
+                        song_id=song.id,
+                        song_title=song.title,
+                        artist_name=song.song_author.author_name,
+                        category_name=song.category.category_name,
+                        path=song.path,
+                        is_liked=song.is_liked,
+                        frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
+                                         "song_length": True},
+                        visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
+                                                           ("songEntrySongDateAddedQLabel", 726),
+                                                           ("songEntrySongCategoryQFrame", 950)]
+
+
+                    )
+                    song_entry.pushButton_30.clicked.connect(partial(self.like_song, song_entry))
+                    song_entry.pushButton_13.clicked.connect(partial(self.play_pause_song, song_entry))
+                    song_entry.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.song_author))
+                    self.ui.mainPageAllSongsSongListQVBoxLayout.addWidget(song_entry)
+            else:
+                # TODO Insert 'No Songs' instead of songs list
+                pass
+
+
+
+
+
+
     @staticmethod
-    def handle_new_file_dialog():
+    def get_new_file_dialog():
         """Create new QFileDialog and return it."""
         file_dialog = QtWidgets.QFileDialog()
         return file_dialog
 
     def handle_song_adder_inputs(self):
-        """Connect SongAdder's song and miniature QFileDialogs and addSong button."""
-        song_file_dialog = self.handle_new_file_dialog()
+        """Connect SongAdder's dialog, miniature QFileDialogs and addSong button."""
+
+        # Create new file dialog for song file
+        song_file_dialog = self.get_new_file_dialog()
+        # Create new file dialog for song miniature file
+        miniature_file_dialog = self.get_new_file_dialog()
+
+        # Connect buttons
+        # Display file selection dialog for song file
         self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongQPushButton.clicked.connect(
             song_file_dialog.exec_)
 
-        miniature_file_dialog = self.handle_new_file_dialog()
+        # Display file selection dialog for song miniature
         self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSelectSongMiniatureQPushButton.clicked.connect(
             miniature_file_dialog.exec_)
 
+        # Handle new song creation
         self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongAddSongQPushButton.clicked.connect(partial(
             self.handle_new_song_creation, song_file_dialog, miniature_file_dialog))
 

@@ -28,7 +28,7 @@ class SongEntry(QtWidgets.QFrame):
     resized = QtCore.Signal()
 
     def __init__(self, *, song_id: int, song_title: str = "No title", artist_name: str = "No author",
-                 category_name: str = "No category", date_added: int = "No date", song_length: int = "No length",
+                 category_name: str = "No category", date_added: int = None, song_length: int = None,
                  path=None, is_liked: bool = False, parent: Type[QtWidgets.QWidget] = None,
                  frame_structure: dict[str, bool] = None, visibility_changing_data_elements: list[tuple[str, int]] = None):
 
@@ -258,7 +258,9 @@ class SongEntry(QtWidgets.QFrame):
             self.songEntrySongDateAddedQLabel.setMinimumSize(QtCore.QSize(0, 40))
             self.songEntrySongDateAddedQLabel.setObjectName("songEntrySongDateAddedQLabel")
             self.horizontalLayout_36.addWidget(self.songEntrySongDateAddedQLabel)
-            self.songEntrySongDateAddedQLabel.setText(self.date_added)
+            self.songEntrySongDateAddedQLabel.setText("No Date")
+            if self.date_added:
+                self.songEntrySongDateAddedQLabel.setText(str(self.date_added))
 
         if self.frame_structure["song_length"]:
             self.songEntrySongSongLengthQLabel = QtWidgets.QLabel(self)
@@ -270,7 +272,9 @@ class SongEntry(QtWidgets.QFrame):
             self.songEntrySongSongLengthQLabel.setMinimumSize(QtCore.QSize(0, 40))
             self.songEntrySongSongLengthQLabel.setObjectName("songEntrySongSongLengthQLabel")
             self.horizontalLayout_36.addWidget(self.songEntrySongSongLengthQLabel)
-            self.songEntrySongSongLengthQLabel.setText(self.song_length)
+            self.songEntrySongSongLengthQLabel.setText("No Length")
+            if self.song_length:
+                self.songEntrySongSongLengthQLabel.setText(str(self.song_length))
 
     def resizeEvent(self, event):
         self.resized.emit()

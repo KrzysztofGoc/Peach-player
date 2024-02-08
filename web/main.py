@@ -10,7 +10,6 @@ import io
 from base import Session, engine, Base
 from models import User, UserSongs, MusicCategories
 
-
 # TODO Add Flask-Migration to enable schema migration
 REGEX = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
 UPLOAD_FOLDER = 'C:/Users/mrocz/PycharmProjects/FLASKAPPTEST/uploads'
@@ -59,7 +58,8 @@ def register():
         return {"error": "2", "message": "Invalid email address"}
     # validation = validate(data["password"])
     # if not validation["result"]:
-        # return {"error": "2", "message": validation["message"]}
+    # return {"error": "2", "message": validation["message"]}
+    print(data["email"], data["username"])
     email_check = session.query(User).filter_by(email=data["email"]).first()
     username_check = session.query(User).filter_by(username=data["username"]).first()
     if email_check:
@@ -76,8 +76,8 @@ def register():
         token=""
     )
     dir_name = UPLOAD_FOLDER + '/' + data['username']
-    os.mkdir(dir_name)
-    print("Directory ", dir_name, " Created ")
+    # os.mkdir(dir_name)
+    # print("Directory ", dir_name, " Created ")
     # add additional validations
     session.add(new_user)
     session.commit()
@@ -103,7 +103,8 @@ def login():
     tokens = convert_list_to_string(list_of_tokens) + " "
     user.token = tokens
     session.commit()
-    return {"error": "1", "token": token, "hashed_name": user.hashed_name, "message": "Successfully logged in(credentials)"}
+    return {"error": "1", "token": token, "hashed_name": user.hashed_name,
+            "message": "Successfully logged in(credentials)"}
 
 
 @app.route('/login_t', methods=['GET', 'POST'])
@@ -263,7 +264,8 @@ def missing_songs_data():
         for item in user_songs:
             if item.song_id not in all_ids:
                 filename = os.path.basename(item.file_path)
-                dict_temp = {"title": item.title, "author": item.author, "cat": item.category, "filename": filename, "song_id": item.song_id}
+                dict_temp = {"title": item.title, "author": item.author, "cat": item.category, "filename": filename,
+                             "song_id": item.song_id}
                 missing_songs.append(dict_temp)
         return jsonify(missing_songs)
     # zmienic tego returna
@@ -286,6 +288,7 @@ def get_music_categories():
 def get_songs_by_category():
     data = request.form.to_dict()
     songs_by_category = session.query()
+
 
 if __name__ == "__main__":
     app.run(debug=True)
