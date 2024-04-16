@@ -134,7 +134,6 @@ class Controller:
         ##########################################################################
         # Song adder slots
         ##########################################################################
-        self.handle_song_adder_inputs()
 
         ##########################################################################
         # Sort buttons' slots
@@ -1396,7 +1395,8 @@ class Controller:
                     category_name=song.category.category_name,
                     path=song.path,
                     is_liked=song.is_liked,
-                    frame_structure={"song_title": True, "artist_name": False, "category_name": True, "date_added": True,
+                    frame_structure={"song_title": True, "artist_name": False, "category_name": True,
+                                     "date_added": True,
                                      "song_length": True},
                     visibility_changing_data_elements=[("songEntrySongCategoryQFrame", 552),
                                                        ("songEntrySongDateAddedQLabel", 726)]
@@ -1463,7 +1463,8 @@ class Controller:
                         category_name=song.category.category_name,
                         path=song.path,
                         is_liked=True,
-                        frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
+                        frame_structure={"song_title": True, "artist_name": True, "category_name": True,
+                                         "date_added": True,
                                          "song_length": True},
                         visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
                                                            ("songEntrySongDateAddedQLabel", 726),
@@ -1623,7 +1624,8 @@ class Controller:
                     artist_name=song.author.author_name,
                     path=song.path,
                     is_liked=song.is_liked,
-                    frame_structure={"song_title": True, "artist_name": True, "category_name": False, "date_added": True,
+                    frame_structure={"song_title": True, "artist_name": True, "category_name": False,
+                                     "date_added": True,
                                      "song_length": True},
                     visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
                                                        ("songEntrySongDateAddedQLabel", 726)]
@@ -2291,20 +2293,25 @@ class Controller:
 
         # Connect buttons
         # Create and handle dialog's miniature selection dialog
-        miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(album_input_dialog.albumInputDialogMiniatureQToolButton, album_input_dialog)
+        miniature_file_dialog = self.handle_and_connect_new_miniature_file_dialog(
+            album_input_dialog.albumInputDialogMiniatureQToolButton, album_input_dialog)
         # App layer frame's clicked slot
         app_layer_frame.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, album_input_dialog))
         # Dialog's exit button clicked slot
-        album_input_dialog.albumInputDialogExitButton.clicked.connect(partial(self.handle_dialog_rejection, app_layer_frame, album_input_dialog))
+        album_input_dialog.albumInputDialogExitButton.clicked.connect(
+            partial(self.handle_dialog_rejection, app_layer_frame, album_input_dialog))
         # Dialog's add button clicked slot
-        album_input_dialog.albumInputDialogAddButton.clicked.connect(partial(self.handle_new_album_creation, album_input_dialog, miniature_file_dialog, app_layer_frame, all_authors, all_categories))
+        album_input_dialog.albumInputDialogAddButton.clicked.connect(
+            partial(self.handle_new_album_creation, album_input_dialog, miniature_file_dialog, app_layer_frame,
+                    all_authors, all_categories))
 
         # Show app layer_frame and dialog on the screen
         app_layer_frame.show()
         album_input_dialog.show()
 
     # TODO Add miniature handling when creating album
-    def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame, all_authors, all_categories):
+    def handle_new_album_creation(self, album_dialog, album_miniature_dialog, app_layer_frame, all_authors,
+                                  all_categories):
         """Handle new album creation. Collect input from album_dialog and miniature_file_dialog then create new
             album.
 
@@ -2328,12 +2335,13 @@ class Controller:
         new_album_author = all_authors[album_dialog.albumInputDialogAuthorQComboBox.currentIndex() - 1]
 
         # Create new album item with data provided by user
-        new_album = Albums(album_name=new_album_name, category_id=new_album_category.id, author_id=new_album_author.id)
-        
+        new_album = Albums(album_name=new_album_name, category=new_album_category, author=new_album_author)
+
+        print(new_album.category.category_name, new_album.author.author_name)
         with local_database_app.app_context():
             db.session.add(new_album)
             db.session.commit()
-        
+
         print("Created new album in database.")
         self.handle_dialog_acceptation(app_layer_frame, album_dialog)
 
@@ -2484,7 +2492,7 @@ class Controller:
             print(response["message"])
             with local_database_app.app_context():
                 User.query.delete()
-            db.session.commit()
+                db.session.commit()
             self.user_data = None
             self.ui.centralStackedWidget.setCurrentIndex(1)
         else:
@@ -2524,7 +2532,7 @@ class Controller:
             playlist.
 
             Parameters:
-                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that it shown along it.
+                app_layer_frame (QtWidgets.QFrame): blacked-out frame behind dialog that is shown along it.
                 playlist_dialog (playlistInputDialog): playlistInputDialog used to collect data to create playlist from.
                 playlist_miniature_dialog (QtWidgets.QFileDialog): QFileDialog used to collect miniature for the new
                  playlist.
@@ -2543,6 +2551,7 @@ class Controller:
     def all_songs_button_slot(self):
         """Set main page stacked widget to all song's page index. Populate the combo boxes in the songAdder with values
          retrieved from the database, and populate the allSongsList with songs sourced from the database."""
+        # Change main page stacked widget to all songs page
         self.set_main_page_stacked_widget_index(11)
 
         # Query the database
@@ -2552,18 +2561,24 @@ class Controller:
             all_albums = Albums.query.all()
             all_users_songs = Songs.query.filter_by(id=self.user_data["id"]).all()
 
-            # add default author, category and album
+            # Connect song adder's buttons
+            self.setup_song_adder(all_authors, all_categories, all_albums)
+
+            # Add default author, category and album
             self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.addItem("No Author")
             self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.addItem("No Category")
             self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.addItem("No Album")
 
             # Populate combo boxes with data from database
             for author in all_authors:
-                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.addItem(f"{author.author_name}")
+                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.addItem(
+                    f"{author.author_name}")
             for category in all_categories:
-                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.addItem(f"{category.category_name}")
+                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.addItem(
+                    f"{category.category_name}")
             for album in all_albums:
-                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.addItem(f"{album.album_name}")
+                self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.addItem(
+                    f"{album.album_name}")
 
             # Populate songs list with songs from database
             if all_users_songs:
@@ -2575,26 +2590,22 @@ class Controller:
                         category_name=song.category.category_name,
                         path=song.path,
                         is_liked=song.is_liked,
-                        frame_structure={"song_title": True, "artist_name": True, "category_name": True, "date_added": True,
+                        frame_structure={"song_title": True, "artist_name": True, "category_name": True,
+                                         "date_added": True,
                                          "song_length": True},
                         visibility_changing_data_elements=[("songEntrySongAuthorQFrame", 552),
                                                            ("songEntrySongDateAddedQLabel", 726),
                                                            ("songEntrySongCategoryQFrame", 950)]
 
-
                     )
                     song_entry.pushButton_30.clicked.connect(partial(self.like_song, song_entry))
                     song_entry.pushButton_13.clicked.connect(partial(self.play_pause_song, song_entry))
-                    song_entry.songEntrySongAuthorQPushButton.clicked.connect(partial(self.load_author_page, song.song_author))
+                    song_entry.songEntrySongAuthorQPushButton.clicked.connect(
+                        partial(self.load_author_page, song.song_author))
                     self.ui.mainPageAllSongsSongListQVBoxLayout.addWidget(song_entry)
             else:
                 # TODO Insert 'No Songs' instead of songs list
                 pass
-
-
-
-
-
 
     @staticmethod
     def get_new_file_dialog():
@@ -2602,8 +2613,15 @@ class Controller:
         file_dialog = QtWidgets.QFileDialog()
         return file_dialog
 
-    def handle_song_adder_inputs(self):
-        """Connect SongAdder's dialog, miniature QFileDialogs and addSong button."""
+    def setup_song_adder(self, all_authors, all_categories, all_albums):
+        """Connect song file dialog, miniature file dialog and addSong button with respective slots.
+
+            Parameters:
+                all_authors (list[Authors]): list of all authors added by current user.
+                all_categories (list[MusicCategories]): list of all categories added by current user.
+                all_albums (list[Albums]): list of all albums added by current user.
+                 playlist.
+        """
 
         # Create new file dialog for song file
         song_file_dialog = self.get_new_file_dialog()
@@ -2621,16 +2639,19 @@ class Controller:
 
         # Handle new song creation
         self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongAddSongQPushButton.clicked.connect(partial(
-            self.handle_new_song_creation, song_file_dialog, miniature_file_dialog))
+            self.handle_new_song_creation, song_file_dialog, miniature_file_dialog, all_authors, all_categories, all_albums))
 
-    def handle_new_song_creation(self, song_file_dialog, miniature_file_dialog):
+    def handle_new_song_creation(self, song_file_dialog, miniature_file_dialog, all_authors, all_categories, all_albums):
         """Handle new song creation. Collect input from song_file_dialog, miniature_file_dialog and SongAdder's QLineEdits
         and QComboBoxes then create new song.
 
         Parameters:
             song_file_dialog(QtWidgets.QFileDialog): QFileDialog used to collect song file info from.
             miniature_file_dialog(QtWidgets.QFileDialog): QFileDialog used to collect song miniature info from.
-
+            all_authors (list[Authors]): list of all authors added by current user.
+            all_categories (list[MusicCategories]): list of all categories added by current user.
+            all_albums (list[Albums]): list of all albums added by current user.
+             playlist.
         """
         print(f"Handling song creation...\n"
               f"---------------------------------------------------------------------------------------\n"
@@ -2643,17 +2664,18 @@ class Controller:
               f"---------------------------------------------------------------------------------------")
         # handle adding new song to database here
 
-        songTitle = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongTitleQLineEdit.text()
-        songAuthor = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.currentText()
+        song_title = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongTitleQLineEdit.text()
+        song_author_name = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAuthorQComboBox.currentText()
         songCategory = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongCategoryQComboBox.currentText()
         songAlbum = self.ui.mainPageAllSongsSongAdderQFrame.mainPageAllSongsSongAlbumQComboBox.currentText()
 
-        newSong = Songs(
-            title=songTitle,
-            author_id=songAuthor,
-            category_id=songCategory,
-            album_id=songAlbum,
-        )
+        with local_database_app.app_context():
+            newSong = Songs(
+                title=song_title,
+                author_id=song_author_name,
+                category_id=songCategory,
+                album_id=songAlbum,
+            )
 
         print("Created new song in database.")
 

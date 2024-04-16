@@ -2493,7 +2493,7 @@ SongEntry QPushButton:hover{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>836</height>
+                      <height>694</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -5359,7 +5359,7 @@ SortButtonsQFrame QPushButton{
                       <x>0</x>
                       <y>0</y>
                       <width>1174</width>
-                      <height>819</height>
+                      <height>513</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -7247,7 +7247,7 @@ QFrame#frame_114 QPushButton:checked{
                       <x>0</x>
                       <y>0</y>
                       <width>900</width>
-                      <height>819</height>
+                      <height>792</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -9016,7 +9016,7 @@ QWidget#widget_7{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>836</height>
+                      <height>694</height>
                      </rect>
                     </property>
                     <property name="sizePolicy">
@@ -20707,7 +20707,7 @@ QWidget#widget_9{
                       <x>0</x>
                       <y>0</y>
                       <width>924</width>
-                      <height>836</height>
+                      <height>702</height>
                      </rect>
                     </property>
                     <property name="sizePolicy">
@@ -22662,7 +22662,7 @@ SongEntry QPushButton:hover{
                       <x>0</x>
                       <y>0</y>
                       <width>1424</width>
-                      <height>819</height>
+                      <height>569</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -24826,7 +24826,7 @@ QWidget#scrollAreaWidgetContents_11{
                       <x>0</x>
                       <y>0</y>
                       <width>900</width>
-                      <height>819</height>
+                      <height>800</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -32569,8 +32569,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1095</width>
-                <height>908</height>
+                <width>496</width>
+                <height>697</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_63">
@@ -34098,8 +34098,8 @@ QScrollBar::sub-line:vertical{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1095</width>
-                <height>908</height>
+                <width>496</width>
+                <height>638</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_70">
